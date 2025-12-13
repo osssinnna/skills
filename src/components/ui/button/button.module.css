@@ -1,0 +1,85 @@
+/* сбиваем стили браузера */
+
+
+button {
+  border: none;
+  padding: 0;
+  color: inherit;
+  font: inherit;
+  background-color: transparent;
+  cursor: pointer;
+}
+
+.button {
+  /* primary */
+  --color-text-btn: #0C0C0C;
+  --pr-background-colorHover: #16CC5A;
+  --pr-background-colorActive: #052E14;
+  --pr-background-colorDisabl: #E4E8DF;
+  --pr-color-Disabl: #69735D;
+  /* secondary */
+  --sec-background-colorHover: #FFFE91;
+  --sec-background-colorActive: #FFFD55;
+  --sec-background-colorDisabl: #E4E8DF;
+  --sec-color-Disabl: #69735D;
+  border-radius: 12px;
+  padding: 12px 23.5px;
+  color:var(--color-text-btn);
+  font-family: var(--main-font, 'Jost'), system-ui, fantasy;
+  font-weight: var(--fw-text, 400);
+  font-size: 16px;
+  line-height: 1.5;
+  letter-spacing: 0.02em;
+  transition: all, 0.3s ease-in-out;
+}
+
+.button:disabled {
+  cursor: not-allowed;
+}
+
+.buttonPrimary {
+  background-color:  var(--color-primary, #ABD27A);
+
+}
+
+.buttonPrimary:hover {
+  background-color: var(--pr-background-colorHover);
+}
+
+.buttonPrimary:active {
+  background-color: var(--pr-background-colorActive);
+}
+
+.buttonPrimary:disabled {
+  color: var(--pr-color-Disabl);
+  background-color: var(--pr-background-colorDisabl);
+}
+
+.buttonSecondary {
+  border: 1px solid var(--color-primary, #ABD27A);
+  background-color:  var(--color-secondary, #ffffff);
+}
+
+.buttonSecondary:hover {
+  background-color: var(--sec-background-colorHover);
+}
+
+.buttonSecondary:active {
+  background-color: var(--sec-background-colorActive);
+}
+
+.buttonSecondary:disabled {
+  border: none;
+  color: var(--sec-color-Disabl);
+  background-color: var(--sec-background-colorDisabl);
+}
+
+.buttonFullSize {
+  width: 100%;
+}
+
+
+
+
+
+
