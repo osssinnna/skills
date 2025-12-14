@@ -3,7 +3,7 @@ type TSkillsPerson = {
     wantsToLearn: string[];
 };
 
-type TPerson = {
+export type TPerson = {
     id: string;
     img: string;
     name: string;
@@ -14,6 +14,7 @@ type TPerson = {
 
 export type TPersonCardUIProps = {
     person: TPerson;
-    isLiked: string;
+    isLiked: boolean;
     onLikeToggle: () => void;
+    onClickCardButton: () => void; // добавила это, чтобы как-то на кнопку ПОДРОБНЕЕ нажимать (?)
 };
