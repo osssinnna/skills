@@ -1,4 +1,4 @@
-import type { FC, ReactNode } from 'react';
+import type {  FC, ReactNode } from 'react';
 import styles from './button.module.css';
 import clsx from 'clsx';
 
@@ -7,14 +7,33 @@ type TButtonUIProps = {
  color:'primary' | 'secondary',
  fulsSize?: boolean,
  disabledToggle?: boolean,
- onClick:() => void
+ onClick?:() => void,
 }
 
-export const ButtonUI: FC<TButtonUIProps> = ({children, color, fulsSize = false, disabledToggle = false, onClick}) => {
+type TCustomSettingBtn = {
+  horizontalPadding?: string,
+  verticalPadding?: string
+}
+
+export const ButtonUI: FC<TButtonUIProps & TCustomSettingBtn> = ({
+  children, 
+  color, 
+  fulsSize = false, 
+  disabledToggle = false, 
+  onClick,   
+  horizontalPadding ='',
+  verticalPadding = ''
+}) => {
+  const styleHorizonPadding  = horizontalPadding ? {'--btn-padding-horizontal': horizontalPadding} : undefined;
+  const styleVerticalPadding  = verticalPadding ? {'--btn-padding-vertical': verticalPadding} : undefined;
+  const customStyle = {
+    ...styleHorizonPadding,
+    ...styleVerticalPadding 
+  } as React.CSSProperties
   const className = clsx(
     styles.button,
     color === 'primary' ? styles.buttonPrimary : styles.buttonSecondary,
     fulsSize ? styles.buttonFullSize : ''
   )
-  return <button onClick={onClick} disabled={disabledToggle} className={className}>{children}</button>;
+  return <button style={customStyle} onClick={onClick} disabled={disabledToggle} className={className}>{children}</button>;
 };
