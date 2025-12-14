@@ -1,20 +1,31 @@
 .button {
   /* локальные переменные кнопки */
+  /* padding переменные */
+  --btn-padding-vertical: 12px;
+  --btn-padding-horizontal: 24px;
   /* primary */
   --color-text-btn: #0C0C0C;
-  --pr-background-colorHover: #16CC5A;
-  --pr-background-colorActive: #052E14;
+  --pr-background-colorHover: #DEEBC5;
+  --pr-background-colorActive: #508826;
+  --pr-colorActive: var(--color-secondary, #FFFFFF);
   --pr-background-colorDisabl: #E4E8DF;
-  --pr-color-Disabl: #69735D;
+  --pr-colorDisabl: #69735D;
   /* secondary */
-  --sec-background-colorHover: #FFFE91;
-  --sec-background-colorActive: #FFFD55;
-  --sec-background-colorDisabl: #E4E8DF;
-  --sec-color-Disabl: #69735D;
+  --sec-borderColorActive: var(--pr-background-colorActive, #508826);
+  --sec-colorBorderHover: #DEEBC5;
+  --sec-textColorHover: #69735D;
+  --sec-background-colorDisabl: var(--color-secondary, #FFFFFF);
+  --sec-border-colorDisabl: #E4E8DF;
+  --sec-color-Disabl: #9CA197;
+  /*  Выравнивание всего содерж кнопки*/
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
   border-radius: 12px;
-  padding: 12px 23.5px;
-  color:var(--color-text-btn);
-  font-family: var(--main-font, 'Jost'), system-ui, fantasy;
+  padding: var( --btn-padding-vertical, 12px) var(--btn-padding-horizontal, 24px);
+  color:var(--color-text-btn, #0C0C0C);
+  font-family: var(--main-font, 'Roboto'), system-ui, fantasy;
   font-weight: var(--fw-text, 400);
   font-size: 16px;
   line-height: 1.5;
@@ -26,42 +37,49 @@
 .button:disabled {
   cursor: not-allowed;
 }
-
+/* Primary */
 .buttonPrimary {
   background-color:  var(--color-primary, #ABD27A);
-
 }
 
 .buttonPrimary:hover {
-  background-color: var(--pr-background-colorHover);
+  background-color: var(--pr-background-colorHover, #DEEBC5);
 }
 
 .buttonPrimary:active {
-  background-color: var(--pr-background-colorActive);
+  color: var(--pr-colorActive, #FFFFFF);
+  background-color: var(--pr-background-colorActive, #508826);
 }
 
 .buttonPrimary:disabled {
-  color: var(--pr-color-Disabl);
-  background-color: var(--pr-background-colorDisabl);
+  color: var(--pr-colorDisabl, #69735D);
+  background-color: var(--pr-background-colorDisabl, #E4E8DF);
 }
-
+/* Secondary */
 .buttonSecondary {
   border: 1px solid var(--color-primary, #ABD27A);
   background-color:  var(--color-secondary, #ffffff);
 }
 
 .buttonSecondary:hover {
-  background-color: var(--sec-background-colorHover);
+  border-color:  var(--sec-colorBorderHover, #DEEBC5);
+  color: var(--sec-textColorHover,#69735D);
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
 }
 
 .buttonSecondary:active {
-  background-color: var(--sec-background-colorActive);
+  border-color: var(--sec-borderColorActive, #508826);
+  color: var(--main-text-color, #253017);
 }
 
 .buttonSecondary:disabled {
-  border: none;
-  color: var(--sec-color-Disabl);
-  background-color: var(--sec-background-colorDisabl);
+  border-color: var(--sec-border-colorDisabl, #E4E8DF);
+  color: var(--sec-color-Disabl, #9CA197);
+}
+
+.button:focus-visible {
+  outline: none; 
+  box-shadow: 0 0 0 3px rgba(171, 210, 122, 0.5); 
 }
 
 .buttonFullSize {
