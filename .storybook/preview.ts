@@ -1,3 +1,4 @@
+import '../src/styles/index.css'; // путь  глобальному CSS для всех story
 import type { Preview } from '@storybook/react-vite'
 
 const preview: Preview = {
