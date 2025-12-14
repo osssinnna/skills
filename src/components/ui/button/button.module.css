@@ -1,16 +1,5 @@
-/* сбиваем стили браузера */
-
-
-button {
-  border: none;
-  padding: 0;
-  color: inherit;
-  font: inherit;
-  background-color: transparent;
-  cursor: pointer;
-}
-
 .button {
+  /* локальные переменные кнопки */
   /* primary */
   --color-text-btn: #0C0C0C;
   --pr-background-colorHover: #16CC5A;
@@ -30,7 +19,8 @@ button {
   font-size: 16px;
   line-height: 1.5;
   letter-spacing: 0.02em;
-  transition: all, 0.3s ease-in-out;
+   transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
+  cursor: pointer;
 }
 
 .button:disabled {

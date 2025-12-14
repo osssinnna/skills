@@ -1,0 +1,23 @@
+/* переменные */
+@import './variables.css';
+
+*,
+*::after,
+*::before {
+  box-sizing: border-box;
+}
+
+
+body {
+  margin: 0;
+}
+
+button {
+  border: none;
+  padding: 0;
+  color: inherit;
+  font: inherit;
+  background-color: transparent;
+}
+
+
