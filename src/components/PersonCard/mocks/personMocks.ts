@@ -9,7 +9,7 @@ export const mockPerson1: TPerson = {
     skills: [
         {
         teach: ['Игра на барабанах'],
-        wantsToLearn: ['Фотография', 'Английский язык'],
+        wantsToLearn: ['Фотография', 'Английский язык', 'Йога'],
         },
     ],
 };
@@ -27,23 +27,3 @@ export const mockPerson2: TPerson = {
         },
     ],
 };
-
-export const mockPerson3: TPerson = {
-    id: '33333333-3333-3333-3333-333333333333',
-    img: 'https://commons.wikimedia.org/wiki/Special:FilePath/Jules_Verne_by_%C3%89tienne_Carjat.jpg?width=200',
-    name: 'Михаил Фёдоров',
-    city: 'Новосибирск',
-    age: '27 лет',
-    skills: [
-        {
-        teach: ['Портретная фотография'],
-        wantsToLearn: ['Испанский язык'],
-        },
-    ],
-};
-
-export const mockPersons: TPerson[] = [
-    mockPerson1,
-    mockPerson2,
-    mockPerson3,
-];
