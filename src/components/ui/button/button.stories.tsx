@@ -26,7 +26,7 @@ type Story =StoryObj<typeof ButtonUI>;
 export const Primary: Story = {
   args: {
     color: 'primary',
-    fulsSize: false,
+    fulsSize: true,
     disabledToggle: false,
     children: 'Предложить обмен'
   }
@@ -47,9 +47,25 @@ export const Secondary: Story = {
 export const Disabled: Story = {
   args: {
     color: 'secondary',
-      fulsSize: false,
+    fulsSize: false,
     disabledToggle: true,
     children: 'Сохранить Disabled'
+  }
+}
+
+// fullWidth
+
+export const fullWidth: Story = {
+  render: (args) => (
+    <div style = {{width: '400px', padding: '20px', border: '2px solid black'}}>
+      <ButtonUI {...args}/>
+    </div>
+  ),
+  args: {
+    color: 'primary',
+    fulsSize: true,
+    disabledToggle: false,
+    children: 'Предложить обмен'
   }
 }
 
