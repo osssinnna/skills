@@ -26,7 +26,7 @@ type Story =StoryObj<typeof ButtonUI>;
 export const Primary: Story = {
   args: {
     color: 'primary',
-    fulsSize: true,
+    fulsSize: false,
     disabledToggle: false,
     children: 'Предложить обмен'
   }
