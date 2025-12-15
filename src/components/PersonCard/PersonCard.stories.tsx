@@ -14,10 +14,6 @@ const meta: Meta<typeof PersonCard> = {
         },
     },
     argTypes: {
-        isLiked: {
-            control: 'boolean',
-            description: 'Состояние лайка',
-        },
         onLikeToggle: {
             action: 'clicked', 
             description: 'Коллбэк при клике на лайк',
@@ -48,30 +44,18 @@ type Story = StoryObj<typeof PersonCard>;
 const noop = () => {};
 
 export const Default: Story = {
-    name: "Default PersonCard",
+    name: "PersonCard больше 2 тегов",
     args: {
         person: mockPerson1,
-        isLiked: mockPerson1.id,
-        onLikeToggle: noop,
-        onClickCardButton: noop,
-    },
-};
-
-export const Liked: Story = {
-    name: "Liked PersonCard",
-    args: {
-        person: mockPerson1,
-        isLiked: mockPerson1.id,
         onLikeToggle: noop,
         onClickCardButton: noop,
     },
 };
 
 export const DifferentData: Story = {
-    name: "Другие значения для PersonCard",
+    name: "PersonCard 2 тега",
     args: {
         person: mockPerson2,
-        isLiked: mockPerson2.id,
         onLikeToggle: noop,
         onClickCardButton: noop,
     },
