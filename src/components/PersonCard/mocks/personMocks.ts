@@ -3,13 +3,13 @@ import type { TPerson } from '../../ui/PersonCard/type';
 export const mockPerson1: TPerson = {
     id: '11111111-1111-1111-1111-111111111111',
     img: 'https://commons.wikimedia.org/wiki/Special:FilePath/A_drummer.jpg?width=200',
-    name: 'Алексей Ковалёв',
-    city: 'Москва',
-    age: '32 года',
+    name: 'Иван Ковалёв',
+    city: 'Санкт-Петербург',
+    age: '34 года',
     skills: [
         {
         teach: ['Игра на барабанах'],
-        wantsToLearn: ['Фотография', 'Английский язык', 'Йога'],
+        wantsToLearn: ['Тайм менеджмент', 'Медитация', 'Йога'],
         },
     ],
 };
