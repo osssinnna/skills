@@ -1,20 +1,31 @@
-type TSkillsPerson = {
-    teach: string[];
-    wantsToLearn: string[];
+export type TSubcategoryWantToLearn = {
+    id: number;
+    name: string;
+};
+
+export type TSubcategoriesWantToLearn = TSubcategoryWantToLearn[];
+
+export type TSkillCanTeach = {
+    id: number;
+    name: string;
+    description: string;
 };
 
 export type TPerson = {
-    id: string;
-    img: string;
+    id: number;
+    avatarUrl: string;
     name: string;
-    city: string;
+    location: string;
     age: string;
-    skills: TSkillsPerson[];
+    gender: string;
+    skillCanTeach: TSkillCanTeach;
+    images: string[];
+    subcategoriesWantToLearn: TSubcategoriesWantToLearn;
 };
 
 export type TPersonCardUIProps = {
     person: TPerson;
     isLiked: boolean;
     onLikeToggle: () => void;
-    onClickCardButton: () => void; // добавила это, чтобы как-то на кнопку ПОДРОБНЕЕ нажимать (?)
+    onClickCardButton: () => void;
 };
