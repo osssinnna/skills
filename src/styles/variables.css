@@ -4,6 +4,7 @@
   --fw-subtitle: 500;
   --main-font: 'Roboto';
   --title-font: 'Jost';
+  --open-sans-font: 'Open Sans', sans-serif;
   
   --main-text-color: #253017;
   --disabled-text-color:#9CA197;
@@ -27,6 +28,3 @@
   --tag-health: #E9F7E7;
   --tag-additional: #E8ECF7;
 }
-
-
-
