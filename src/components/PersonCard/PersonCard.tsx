@@ -2,24 +2,21 @@ import { useState, useEffect, useCallback } from "react";
 import { PersonCardUI } from "../ui/PersonCard/PersonCardUI";
 import type { TPersonCardUIProps } from '../ui/PersonCard/type';
 
-type TPersonCardProps = Omit<TPersonCardUIProps, 'isLiked'> & {
-    isLiked?: string; // id пользователя для проверки в localStorage
-};
+type TPersonCardProps = Omit<TPersonCardUIProps, 'isLiked'>;
 
 export const PersonCard = ({
     person,
-    isLiked,
     onLikeToggle,
     onClickCardButton
 }: TPersonCardProps) => {
 
-    //заглушка для isLiked (?)
-    const dummy = isLiked? true : false;
+    // Тут должна быть логика проверки localStorage, которая возвращает есть ли лайк
+    // пока пусть так
+    const dummy = person.id? true : false;
 
     const [isButtonLiked, setIsButtonLiked] = useState(dummy);
 
     useEffect(() => {
-        // Логика проверки localStorage будет здесь
         setIsButtonLiked(dummy);
     }, [dummy]);
 
