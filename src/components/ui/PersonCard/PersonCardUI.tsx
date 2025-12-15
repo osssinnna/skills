@@ -3,6 +3,7 @@ import type { FC } from "react";
 import type { TPersonCardUIProps } from "./type";
 import { IconButton } from "../../IconButton/IconButton";
 import { ButtonUI } from "../button/button";
+import { TagSkillUI } from "../tag";
 
 const MAX_VISIBLE_TAGS = 2;
 
@@ -18,10 +19,7 @@ export const PersonCardUI: FC<TPersonCardUIProps> = ({
     const renderTags = (tags: string[]) => {
         if (tags.length <= MAX_VISIBLE_TAGS) {
             return tags.map((item, idx) => (
-                // пока не стала ставить TagSkillUI -> надо? а мы в TagSkillUI же должны еще key добавить, т.к работа со списком все дела (?)
-                <span key={idx} className={style.tag}>
-                    {item}
-                </span>
+                <TagSkillUI color="#F7E7F2" key={idx}>{item}</TagSkillUI>
             ));
         } else {
             const visibleTags = tags.slice(0, MAX_VISIBLE_TAGS);
@@ -30,13 +28,9 @@ export const PersonCardUI: FC<TPersonCardUIProps> = ({
             return (
                 <>
                     {visibleTags.map((item, idx) => (
-                        <span key={idx} className={`${style.tag} ${style.visible_tag}`}>
-                            {item}
-                        </span>
+                        <TagSkillUI color="#F7E7F2" key={idx}>{item}</TagSkillUI>
                     ))}
-                    <span className={`${style.tag} ${style.remaining_tag}`}>
-                        +{count}
-                    </span>
+                    <TagSkillUI color="#E8ECF7">+{count}</TagSkillUI>
                 </>
             );
         }
