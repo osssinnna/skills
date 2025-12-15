@@ -1,0 +1,86 @@
+[
+  {
+    "id": 1,
+    "avatarUrl": "https://randomuser.me/api/portraits/men/12.jpg",
+    "name": "Алексей Петров",
+    "location": "Москва, Россия",
+    "age": "28 лет",
+    "gender": "Мужской",
+    "skillCanTeach": {
+      "id": 101,
+      "name": "Фотография",
+      "description": "Основы съемки, работа с камерой и обработка фото."
+    },
+    "images": [
+      "https://picsum.photos/seed/101/400/300",
+      "https://picsum.photos/seed/102/400/300"
+    ],
+    "subcategoriesWantToLearn": [
+      { "id": 201, "name": "Рисование" },
+      { "id": 202, "name": "Музыка" }
+    ]
+  },
+  {
+    "id": 2,
+    "avatarUrl": "https://randomuser.me/api/portraits/women/34.jpg",
+    "name": "Марина Соколова",
+    "location": "Санкт-Петербург, Россия",
+    "age": "32 года",
+    "gender": "Женский",
+    "skillCanTeach": {
+      "id": 102,
+      "name": "Веб-дизайн",
+      "description": "Создание макетов сайтов, UI/UX дизайн и прототипирование."
+    },
+    "images": [
+      "https://picsum.photos/seed/103/400/300",
+      "https://picsum.photos/seed/104/400/300"
+    ],
+    "subcategoriesWantToLearn": [
+      { "id": 203, "name": "Фотография" },
+      { "id": 204, "name": "Программирование" }
+    ]
+  },
+  {
+    "id": 3,
+    "avatarUrl": "https://randomuser.me/api/portraits/men/45.jpg",
+    "name": "Иван Кузнецов",
+    "location": "Новосибирск, Россия",
+    "age": "25 лет",
+    "gender": "Мужской",
+    "skillCanTeach": {
+      "id": 103,
+      "name": "Гитара",
+      "description": "Игра на акустической и электрогитаре, базовые аккорды и техники."
+    },
+    "images": [
+      "https://picsum.photos/seed/105/400/300",
+      "https://picsum.photos/seed/106/400/300"
+    ],
+    "subcategoriesWantToLearn": [
+      { "id": 205, "name": "Фотография" },
+      { "id": 206, "name": "Кулинария" }
+    ]
+  },
+  {
+    "id": 4,
+    "avatarUrl": "https://randomuser.me/api/portraits/women/22.jpg",
+    "name": "Екатерина Иванова",
+    "location": "Казань, Россия",
+    "age": "29 лет",
+    "gender": "Женский",
+    "skillCanTeach": {
+      "id": 104,
+      "name": "Программирование",
+      "description": "Основы JavaScript, React и фронтенд-разработка."
+    },
+    "images": [
+      "https://picsum.photos/seed/107/400/300",
+      "https://picsum.photos/seed/108/400/300"
+    ],
+    "subcategoriesWantToLearn": [
+      { "id": 207, "name": "Музыка" },
+      { "id": 208, "name": "Фотография" }
+    ]
+  }
+]
