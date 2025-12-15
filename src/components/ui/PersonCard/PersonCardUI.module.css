@@ -39,7 +39,7 @@
     top: 20px;
     right: 20px;
     width: 24px;
-    height: 24px;
+    transform: scale(1.31);
     cursor: pointer;
     z-index: 1;
 }
@@ -54,21 +54,23 @@
 }
 
 .text h3 {
-    font-family: 'Open Sans', sans-serif;
+    font-family: var(--open-sans-font, 'Open Sans');
     font-size: 20px;
-    font-weight: 600;
-    line-height: 24px;
-    letter-spacing: -0.011em;
+    font-weight: 500; 
+    line-height: 25px;
+    letter-spacing: 0.04em;
     margin: 0;
+    color: var(--main-text-color, #253017);
 }
 
 .text p {
-    font-family: 'Roboto', sans-serif;
+    font-family: var( --main-font, 'Roboto'), system-ui, sans-serif;
     font-size: 12px;
     font-weight: 400;
-    letter-spacing: 0.02em;
-    vertical-align: middle;
+    letter-spacing: -0.029em;
     margin: 0;
+    line-height: 16px;
+    color: var(--main-text-color, #253017);
 }
 
 .skills_container {
@@ -84,37 +86,16 @@
 }
 
 .skill_container h4 {
-    font-family: 'Roboto', sans-serif;
+    font-family: var( --main-font, 'Roboto'), system-ui, sans-serif;
     font-size: 16px;
     font-weight: 500;
     margin: 0;
     line-height: 24px;
-    letter-spacing: 0.02em;
+    letter-spacing: 0.007em;
+    color: var(--main-text-color, #253017);
 }
 
 .skill_list {
     font-size: 12px;
     font-weight: 400;
-}
-
-.tag {
-    display: inline-block;
-    margin-right: 4px;
-    padding: 8px 12px;
-    border-radius: 20px;
-    font-size: 12px;
-    font-family: 'Roboto', sans-serif;
-    font-weight: 400;
-    line-height: 16px;
-    color: #253017;
-    background-color: #F7E7F2;
-}
-
-.visible_tag {
-    /* для теста (ПОТОМ РАЗОБРАТЬСЯ С ЦВЕТАМИ) */
-    background-color: #F7E7F2;
-}
-
-.remaining_tag {
-    background-color: #E8ECF7;
 }
