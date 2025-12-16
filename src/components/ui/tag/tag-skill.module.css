@@ -6,5 +6,8 @@
   font-weight: var(--fw-text,400);
   font-size:12px;
   line-height: 16px;
-  letter-spacing: 0.02em;
+  /* добавила */
+  display: inline-block; 
+  letter-spacing: -0.001em;
+  margin-right: 4px;
 }
