@@ -1,9 +1,11 @@
 import style from "./PersonCardUI.module.css";
 import type { FC } from "react";
 import type { TPersonCardUIProps, TSubcategoryWantToLearn } from "./type";
-import { IconButton } from "../../IconButton/IconButton";
+import { IconButtonUI } from "../IconButton/IconButtonUI";
 import { ButtonUI } from "../button/button";
 import { TagSkillUI } from "../tag";
+import iconLike from '../../../assets/icon-like.svg'
+import iconLikeFilled from '../../../assets/icon-like-filled.svg';
 
 const MAX_VISIBLE_TAGS = 2;
 
@@ -11,7 +13,6 @@ export const PersonCardUI: FC<TPersonCardUIProps> = ({
     person,
     isLiked,
     onLikeToggle,
-    onClickCardButton
 }) => {
     const firstName = person.name.split(' ')[0];
 
@@ -46,7 +47,9 @@ export const PersonCardUI: FC<TPersonCardUIProps> = ({
                 />
                 <div className={style.info}>
                     <div className = {style.icon}>
-                        <IconButton 
+                        <IconButtonUI 
+                            icon={iconLike}
+                            iconActive={iconLikeFilled}
                             isActive = {isLiked}
                             onClick = {onLikeToggle}
                         /> 
@@ -79,7 +82,6 @@ export const PersonCardUI: FC<TPersonCardUIProps> = ({
                     color={"primary"}
                     fulsSize={true}
                     disabledToggle={false}
-                    onClick={onClickCardButton}
                 >
                     Подробнее
                 </ButtonUI>

@@ -18,10 +18,6 @@ const meta: Meta<typeof PersonCard> = {
             action: 'clicked', 
             description: 'Коллбэк при клике на лайк',
         },
-        onClickCardButton: {
-            action: 'clicked', 
-            description: 'Коллбэк при клике кнопку "ПОДРОБНЕЕ"',
-        },
     },
     tags: ['autodocs'],
     decorators: [
@@ -48,7 +44,6 @@ export const Default: Story = {
     args: {
         person: mockPerson1,
         onLikeToggle: noop,
-        onClickCardButton: noop,
     },
 };
 
@@ -57,6 +52,5 @@ export const DifferentData: Story = {
     args: {
         person: mockPerson2,
         onLikeToggle: noop,
-        onClickCardButton: noop,
     },
 };

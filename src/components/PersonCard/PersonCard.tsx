@@ -7,7 +7,6 @@ type TPersonCardProps = Omit<TPersonCardUIProps, 'isLiked'>;
 export const PersonCard = ({
     person,
     onLikeToggle,
-    onClickCardButton
 }: TPersonCardProps) => {
 
     // Тут должна быть логика проверки localStorage, которая возвращает есть ли лайк
@@ -30,7 +29,6 @@ export const PersonCard = ({
             person={person}
             isLiked={isButtonLiked}
             onLikeToggle={handleLikeToggle}
-            onClickCardButton={onClickCardButton}
         />
     );
 };

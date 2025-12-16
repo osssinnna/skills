@@ -1,5 +1,5 @@
-import type { TIconButtonUIPropsUI } from "./type";
 import type { FC } from "react";
+import type { TIconButtonUIPropsUI } from "./type";
 import styles from "./IconButtonUI.module.css";
 
 export const IconButtonUI: FC<TIconButtonUIPropsUI> = ({

@@ -1,9 +1,11 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { IconButton } from "./IconButton";
+import { IconButtonUI } from "./IconButtonUI";
+import iconLike from '../../../assets/icon-like.svg'
+import iconLikeFilled from '../../../assets/icon-like-filled.svg';
 
-const meta: Meta<typeof IconButton> = {
-    title: "Components/IconButton",
-    component: IconButton,
+const meta: Meta<typeof IconButtonUI> = {
+    title: "Components/ui/IconButtonUI",
+    component: IconButtonUI,
     parameters: {
         layout: "centered",
         docs: {
@@ -33,13 +35,15 @@ const meta: Meta<typeof IconButton> = {
 };
 
 export default meta;
-type Story = StoryObj<typeof IconButton>;
+type Story = StoryObj<typeof IconButtonUI>;
 
 // базовое состояние компонента (прозрачное сердечко)
 export const DefaultIconButton: Story = {
     name: "Default IconButton",
     args: {
         isActive: false,
+        icon: iconLike,
+        iconActive: iconLikeFilled,
     },
     parameters: {
         docs: {
@@ -55,6 +59,8 @@ export const ActiveIconButton: Story = {
     name: "Active IconButton",
     args: {
         isActive: true,
+        icon: iconLike,
+        iconActive: iconLikeFilled,
     },
     parameters: {
         docs: {

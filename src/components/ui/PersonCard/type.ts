@@ -27,5 +27,4 @@ export type TPersonCardUIProps = {
     person: TPerson;
     isLiked: boolean;
     onLikeToggle: () => void;
-    onClickCardButton: () => void;
 };
