@@ -1,6 +1,6 @@
 import type { ChangeEvent, FC } from "react";
 import styles from "./search-input.module.css";
-import { IconButtonUI } from "../IconButton/IconButtonUI";
+import { IconButtonUI } from "../iconButton/iconButton";
 import crossIcon from "../../../assets/icon-cross.svg";
 import searchIcon from "../../../assets/icon-search.svg";
 
