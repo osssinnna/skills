@@ -1,1 +1,0 @@
-export { TagSkillUI } from './tag-skill';
