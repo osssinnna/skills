@@ -1,5 +1,6 @@
 /* переменные */
 @import './variables.css';
+@import './font.css';
 
 body {
   margin: 0;
