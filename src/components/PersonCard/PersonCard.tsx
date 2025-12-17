@@ -1,34 +1,30 @@
 import { useState, useEffect, useCallback } from "react";
-import { PersonCardUI } from "../ui/PersonCard/PersonCardUI";
-import type { TPersonCardUIProps } from '../ui/PersonCard/type';
+import { PersonCardUI } from "../ui/personCard/personCardUI";
+import type { TPersonCardUIProps } from "../ui/personCard/type";
 
-type TPersonCardProps = Omit<TPersonCardUIProps, 'isLiked'>;
+type TPersonCardProps = Omit<TPersonCardUIProps, "isLiked">;
 
-export const PersonCard = ({
-    person,
-    onLikeToggle,
-}: TPersonCardProps) => {
+export const PersonCard = ({ person, onLikeToggle }: TPersonCardProps) => {
+  // Тут должна быть логика проверки localStorage, которая возвращает есть ли лайк
+  // пока пусть так
+  const dummy = person.id ? true : false;
 
-    // Тут должна быть логика проверки localStorage, которая возвращает есть ли лайк
-    // пока пусть так
-    const dummy = person.id? true : false;
+  const [isButtonLiked, setIsButtonLiked] = useState(dummy);
 
-    const [isButtonLiked, setIsButtonLiked] = useState(dummy);
+  useEffect(() => {
+    setIsButtonLiked(dummy);
+  }, [dummy]);
 
-    useEffect(() => {
-        setIsButtonLiked(dummy);
-    }, [dummy]);
+  const handleLikeToggle = useCallback(() => {
+    setIsButtonLiked((prev) => !prev);
+    onLikeToggle();
+  }, [onLikeToggle]);
 
-    const handleLikeToggle = useCallback(() => {
-        setIsButtonLiked(prev => !prev);
-        onLikeToggle();
-    }, [onLikeToggle]); 
-
-    return (
-        <PersonCardUI
-            person={person}
-            isLiked={isButtonLiked}
-            onLikeToggle={handleLikeToggle}
-        />
-    );
+  return (
+    <PersonCardUI
+      person={person}
+      isLiked={isButtonLiked}
+      onLikeToggle={handleLikeToggle}
+    />
+  );
 };
