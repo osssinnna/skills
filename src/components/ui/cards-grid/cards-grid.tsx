@@ -1,4 +1,4 @@
-import { memo, useCallback } from 'react';
+import { memo } from 'react';
 import { PersonCard } from '../../personCard/personCard';
 import styles from "./cards-grid.module.css";
 
@@ -30,15 +30,7 @@ interface CardsGridProps {
   onLikeToggle?: (userId: number) => void;
 }
 
-// Мемоизируем весь компонент
-export const CardsGrid = memo<CardsGridProps>(({ 
-  users, 
-  onLikeToggle 
-}) => {
-  const handleLikeToggle = useCallback((userId: number) => {
-    onLikeToggle?.(userId);
-  }, [onLikeToggle]);
-
+export const CardsGrid = memo<CardsGridProps>(({ users }) => {
   if (users.length === 0) {
     return (
       <div className={styles.emptyState}>
@@ -53,7 +45,7 @@ export const CardsGrid = memo<CardsGridProps>(({
         <PersonCard
           key={user.id}
           person={user}
-          onLikeToggle={() => handleLikeToggle(user.id)}
+          onLikeToggle={() => {}}
         />
       ))}
     </div>
