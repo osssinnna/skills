@@ -1,6 +1,22 @@
 import { Routes, Route } from "react-router-dom";
 import { NotFound404 } from "../../pages/not-found-404/not-found-404";
 import { AppHeader } from "../app-header";
+import { FooterUI, type TFooterLink } from "../ui/footer";
+
+const footerLinks: TFooterLink[][] = [
+  [
+    { label: "О проекте", href: "/" },
+    { label: "Все навыки", href: "/" },
+  ],
+  [
+    { label: "Контакты", href: "/" },
+    { label: "Блог", href: "/" },
+  ],
+  [
+    { label: "Политика конфиденциальности", href: "/" },
+    { label: "Пользовательское соглашение", href: "/" },
+  ],
+];
 
 function App() {
   return (
@@ -15,6 +31,7 @@ function App() {
         {/* настоящий 404 */}
         <Route path="*" element={<NotFound404 />} />
       </Routes>
+      <FooterUI links={footerLinks} />
     </>
   );
 }
