@@ -1,4 +1,4 @@
-import { useEffect, useRef, type FC } from 'react';
+import { useCallback, useEffect, useLayoutEffect, useRef, useState, type FC } from 'react';
 import { ModalUI } from '../ui/modal/';
 import ReactDOM from 'react-dom';
 
@@ -13,20 +13,44 @@ type ModalProps = {
 const modalRoot = document.getElementById('modals') ?? document.body;
 
 export const Modal: FC<ModalProps> = ({ onClose, children }) => {
-
   const modalUIRef =useRef<HTMLDivElement>(null);
+  const timeoutRef =useRef<NodeJS.Timeout | null>(null);
+  const [isShowModal, setIsShowModal] = useState(false);
+  // работа анимации
+  useEffect(() => {
+    timeoutRef.current = setTimeout(() => setIsShowModal(true));
+    
+    return () => {
+      //  очистка интервала
+      if( timeoutRef.current){
+          clearTimeout(timeoutRef.current);
+      }
+      
+    }
+  }, []);
+  
+   const handleClose = useCallback(() => {
+      //  для анимации при закрытии мо
+      setIsShowModal(false);
+      //  закрываем модал c небольшим таймером чтобы аним закр успела сработать перед разм комп
+      timeoutRef.current = setTimeout(()=>onClose(),500);
+    },[onClose]);
+  
   // установка слушателей закр мо
   useEffect(() => {
     const handleEscape = (e: KeyboardEvent) => {
       if(e.key === 'Escape') {
-              onClose();
+            handleClose();
       }  
     };
     document.addEventListener('keydown', handleEscape)
     return () => {
       document.removeEventListener('keydown', handleEscape )
+      if(timeoutRef.current) {
+        clearTimeout(timeoutRef.current);
+      }
     }
-  },[onClose]);
+  },[handleClose]);
 
   // установка фокуса(полезно для доступности)
 
@@ -40,14 +64,17 @@ export const Modal: FC<ModalProps> = ({ onClose, children }) => {
    const currentOverflowBody = document.body.style.overflow;
   //  блок скролл
   document.body.style.overflow = 'hidden';
-    // при размотировании убираем hidden
+    // при размотировании убираем hidden и таймер 
     return () => {
       document.body.style.overflow = currentOverflowBody;
+       if (timeoutRef.current) {
+        clearTimeout(timeoutRef.current);
+      }
     }
   },[])
 
   return ReactDOM.createPortal(
-    <ModalUI ref={modalUIRef} onClose={onClose}>
+    <ModalUI isShowModalAnim={isShowModal} ref={modalUIRef} onClose={handleClose}>
       {children}
     </ModalUI>,
     modalRoot as HTMLDivElement
