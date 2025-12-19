@@ -1,0 +1,27 @@
+.modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  z-index: 9999;
+  width: 100%;
+  max-width: 556px;
+  border-radius: 12px;
+  background-color: var( --color-secondary, #ffffff);
+  transform: translate(-50%, -50%);
+}
+
+.modal:focus {
+  outline: none;
+}
+
+.modalContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 80px 60px;
+}
+
+
+
+
