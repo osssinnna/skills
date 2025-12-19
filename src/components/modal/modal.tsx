@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useLayoutEffect, useRef, useState, type FC } from 'react';
+import { useCallback, useEffect, useRef, useState, type FC } from 'react';
 import { ModalUI } from '../ui/modal/';
 import ReactDOM from 'react-dom';
 
@@ -32,8 +32,11 @@ export const Modal: FC<ModalProps> = ({ onClose, children }) => {
    const handleClose = useCallback(() => {
       //  для анимации при закрытии мо
       setIsShowModal(false);
+      if(timeoutRef.current){
+        clearTimeout(timeoutRef.current);
+      }
       //  закрываем модал c небольшим таймером чтобы аним закр успела сработать перед разм комп
-      timeoutRef.current = setTimeout(()=>onClose(),500);
+      timeoutRef.current = setTimeout(()=>onClose(), 350);
     },[onClose]);
   
   // установка слушателей закр мо
