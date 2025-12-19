@@ -1,4 +1,4 @@
-import { forwardRef, useEffect, useState} from "react";
+import { forwardRef} from "react";
 import { ModalOverlayUI } from "../modal-overlay";
 import styles from "./modal.module.css";
 import clsx from "clsx";
