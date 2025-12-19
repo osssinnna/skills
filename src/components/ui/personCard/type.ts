@@ -26,5 +26,7 @@ export type TPerson = {
 export type TPersonCardUIProps = {
     person: TPerson;
     isLiked: boolean;
-    onLikeToggle: () => void;
+    onLikeToggle: (id?: number | string) => void;
+    onShareToggle: (id?: number | string) => void;
+    onMoreClick: (id?: number | string) => void;
 };

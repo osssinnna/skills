@@ -14,9 +14,8 @@
 }
 
 .user {
-    align-items: flex-start;
     display: flex;
-    gap: 12px;
+    align-items: center;
 }
 
 .image {
@@ -24,14 +23,15 @@
     height: 100px;
     border-radius: 50%;
     object-fit: cover;
+    flex: 0 0 auto;
 }
 
 .info {
     display: flex;
     flex-direction: column;
     gap: 4px;
-    width: 172px;
-    justify-content:flex-end;
+    margin: 0 auto;
+    text-align: center;
 }
 
 .icon {
@@ -76,7 +76,7 @@
 .skills_container {
     display: flex;
     flex-direction: column;
-    gap: 12px;
+    gap: 24px;
 }
 
 .skill_container {
