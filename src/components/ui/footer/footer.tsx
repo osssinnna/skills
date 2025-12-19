@@ -4,7 +4,22 @@ import styles from "./footer.module.css";
 import { LogoUI } from "../logo";
 import down from "../../../assets/icon-down.svg";
 
-export const FooterUI: FC<TFooterUIProps> = ({ links, onAllSkillsClick }) => {
+const footerLinks = [
+  [
+    { label: "О проекте", href: "/" },
+    { label: "Все навыки", href: "/" },
+  ],
+  [
+    { label: "Контакты", href: "/" },
+    { label: "Блог", href: "/" },
+  ],
+  [
+    { label: "Политика конфиденциальности", href: "/" },
+    { label: "Пользовательское соглашение", href: "/" },
+  ],
+];
+
+export const FooterUI: FC<TFooterUIProps> = ({ onAllSkillsClick }) => {
   return (
     <footer className={styles.footer}>
       <div className={styles.logoSection}>
@@ -13,7 +28,7 @@ export const FooterUI: FC<TFooterUIProps> = ({ links, onAllSkillsClick }) => {
         </a>
       </div>
 
-      {links.map((column, columnIndex) => (
+      {footerLinks.map((column, columnIndex) => (
         <div
           key={columnIndex}
           className={styles.column}
@@ -45,4 +60,3 @@ export const FooterUI: FC<TFooterUIProps> = ({ links, onAllSkillsClick }) => {
     </footer>
   );
 };
-

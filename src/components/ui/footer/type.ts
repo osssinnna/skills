@@ -4,7 +4,5 @@ export type TFooterLink = {
 };
 
 export type TFooterUIProps = {
-  links: TFooterLink[][];
   onAllSkillsClick?: () => void;
 };
-
