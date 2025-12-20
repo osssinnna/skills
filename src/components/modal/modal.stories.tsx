@@ -3,7 +3,7 @@ import { Modal } from "./modal";
 import { ModalMessageUI } from "../ui/modal/modal-message";
 import bellIcon from '../../assets/modal-message/notificationBell-icon.svg';
 import { ButtonUI } from "../ui/button";
-import { useGoBack } from "../../utils/hooks";
+import { useGoBack } from "../../hooks/use-go-back";
 import { Link, MemoryRouter, Route, Routes, useLocation, useNavigate } from "react-router-dom";
 import { NotFound404 } from "../../pages/not-found-404/not-found-404";
 
@@ -61,7 +61,6 @@ const PageHome = () => {
 const AppRoutes = () => {
     const location = useLocation();
     const backgroundLocation = location.state?.background;
-    const goBack = useGoBack(1);
     return <>
               <Routes location={backgroundLocation || location}>
                 {/* Главная страница с кнопкой */}
