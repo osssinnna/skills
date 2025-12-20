@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useRef, useState, type FC } from 'react';
+import { clearTimeoutRef } from '../../utils/clear-timeout';
 import { ModalUI } from '../ui/modal/';
 import ReactDOM from 'react-dom';
 
@@ -34,10 +35,8 @@ export const Modal: FC<ModalProps> = ({ onClose, children }) => {
     
     return () => {
       //  при размонтир след:
-      //  1. очистка таймаута
-      if( timeoutRef.current){
-          clearTimeout(timeoutRef.current);
-      }
+      //  1. очистка таймаута если мы перешли по др роуту - размонтировав к-т мо
+      clearTimeoutRef(timeoutRef)
       //  2. восстановл стандр body.style.overflow 
       document.body.style.overflow = currentOverflowBody;
     }
@@ -46,9 +45,7 @@ export const Modal: FC<ModalProps> = ({ onClose, children }) => {
    const handleClose = useCallback(() => {
       //  для анимации при закрытии мо
       setIsShowModal(false); // удаляем класс для аним
-      if(timeoutRef.current){
-        clearTimeout(timeoutRef.current); // удаляем  предыдущ таймаут если он был
-      }
+      clearTimeoutRef(timeoutRef) // удаляем  предыдущ таймаут если он был (напр когда открывалось МО)
       //  закрываем модал c небольшим таймером чтобы аним закр(удаление класса modalOpen) успела сработать перед разм комп
       timeoutRef.current = setTimeout(()=>onClose(), 350);
     },[onClose]);
@@ -63,9 +60,8 @@ export const Modal: FC<ModalProps> = ({ onClose, children }) => {
     document.addEventListener('keydown', handleEscape)
     return () => {
       document.removeEventListener('keydown', handleEscape )
-      if(timeoutRef.current) {
-        clearTimeout(timeoutRef.current);
-      }
+      // при любом размонтировании очищаем таймаут закрытия после отработки функции handleEscape
+      clearTimeoutRef(timeoutRef)
     }
   },[handleClose]);
 
