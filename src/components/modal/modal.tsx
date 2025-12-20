@@ -13,29 +13,43 @@ type ModalProps = {
 const modalRoot = document.getElementById('modals') ?? document.body;
 
 export const Modal: FC<ModalProps> = ({ onClose, children }) => {
-  const modalUIRef =useRef<HTMLDivElement>(null);
-  const timeoutRef =useRef<NodeJS.Timeout | null>(null);
-  const [isShowModal, setIsShowModal] = useState(false);
+  const modalUIRef =useRef<HTMLDivElement>(null); // реф дляуправление фокусом модалки
+  const timeoutRef =useRef<NodeJS.Timeout | null>(null); //таймаут дляустановки флагаанимации
+  const [isShowModal, setIsShowModal] = useState(false); // флан анимации
   // работа анимации
   useEffect(() => {
+    //  устанавливаем флаг анимации чтобы подставить в модалку нужный класс в необх время
     timeoutRef.current = setTimeout(() => setIsShowModal(true));
+     // чтобы скринридер знал,что фокус переместился в модалку
+    if(!modalUIRef.current) return;
+    // установка фокуса(полезно для доступности)
+        modalUIRef.current.focus();
+
+  //  блокируем скролл при откр модалке
+  // сохр тек значение 
+   const currentOverflowBody = document.body.style.overflow;
+  //  блок скролл при открытой модалке
+  document.body.style.overflow = 'hidden';
+    // при размотировании убираем hidden и таймер 
     
     return () => {
-      //  очистка интервала
+      //  при размонтир след:
+      //  1. очистка таймаута
       if( timeoutRef.current){
           clearTimeout(timeoutRef.current);
       }
-      
+      //  2. восстановл стандр body.style.overflow 
+      document.body.style.overflow = currentOverflowBody;
     }
   }, []);
   
    const handleClose = useCallback(() => {
       //  для анимации при закрытии мо
-      setIsShowModal(false);
+      setIsShowModal(false); // удаляем класс для аним
       if(timeoutRef.current){
-        clearTimeout(timeoutRef.current);
+        clearTimeout(timeoutRef.current); // удаляем  предыдущ таймаут если он был
       }
-      //  закрываем модал c небольшим таймером чтобы аним закр успела сработать перед разм комп
+      //  закрываем модал c небольшим таймером чтобы аним закр(удаление класса modalOpen) успела сработать перед разм комп
       timeoutRef.current = setTimeout(()=>onClose(), 350);
     },[onClose]);
   
@@ -54,27 +68,6 @@ export const Modal: FC<ModalProps> = ({ onClose, children }) => {
       }
     }
   },[handleClose]);
-
-  // установка фокуса(полезно для доступности)
-
-  useEffect(() =>{
-  // чтобы скринридер знал,что фокус переместился в модалку
-    if(!modalUIRef.current) return;
-        modalUIRef.current?.focus();
-
-  //  блокируем скролл при откр модалке
-  // сохр тек значение 
-   const currentOverflowBody = document.body.style.overflow;
-  //  блок скролл
-  document.body.style.overflow = 'hidden';
-    // при размотировании убираем hidden и таймер 
-    return () => {
-      document.body.style.overflow = currentOverflowBody;
-       if (timeoutRef.current) {
-        clearTimeout(timeoutRef.current);
-      }
-    }
-  },[])
 
   return ReactDOM.createPortal(
     <ModalUI isShowModalAnim={isShowModal} ref={modalUIRef} onClose={handleClose}>
