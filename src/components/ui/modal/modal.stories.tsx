@@ -24,6 +24,7 @@ type Story =StoryObj<typeof ModalUI>;
 export const offerChange: Story = {
   args: {
    onClose: ()=>{},
+   isShowModalAnim:true,
    children: (
     <ModalMessageUI
       image={offerDoneIcon}
@@ -43,6 +44,7 @@ export const offerChange: Story = {
 export const toLogin: Story = {
   args: {
    onClose: ()=>{},
+   isShowModalAnim: true,
    children: (
     <ModalMessageUI
       image={account}
