@@ -6,6 +6,18 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    transition: opacity 0.3s ease;
+}
+
+/* hover */
+.button:hover {
+  opacity: 0.6;
+}
+
+/* focus-visible */
+.button:focus-visible {
+  outline: 2px solid #4f4f4f;
+  outline-offset: 2px;
 }
 
 .icon {
