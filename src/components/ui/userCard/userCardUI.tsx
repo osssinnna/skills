@@ -1,4 +1,4 @@
-import style from "./personCardUI.module.css";
+import style from "./userCardUI.module.css";
 import type { FC } from "react";
 import type { TUserCardUIProps, TSubcategoryWantToLearn } from "./type";
 import { IconButtonUI } from "../iconButton/iconButton";
