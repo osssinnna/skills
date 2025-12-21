@@ -1,10 +1,10 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { PersonCard } from "./personCard";
+import { UserCard } from "./userCard";
 import { mockPerson1, mockPerson2 } from "./mocks/personMocks";
 
-const meta: Meta<typeof PersonCard> = {
+const meta: Meta<typeof UserCard> = {
   title: "Components/PersonCard",
-  component: PersonCard,
+  component: UserCard,
   parameters: {
     layout: "centered",
     docs: {
@@ -37,7 +37,7 @@ const meta: Meta<typeof PersonCard> = {
 };
 
 export default meta;
-type Story = StoryObj<typeof PersonCard>;
+type Story = StoryObj<typeof UserCard>;
 
 // заглушка
 const noop = () => {};

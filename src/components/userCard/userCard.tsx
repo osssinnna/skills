@@ -1,10 +1,10 @@
 import { useState, useEffect, useCallback } from "react";
-import { PersonCardUI } from "../ui/personCard/personCardUI";
-import type { TPersonCardUIProps } from "../ui/personCard/type";
+import { UserCardUI } from "../ui/userCard/userCardUI";
+import type { TUserCardUIProps } from "../ui/userCard/type";
 
-type TPersonCardProps = Omit<TPersonCardUIProps, "isLiked">;
+type TUserCardProps = Omit<TUserCardUIProps, "isLiked">;
 
-export const PersonCard = ({ person, onLikeToggle }: TPersonCardProps) => {
+export const UserCard = ({ person, onLikeToggle }: TUserCardProps) => {
   // Тут должна быть логика проверки localStorage, которая возвращает есть ли лайк
   // пока пусть так
   const dummy = person.id ? true : false;
@@ -21,7 +21,7 @@ export const PersonCard = ({ person, onLikeToggle }: TPersonCardProps) => {
   }, [onLikeToggle]);
 
   return (
-    <PersonCardUI
+    <UserCardUI
       person={person}
       isLiked={isButtonLiked}
       onLikeToggle={handleLikeToggle}

@@ -1,6 +1,6 @@
 import style from "./personCardUI.module.css";
 import type { FC } from "react";
-import type { TPersonCardUIProps, TSubcategoryWantToLearn } from "./type";
+import type { TUserCardUIProps, TSubcategoryWantToLearn } from "./type";
 import { IconButtonUI } from "../iconButton/iconButton";
 import { ButtonUI } from "../button/button";
 import { TagSkillUI } from "../tag";
@@ -9,7 +9,7 @@ import iconLikeFilled from "../../../assets/icon-like-filled.svg";
 
 const MAX_VISIBLE_TAGS = 2;
 
-export const PersonCardUI: FC<TPersonCardUIProps> = ({
+export const UserCardUI: FC<TUserCardUIProps> = ({
   person,
   isLiked,
   onLikeToggle,
