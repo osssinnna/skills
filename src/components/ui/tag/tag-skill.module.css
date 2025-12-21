@@ -1,0 +1,13 @@
+.tagSkill {
+  border-radius: 20px;
+  padding: 8px 12px;
+  color:var(--main-text-color, #253017);
+  font-family: var( --main-font, 'Roboto'), system-ui, sans-serif;
+  font-weight: var(--fw-text,400);
+  font-size:12px;
+  line-height: 16px;
+  /* добавила */
+  display: inline-block; 
+  letter-spacing: -0.001em;
+  margin-right: 4px;
+}
