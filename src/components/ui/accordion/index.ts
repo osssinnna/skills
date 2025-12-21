@@ -1,1 +1,0 @@
-export { AccordionUI } from './accordion';
