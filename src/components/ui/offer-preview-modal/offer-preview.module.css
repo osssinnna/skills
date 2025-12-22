@@ -1,4 +1,4 @@
-*{
+* {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
@@ -7,6 +7,9 @@
    Контейнер
 ================================ */
 .container {
+  width: 100%;
+  max-width: 1024px;
+  margin: 0 auto;
   padding: 44px 60px 72px;
   background: #ffffff;
   border-radius: 12px;
@@ -19,7 +22,10 @@
 /* ===============================
    Верхний текст
 ================================= */
-.header { 
+.header {
+  width: 100%;
+  max-width: 904px;
+  align-self: center;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -27,7 +33,7 @@
 }
 
 .headerTitle {
-  font-family: 'Jost';
+  font-family: "Jost";
   font-weight: 500;
   font-size: 24px;
   line-height: 32px;
@@ -35,7 +41,7 @@
 }
 
 .headerSubtitle {
-  font-family: 'Roboto';
+  font-family: "Roboto";
   font-size: 12px;
   line-height: 16px;
   letter-spacing: 0.02em;
@@ -47,6 +53,8 @@
    Основная таблица
 ================================ */
 .offer {
+  width: 100%;
+  max-width: 904px;
   height: 324px;
   display: grid;
   grid-template-columns: 420px 440px;
@@ -79,7 +87,7 @@
 
 /* Заголовок */
 .title {
-  font-family: 'Jost';
+  font-family: "Jost";
   font-weight: 500;
   font-size: 32px;
   line-height: 40px;
@@ -89,7 +97,7 @@
 
 /* Хлебные крошки */
 .breadcrumbs {
-  font-family: 'Roboto';
+  font-family: "Roboto";
   font-size: 12px;
   line-height: 16px;
   letter-spacing: 0.02em;
@@ -101,7 +109,7 @@
   margin-top: 20px;
   margin-bottom: 32px;
 
-  font-family: 'Roboto';
+  font-family: "Roboto";
   font-size: 16px;
   line-height: 24px;
   letter-spacing: 0.02em;
@@ -191,7 +199,7 @@
   align-items: center;
   justify-content: center;
 
-  font-family: 'Roboto';
+  font-family: "Roboto";
   font-weight: 500;
   font-size: 16px;
   color: #ffffff;

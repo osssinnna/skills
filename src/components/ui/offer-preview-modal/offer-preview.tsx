@@ -33,7 +33,7 @@ export const OfferPreview = ({
     <div className={styles.container}>
       {/* Верхний блок */}
       <div className={styles.header}>
-        <h2 className={styles.headerTitle}>Предпросмотр предложения</h2>
+        <h2 className={styles.headerTitle}>Ваше предложение</h2>
         <p className={styles.headerSubtitle}>
           Пожалуйста, проверьте и подтвердите правильность данных
         </p>
