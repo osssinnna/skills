@@ -1,0 +1,47 @@
+.group {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+
+  --hoverTextColor: #69735d;
+  --accentColor: var(--color-primary);
+}
+
+.option {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+}
+
+.label {
+  transition: color 0.2s ease;
+}
+
+.option:hover .label {
+  color: var(--hoverTextColor);
+}
+
+/* radio */
+
+.radio {
+  appearance: none;
+  width: 18px;
+  height: 18px;
+  border: 2px solid #c7c7c7;
+  border-radius: 50%;
+  position: relative;
+  cursor: pointer;
+}
+
+.radio:checked {
+  border-color: var(--accentColor);
+}
+
+.radio:checked::after {
+  content: "";
+  position: absolute;
+  inset: 4px;
+  background: var(--accentColor);
+  border-radius: 50%;
+}

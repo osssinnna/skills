@@ -1,0 +1,76 @@
+/* input */
+.input {
+  width: 100%;
+  padding: 12px;
+  border-radius: 12px;
+  border: 1px solid #a6a6a6;
+  font-size: 14px;
+  outline: none;
+}
+
+.input:focus {
+  border-color: #9acb63;
+}
+
+/* popper */
+.popper :global(.react-datepicker) {
+  border-radius: 16px;
+  border: 1px solid #e0e0e0;
+  padding: 12px;
+}
+
+/* header без стрелок и даты */
+.header {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+  margin-bottom: 8px;
+}
+
+/* dropdown */
+.select {
+  padding: 4px 8px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  font-size: 14px;
+}
+
+/* год — ограничение по высоте (≈12 элементов) */
+.yearSelect {
+  max-height: 288px;
+  overflow-y: auto;
+}
+
+/* выбранный день */
+.popper :global(.react-datepicker__day--selected),
+.popper :global(.react-datepicker__day--keyboard-selected) {
+  background-color: #9acb63;
+  color: #fff;
+  border-radius: 50%;
+}
+
+/* дни вне месяца — серые */
+.popper :global(.react-datepicker__day--outside-month) {
+  color: #bdbdbd;
+}
+
+/* hover у серых дней выключен */
+.popper :global(.react-datepicker__day--outside-month:hover) {
+  background-color: transparent;
+}
+
+/* hover обычных дней */
+.popper :global(.react-datepicker__day:hover) {
+  background-color: #eef6e3;
+  border-radius: 50%;
+}
+/* ограничиваем высоту dropdown месяца */
+.popper :global(.react-datepicker__month-dropdown) {
+  max-height: 240px; /* ~12 пунктов */
+  overflow-y: auto;
+}
+
+/* ограничиваем высоту dropdown года */
+.popper :global(.react-datepicker__year-dropdown) {
+  max-height: 240px; /* ~12 пунктов */
+  overflow-y: auto;}
