@@ -2,6 +2,7 @@ import { Routes, Route } from "react-router-dom";
 import { NotFound404 } from "../../pages/not-found-404/not-found-404";
 import { AppHeader } from "../app-header";
 import { About } from "../about";
+import { FooterUI } from "../ui/footer";
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
         {/* настоящий 404 */}
         <Route path="*" element={<NotFound404 />} />
       </Routes>
+      <FooterUI />
     </>
   );
 }

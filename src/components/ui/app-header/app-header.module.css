@@ -1,7 +1,12 @@
 .header {
   --hoverTextColor: #69735d;
   --focusColor: rgba(171, 210, 122, 0.5);
-
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+  /* box-sizing: border-box; */
   background-color: var(--background-color);
   padding: 36px;
 }

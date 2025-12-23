@@ -1,1 +1,0 @@
-export { PersonCardUI } from "./personCardUI";

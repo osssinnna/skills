@@ -1,6 +1,6 @@
-import type { TPerson } from "../../ui/personCard/type";
+import type { TUser } from "../../ui/userCard/type";
 
-export const mockPerson1: TPerson = {
+export const mockPerson1: TUser = {
   id: 1,
   avatarUrl:
     "https://commons.wikimedia.org/wiki/Special:FilePath/A_drummer.jpg?width=200",
@@ -24,7 +24,7 @@ export const mockPerson1: TPerson = {
   ],
 };
 
-export const mockPerson2: TPerson = {
+export const mockPerson2: TUser = {
   id: 2,
   avatarUrl:
     "https://commons.wikimedia.org/wiki/Special:FilePath/Artist_painting_watercolor_%28Unsplash%29.jpg?width=200",
