@@ -1,16 +1,16 @@
 export type Category = {
-  id: string;
+  id: number;
   name: string;
 };
 
 export type Subcategory = {
-  id: string;
+  id: number;
   name: string;
-  categoryId: string;
+  categoryId: number;
 };
 
 export type User = {
-  id: string;
+  id: number;
   avatarUrl: string;
   name: string;
   location: string;
@@ -25,10 +25,10 @@ export type User = {
 };
 
 export type SkillCanTeach = {
-  name: string;
+  name: number;
   description: string;
-  categoryId: string;
-  subcategoryId: string;
+  id: number;
+  subcategoryId: number;
 };
 
 export type RegistrationData = {
