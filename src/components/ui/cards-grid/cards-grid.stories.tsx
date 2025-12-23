@@ -1,0 +1,101 @@
+import type { Meta, StoryObj } from "@storybook/react";
+import { CardsGrid } from "./cards-grid";
+import mockUsers from "../../../mock/mockUser.json";
+
+// Мокаем данные для Storybook
+const typedUsers = mockUsers.map(user => ({
+  ...user,
+  gender: user.gender as 'Мужской' | 'Женский'
+}));
+
+const meta: Meta<typeof CardsGrid> = {
+  title: "Components/CardsGrid",
+  component: CardsGrid,
+  parameters: {
+    layout: "padded",
+    docs: {
+      description: {
+        component: "Компонент сетки для отображения карточек пользователей в виде сетки. Автоматически адаптируется под размер экрана.",
+      },
+    },
+  },
+  argTypes: {
+    users: {
+      description: "Массив пользователей для отображения",
+      table: {
+        type: { summary: "User[]" },
+      },
+    },
+    onLikeToggle: {
+      action: "onLikeToggle",
+      description: "Коллбэк при клике на лайк в карточке пользователя",
+      table: {
+        type: { summary: "(userId: number) => void" },
+      },
+    },
+  },
+  tags: ["autodocs"],
+};
+
+export default meta;
+type Story = StoryObj<typeof CardsGrid>;
+
+// 🟦 Базовое состояние компонента
+export const Default: Story = {
+  name: "Default",
+  args: {
+    users: typedUsers,
+  },
+  parameters: {
+    docs: {
+      description: {
+        story: "Стандартное состояние сетки с несколькими пользователями.",
+      },
+    },
+  },
+};
+
+// 🟥 Состояние с одним пользователем
+export const SingleUser: Story = {
+  name: "Single User",
+  args: {
+    users: typedUsers.slice(0, 1),
+  },
+  parameters: {
+    docs: {
+      description: {
+        story: "Сетка с одним пользователем. Показывает адаптивность компонента.",
+      },
+    },
+  },
+};
+
+// 🟨 Пустое состояние
+export const Empty: Story = {
+  name: "Empty State",
+  args: {
+    users: [],
+  },
+  parameters: {
+    docs: {
+      description: {
+        story: "Состояние, когда нет пользователей для отображения.",
+      },
+    },
+  },
+};
+
+// 🟪 Минимальное количество пользователей
+export const FewUsers: Story = {
+  name: "Few Users",
+  args: {
+    users: typedUsers.slice(0, 2),
+  },
+  parameters: {
+    docs: {
+      description: {
+        story: "Сетка с небольшим количеством пользователей.",
+      },
+    },
+  },
+};
