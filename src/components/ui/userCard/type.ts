@@ -24,7 +24,7 @@ export type TUser = {
 };
 
 export type TUserCardUIProps = {
-  person: TUser;
+  user: TUser;
   isLiked: boolean;
   onLikeToggle: () => void;
 };

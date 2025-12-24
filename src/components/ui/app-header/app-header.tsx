@@ -9,6 +9,7 @@ import theme from "../../../assets/icon-theme.svg";
 import clsx from "clsx";
 import { IconButtonUI } from "./../iconButton";
 import { SearchInput } from "./../../search-input/search-input";
+import { NavLink } from "react-router-dom";
 
 export const AppHeaderUI: FC<TAppHeaderUIProps> = ({
   userName,
@@ -69,12 +70,12 @@ export const AppHeaderUI: FC<TAppHeaderUIProps> = ({
                   Вход
                 </a>
 
-                <a
-                  href="/register"
+                <NavLink
+                  to="/register"
                   className={clsx(styles.link, styles.button, styles.buttonPrimary)}
                 >
                   Регистрация
-                </a>
+                </NavLink>
               </div>
             </>
           )}

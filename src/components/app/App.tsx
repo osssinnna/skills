@@ -1,14 +1,18 @@
 import { Routes, Route } from "react-router-dom";
 import { NotFound404 } from "../../pages/not-found-404/not-found-404";
-import { AppHeader } from "../app-header";
-import { FooterUI } from "../ui/footer";
+import { Register } from "../../pages/register";
+import { PageLayout } from "../../pages/page-layout";
+import { MainPage } from "../../pages/main-page";
 
 function App() {
   return (
     <>
-      <AppHeader />
       <Routes>
+        <Route path="/" element={<PageLayout />}>
+          <Route index element={<MainPage />} />
+        </Route>
         {/* любые существующие роуты */}
+        <Route path="/register" element={<Register />} />
 
         {/* временно для проверки */}
         <Route path="/404" element={<NotFound404 />} />
@@ -16,7 +20,6 @@ function App() {
         {/* настоящий 404 */}
         <Route path="*" element={<NotFound404 />} />
       </Routes>
-      <FooterUI />
     </>
   );
 }

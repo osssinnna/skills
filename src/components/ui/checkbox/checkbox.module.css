@@ -8,26 +8,33 @@
   white-space: nowrap;
 }
 
-.labelCheckbox {
+.label {
   display: flex;
   justify-content: baseline;
   align-items: center;
   gap: 10px;
+  margin: 0;
+  cursor: pointer;
+  padding: 0 20px;
 }
 
-.checkboxName {
-color: #253017;
-font-family: var(--main-text, 'Roboto');
-font-weight:var(--fw-text, 400);
-font-size: 16px;
-line-height: 1.5;
-letter-spacing: 0.02em;
+.label:hover {
+  background-color: var(--color-primary-disabled);
 }
 
+.label button {
+  pointer-events: none;
+}
 
+.text {
+  color: #253017;
+  font-family: var(--main-text, "Roboto");
+  font-weight: var(--fw-text, 400);
+  font-size: 16px;
+  line-height: 1.5;
+  letter-spacing: 0.02em;
+}
 
-
-
-
-
-
+.textChecked {
+  color: var(--color-primary-pressed);
+}

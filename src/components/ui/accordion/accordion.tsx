@@ -6,7 +6,7 @@ import closed from "../accordion/assets/images/closed.svg";
 import { IconButtonUI } from "../iconButton/iconButton";
 import clsx from "clsx";
 
-type TItemChecbox = {
+type TItemCheckbox = {
   id: string;
   label: string;
   isActive: boolean;
@@ -16,7 +16,7 @@ type AccordionCheckboxProps = {
   label: string; //текст аккордеона
   isActive: boolean; //активность галочки самого аккордиона
   onChange: () => void; // для выбора всех под чекбоксов
-  items: TItemChecbox[]; //чекбоксы внутри аккордеона
+  items: TItemCheckbox[]; //чекбоксы внутри аккордеона
   onItemChange: (id: string) => void; // обработчик изменения состояния внутреннего чекбокса
 };
 
@@ -51,10 +51,7 @@ export const AccordionUI: FC<AccordionCheckboxProps> = ({
         />
       </div>
       <ul
-        className={clsx(
-          styles.accordionContent,
-          isOpened && styles.accordionContentOpen
-        )}
+        className={clsx(styles.accordionContent, isOpened && styles.accordionContentOpen)}
         aria-hidden={!isOpened}
       >
         {items.map((item) => (

@@ -1,0 +1,87 @@
+.multiStepRegister {
+  display: grid;
+  justify-content: center;
+  min-height: 100vh;
+  padding: 20px;
+  background: var(--background-color);
+  padding: 5%;
+}
+
+.container {
+  display: grid;
+  grid-template-rows: min-content auto;
+  gap: 32px;
+}
+
+.content {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 24px;
+}
+
+.progressBar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.stepRegister {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: white;
+  padding: 60px;
+  border-radius: 12px;
+}
+
+.step {
+  font-size: 24px;
+  font-weight: 700;
+  color: #1e293b;
+  padding-bottom: 16px;
+  border-bottom: 2px solid #e2e8f0;
+}
+
+.registerDescription {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 40px;
+  background-color: white;
+  border-radius: 12px;
+  padding: 60px;
+}
+
+.containerDescription {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+  text-align: center;
+}
+
+.titleDescription {
+  font-family: "Jost";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 24px;
+  line-height: 28px;
+  letter-spacing: -0.011em;
+  margin: 0;
+}
+
+.textDescription {
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+  letter-spacing: 0.02em;
+}
+
+.images {
+  width: 300px;
+  height: 300px;
+  object-fit: cover;
+}
