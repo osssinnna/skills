@@ -3,13 +3,13 @@ import type { Meta, StoryObj } from "@storybook/react";
 import { CardSection } from "./card-section";
 import mockUsers from "../../../mock/mockUser.json";
 
-const typedUsers = mockUsers.map(user => ({
+const typedUsers = mockUsers.map((user) => ({
   ...user,
-  gender: user.gender as 'Мужской' | 'Женский'
+  gender: user.gender as "Мужской" | "Женский",
 }));
 
 const mockNavigation = (link: string) => {
-  console.log('Навигация по ссылке:', link);
+  console.log("Навигация по ссылке:", link);
 };
 
 const meta: Meta<typeof CardSection> = {
@@ -19,7 +19,8 @@ const meta: Meta<typeof CardSection> = {
     layout: "fullscreen",
     docs: {
       description: {
-        component: "Секция для отображения категории пользователей с ограниченным предпросмотром и возможностью просмотра всех.",
+        component:
+          "Секция для отображения категории пользователей с ограниченным предпросмотром и возможностью просмотра всех.",
       },
     },
   },
@@ -39,12 +40,13 @@ const meta: Meta<typeof CardSection> = {
       },
     },
     maxPreviewCount: {
-      description: "Максимальное количество пользователей в режиме предпросмотра",
-      control: { 
-        type: "number", 
-        min: 1, 
+      description:
+        "Максимальное количество пользователей в режиме предпросмотра",
+      control: {
+        type: "number",
+        min: 1,
         max: 10,
-        step: 1 
+        step: 1,
       },
       table: {
         type: { summary: "number" },
@@ -53,7 +55,8 @@ const meta: Meta<typeof CardSection> = {
     },
     navigationTo: {
       action: "navigationTo",
-      description: "Функция для навигации на страницу со всеми пользователями категории",
+      description:
+        "Функция для навигации на страницу со всеми пользователями категории",
       table: {
         type: { summary: "(link: string) => void" },
       },
@@ -124,12 +127,12 @@ export const WithTwoPreview: Story = {
 // 🌍 Пример с разными значениями maxPreviewCount
 export const DifferentPreviewCounts: Story = {
   render: (args) => (
-    <div style={{ padding: '24px' }}>
-      <div style={{ marginBottom: '32px' }}>
+    <div style={{ padding: "24px" }}>
+      <div style={{ marginBottom: "32px" }}>
         <h3>maxPreviewCount = 1</h3>
         <CardSection {...args} maxPreviewCount={1} />
       </div>
-      <div style={{ marginBottom: '32px' }}>
+      <div style={{ marginBottom: "32px" }}>
         <h3>maxPreviewCount = 2</h3>
         <CardSection {...args} maxPreviewCount={2} />
       </div>
