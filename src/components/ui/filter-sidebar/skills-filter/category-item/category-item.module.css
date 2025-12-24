@@ -1,0 +1,107 @@
+.category {
+  border-radius: 8px;
+
+  --hoverTextColor: #69735d;
+  --accentColor: var(--color-primary);
+}
+
+/* ===== Header ===== */
+
+.categoryHeader {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 10px;
+  padding: 6px 4px;
+}
+
+.categoryName {
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+
+.categoryName:hover {
+  color: var(--hoverTextColor);
+}
+
+/* ===== Chevron ===== */
+
+.chevron {
+  padding: 0;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+}
+
+/* ===== Subcategories ===== */
+
+.subcats {
+  padding-left: 28px;
+  margin-top: 6px;
+
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.subcat {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  font-size: 16px;
+  line-height: 24px;
+  cursor: pointer;
+}
+
+.subcatLabel {
+  transition: color 0.2s ease;
+}
+
+.subcat:hover .subcatLabel {
+  color: var(--hoverTextColor);
+}
+
+/* ===== Checkbox / Radio (локально) ===== */
+
+.checkbox {
+  appearance: none;
+  width: 18px;
+  height: 18px;
+  border: 2px solid #c7c7c7;
+  border-radius: 4px;
+  position: relative;
+  cursor: pointer;
+}
+
+.checkbox:checked {
+  background: var(--accentColor);
+  border-color: var(--accentColor);
+}
+
+.checkbox:checked::after {
+  content: "✓";
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  color: #fff;
+}
+
+.checkbox:indeterminate {
+  background: var(--accentColor);
+  border-color: var(--accentColor);
+}
+
+.checkbox:indeterminate::after {
+  content: "–";
+  color: #fff;
+  font-size: 14px;
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

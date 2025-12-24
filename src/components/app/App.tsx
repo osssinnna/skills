@@ -3,6 +3,7 @@ import { NotFound404 } from "../../pages/not-found-404/not-found-404";
 import { Register } from "../../pages/register";
 import { PageLayout } from "../../pages/page-layout";
 import { MainPage } from "../../pages/main-page";
+import { About } from "../about";
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
         <Route path="/register" element={<Register />} />
 
         {/* временно для проверки */}
+        <Route path="/about" element={<About />} />
         <Route path="/404" element={<NotFound404 />} />
 
         {/* настоящий 404 */}

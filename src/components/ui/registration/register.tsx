@@ -50,10 +50,10 @@ export const RegisterUI = ({
               <>
                 <img src={light} className={s.images}></img>
                 <div className={s.containerDescription}>
-                  <h3 className={s.titleDescription}>Добро пожаловать в SkillSwap!</h3>
+                  <h3 className={s.titleDescription}>Добро пожаловать в SkillSwap!</h3>
                   <p className={s.textDescription}>
-                    Присоединяйтесь к SkillSwap и обменивайтесь знаниями и навыками
-                    с другими людьми
+                    Присоединяйтесь к SkillSwap и обменивайтесь знаниями и навыками с
+                    другими людьми
                   </p>
                 </div>
               </>
@@ -62,9 +62,9 @@ export const RegisterUI = ({
               <>
                 <img src={user} className={s.images}></img>
                 <div className={s.containerDescription}>
-                  <h3 className={s.titleDescription}>Расскажите немного о себе</h3>
+                  <h3 className={s.titleDescription}>Расскажите немного о себе</h3>
                   <p className={s.textDescription}>
-                    Это поможет другим людям лучше вас узнать, чтобы выбрать для обмена
+                    Это поможет другим людям лучше вас узнать, чтобы выбрать для обмена
                   </p>
                 </div>
               </>
@@ -74,11 +74,11 @@ export const RegisterUI = ({
                 <img src={board} className={s.images}></img>
                 <div className={s.containerDescription}>
                   <h3 className={s.titleDescription}>
-                    Укажите, чем вы готовы поделиться
+                    Укажите, чем вы готовы поделиться
                   </h3>
                   <p className={s.textDescription}>
-                    Так другие люди смогут увидеть ваши предложения и предложить
-                    вам обмен!
+                    Так другие люди смогут увидеть ваши предложения и предложить вам
+                    обмен!
                   </p>
                 </div>
               </>
