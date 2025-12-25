@@ -1,24 +1,21 @@
 import { Routes, Route } from "react-router-dom";
+import PageLayout from "../../pages/pageLayout/pageLayout";
+import MainPage from "../../pages/mainPage/mainPage";
 import { NotFound404 } from "../../pages/not-found-404/not-found-404";
-import { AppHeader } from "../app-header";
-import { About } from "../about";
-import { FooterUI } from "../ui/footer";
 
 function App() {
   return (
     <>
-      <AppHeader />
       <Routes>
-        {/* любые существующие роуты */}
-
-        {/* временно для проверки */}
-        <Route path="/about" element={<About />} />
-        <Route path="/404" element={<NotFound404 />} />
-
-        {/* настоящий 404 */}
-        <Route path="*" element={<NotFound404 />} />
+        <Route path="/autorizate"></Route>
+        <Route path="/" element={<PageLayout />}>
+          <Route index element={<MainPage />}></Route>
+          {/* <Route path="/about" element={<About />} /> */}
+          <Route path="*" element={<NotFound404 />} />
+        </Route>
       </Routes>
-      <FooterUI />
+
+      <Routes></Routes>
     </>
   );
 }
