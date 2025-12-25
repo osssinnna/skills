@@ -19,13 +19,14 @@ export type User = {
   skillCanTeach: SkillCanTeach;
   images: string[];
   subcategoriesWantToLearn: Subcategory[];
+  categoriesWantToLearn: Category[];
   likesCount: number;
-  likedByUserIds: string[];
+  likedByUserIds: number[];
   createdAt: string;
 };
 
 export type SkillCanTeach = {
-  name: number;
+  name: string;
   description: string;
   id: number;
   subcategoryId: number;

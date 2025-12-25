@@ -3,7 +3,7 @@ import type { User } from "../../utils/types";
 export type FiltersMode = "all" | "wantToLearn" | "canTeach";
 
 export type Filters = {
-  mode: FiltersMode;
+  mode: "all" | "wantToLearn" | "canTeach";
   gender: "Мужской" | "Женский" | null;
   city: string | null;
   subcategoryIds: number[];
@@ -13,4 +13,6 @@ export type Filters = {
 export type UsersState = {
   users: User[];
   filters: Filters;
+  status: "idle" | "loading" | "succeeded" | "failed";
+  error: unknown | null;
 };
