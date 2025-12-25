@@ -8,9 +8,11 @@ import {
 import type { TypedUseSelectorHook } from "react-redux";
 
 import UsersReduser from "./usersSlice/usersSlice";
+import categoriesReduser from "./categoriesSlice/categoriesSlice";
 
 export const rootReducer = combineReducers({
   users: UsersReduser,
+  categories: categoriesReduser,
 });
 
 const store = configureStore({
