@@ -4,14 +4,16 @@
   position: fixed;
   top: 0;
   left: 0;
-  width: 100%;
   z-index: 1000;
+  width: 100%;
   /* box-sizing: border-box; */
   background-color: var(--background-color);
-  padding: 36px;
 }
 
 .nav {
+  margin: 0 auto;
+  max-width: 1440px;
+  padding: 36px;
   display: grid;
   grid-template-columns: min-content 1fr min-content;
   gap: 32px;

@@ -1,15 +1,19 @@
 .footer {
   --hoverTextColor: #69735d;
   --focusColor: rgba(171, 210, 122, 0.5);
+  width: 100%;
+  background-color: var(--color-secondary);
+  padding: 40px 36px 32px;
+  border-top: 1px solid var(--color-primary-disabled);
+}
 
+.footerContainer {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   grid-template-rows: auto auto auto;
   row-gap: 32px;
-
-  background-color: var(--color-secondary);
-  padding: 40px 36px 32px;
-  border-top: 1px solid var(--color-primary-disabled);
+  max-width: 1400px;
+  margin: 0 auto;
 }
 
 .logoSection {
@@ -75,4 +79,3 @@
   letter-spacing: 0.02em;
   color: var(--disabled-text-color);
 }
-
