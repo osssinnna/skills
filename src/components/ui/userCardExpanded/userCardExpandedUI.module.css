@@ -94,6 +94,7 @@
   line-height: 20px;
   letter-spacing: 0.02em;
   color: var(--main-text-color, #253017);
+  margin-top: 20px;
 }
 
 /* секции навыков */

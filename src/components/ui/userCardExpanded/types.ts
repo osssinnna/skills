@@ -3,12 +3,11 @@ export type TSubcategoryWantToLearn = {
   name: string;
 };
 
-export type TSubcategoriesWantToLearn = TSubcategoryWantToLearn[];
-
 export type TSkillCanTeach = {
   id: number;
   name: string;
   description: string;
+  category?: string;
 };
 
 export type TUser = {
@@ -18,13 +17,15 @@ export type TUser = {
   location: string;
   age: string;
   gender: string;
+  description: string;
   skillCanTeach: TSkillCanTeach;
   images: string[];
-  subcategoriesWantToLearn: TSubcategoriesWantToLearn;
+  subcategoriesWantToLearn: TSubcategoryWantToLearn[];
+
 };
 
-export type TUserCardUIProps = {
-  person: TUser;
+export type TUserCardExpandedUIProps = {
+  user: TUser;
   isLiked: boolean;
-  onLikeToggle: () => void;
+  onLikeToggle?: () => void;  
 };

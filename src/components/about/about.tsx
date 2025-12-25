@@ -5,7 +5,7 @@ import type { Category, Subcategory, User } from "../../utils/types";
 import { usersData } from "../../mock/users";
 import { categories } from "../../mock/categories";
 import s from "./about.module.css";
-import { PersonCard } from "../personCard/personCard";
+
 
 export const About: React.FC = () => {
   const [users, setUsers] = useState<User[]>([]);

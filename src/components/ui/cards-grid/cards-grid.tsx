@@ -1,5 +1,5 @@
 import { memo } from 'react';
-import { PersonCard } from '../../personCard/personCard';
+import { UserCard } from '../../userCard/userCard';
 import styles from "./cards-grid.module.css";
 
 export type Skill = {
@@ -42,7 +42,7 @@ export const CardsGrid = memo<CardsGridProps>(({ users }) => {
   return (
     <div className={styles.grid}>
       {users.map((user) => (
-        <PersonCard
+        <UserCard
           key={user.id}
           person={user}
           onLikeToggle={() => {}}
