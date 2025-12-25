@@ -1,29 +1,7 @@
-import { memo } from 'react';
-import { UserCard } from '../../userCard/userCard';
+import { memo } from "react";
+import { UserCard } from "../../userCard/userCard";
 import styles from "./cards-grid.module.css";
-
-export type Skill = {
-  id: number;
-  name: string;
-  description: string;
-};
-
-export type Subcategory = {
-  id: number;
-  name: string;
-};
-
-export type User = {
-  id: number;
-  avatarUrl: string;
-  name: string;
-  location: string;
-  age: string;
-  gender: 'Мужской' | 'Женский';
-  skillCanTeach: Skill;
-  images: string[];
-  subcategoriesWantToLearn: Subcategory[];
-};
+import type { User } from "../../../utils/types";
 
 interface CardsGridProps {
   users: User[];
@@ -42,11 +20,7 @@ export const CardsGrid = memo<CardsGridProps>(({ users }) => {
   return (
     <div className={styles.grid}>
       {users.map((user) => (
-        <UserCard
-          key={user.id}
-          person={user}
-          onLikeToggle={() => {}}
-        />
+        <UserCard key={user.id} person={user} onLikeToggle={() => {}} />
       ))}
     </div>
   );
