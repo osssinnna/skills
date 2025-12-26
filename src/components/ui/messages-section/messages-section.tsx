@@ -1,48 +1,28 @@
-// import type { FC } from 'react';
-// import { ButtonUI } from '../button';
-// import styles from './message-item.module.css';
+import type { FC } from 'react';
+import styles from './messages-section.module.css';
+import { MessagesList } from '../../messages-list/messages-list';
+import type { TMessageNotifying } from '../../../utils/types';
 
-// type TMessage = {
-//   title: string;
-//   comment: string
-// }
-// type TMessagePropsUI = {
-//   userName: string;
-//   userId: number; // - для перехода на карточку пользователя и отмечания соо как прочитаннок
-//   date: string; // - дата создания сообщения
-//   viewed: boolean; // - просмотрено ли сообщение
-//   onView: () => void;
-//   image?: string;
-//   message: TMessage;
-// }
 
-// export const MessageItemUI:FC<TMessagePropsUI> = ({
-//   userName,
-//   userId,
-//   date,
-//   viewed,
-//   onView,
-//   image,
-//   message,
+type TMessagesSectionUIProps = {
+  unreadMessages: TMessageNotifying[];
+  readMessages: TMessageNotifying[]
+}
 
-//   }) => {
-   
-//   return (
-//     <div className={styles.messageItem} key={String(userId)}>
-//       <div className={styles.description}>
-//         <div className={styles.main}>
-//           <img className={styles.icon} src={image} alt="иконка сообщения о результате предложения" />
-//           <div className={styles.text}>
-//             <h3 className={styles.title}>{`${userName} ${message.title}`}</h3>
-//             <p className={styles.comment}>{message.comment}</p>
-//           </div>
-//         </div>
-//         <div className={styles.date}>{date}</div>
-//       </div>
+
+
+export const MessagesSectionUI:FC<TMessagesSectionUIProps> = ({unreadMessages, readMessages}) => {
+    const hasMessages = unreadMessages.length > 0 || readMessages.length > 0;
+  return (
+    <section className={styles.messagesListSection}>
+      {hasMessages ? (
+      <>
+        <MessagesList title="Новые уведомления" messages={unreadMessages} />
+        <MessagesList title="Просмотренные" messages={readMessages} />
+      </>
       
-//       {!viewed && (
-//         <ButtonUI onClick={onView} color={'primary'}>Перейти</ButtonUI>
-//       )}
-//     </div>
-//   )
-// }
+      ) : 'уведомлений  о новых предложениях пока нет'
+    }
+    </section>
+  )
+}
