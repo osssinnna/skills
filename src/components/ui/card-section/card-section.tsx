@@ -1,8 +1,9 @@
-import React, { useState, useMemo, useCallback } from 'react';
-import { CardsGrid, type User } from '../cards-grid/cards-grid';
-import { ButtonUI } from '../button/button';
-import { IconChevronRight } from '../icon-chevron-right/icon-chevron-right';
-import styles from './card-section.module.css';
+import React, { useState, useMemo, useCallback } from "react";
+import { CardsGrid } from "../cards-grid/cards-grid";
+import { ButtonUI } from "../button/button";
+import { IconChevronRight } from "../icon-chevron-right/icon-chevron-right";
+import styles from "./card-section.module.css";
+import type { User } from "../../../utils/types";
 
 interface CardSectionProps {
   title: string;
@@ -31,16 +32,14 @@ export const CardSection: React.FC<CardSectionProps> = ({
     } else {
       const categorySlug = title
         .toLowerCase()
-        .replace(/\s+/g, '-')
-        .replace(/[^a-zа-яё0-9-]/g, '');
+        .replace(/\s+/g, "-")
+        .replace(/[^a-zа-яё0-9-]/g, "");
       navigationTo(`/category/${categorySlug}`);
     }
   }, [users.length, title, navigationTo]);
 
- 
-
   // Определяем заголовок в зависимости от состояния
-  const sectionTitle = isExpanded 
+  const sectionTitle = isExpanded
     ? `Подходящие предложения: ${users.length}`
     : title;
 
@@ -48,7 +47,7 @@ export const CardSection: React.FC<CardSectionProps> = ({
     <section className={styles.section} aria-label={`Секция: ${sectionTitle}`}>
       <div className={styles.header}>
         <h2 className={styles.title}>{sectionTitle}</h2>
-        
+
         <div className={styles.buttonsContainer}>
           {shouldShowSeeAllButton && (
             <div className={styles.actionButton}>
@@ -60,18 +59,16 @@ export const CardSection: React.FC<CardSectionProps> = ({
               >
                 <div className={styles.buttonContent}>
                   <span>Смотреть все</span>
-                  <IconChevronRight size={20} style={{ marginLeft: '8px' }} />
+                  <IconChevronRight size={20} style={{ marginLeft: "8px" }} />
                 </div>
               </ButtonUI>
             </div>
           )}
         </div>
       </div>
-      
+
       <div className={styles.gridContainer}>
-        <CardsGrid
-          users={displayedUsers}
-        />
+        <CardsGrid users={displayedUsers} />
       </div>
     </section>
   );

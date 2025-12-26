@@ -2,8 +2,8 @@ import { createSelector } from "@reduxjs/toolkit";
 import type { RootState } from "../store";
 import { selectSubcategoryIdsBySelectedCategories } from "../categoriesSlice/selectors";
 
-const selectUsers = (state: RootState) => state.users.users;
-const selectFilters = (state: RootState) => state.users.filters;
+export const selectUsers = (state: RootState) => state.users.users;
+export const selectFilters = (state: RootState) => state.users.filters;
 
 export const selectFilteredUsers = createSelector(
   [selectUsers, selectFilters, selectSubcategoryIdsBySelectedCategories],

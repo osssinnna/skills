@@ -1,6 +1,6 @@
 .section {
   width: 100%;
-  margin-bottom: 48px;
+  margin-bottom: 60px;
   padding: 0 16px;
 }
 
@@ -14,7 +14,7 @@
 }
 
 .title {
-  font-family: var(--open-sans-font, 'Open Sans', sans-serif);
+  font-family: var(--open-sans-font, "Open Sans", sans-serif);
   font-size: 24px;
   font-weight: 600;
   color: var(--main-text-color, #253017);
@@ -58,36 +58,9 @@
 }
 
 .countInfo {
-  font-family: var(--main-font, 'Roboto', sans-serif);
+  font-family: var(--main-font, "Roboto", sans-serif);
   font-size: 14px;
-  color: var(--disabled-text-color, #9CA197);
+  color: var(--disabled-text-color, #9ca197);
   margin: 0;
   font-style: italic;
-}
-
-@media (max-width: 768px) {
-  .section {
-    padding: 0 12px;
-    margin-bottom: 32px;
-  }
-  
-  .header {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 12px;
-    margin-bottom: 24px;
-  }
-  
-  .title {
-    font-size: 20px;
-  }
-  
-  .buttonsContainer {
-    width: 100%;
-    flex-direction: column;
-  }
-  
-  .actionButton {
-    width: 100%;
-  }
 }
