@@ -1,12 +1,21 @@
 .messagesListSection {
-    background-color: var(--color-secondary, #fff);
-    padding: clamp(20px, 5vw, 60px);
-    border: 1px solid var(--color-caption, #69735D);
-    border-radius: 12px;
+    position: fixed;
+    top: 130px;
+    right: 36px;
     display: flex;
     flex-direction: column;
     gap: 40px;
     width: 100%;
     max-width: 556px;
+    border: 1px solid var(--color-caption, #69735D);
+    border-radius: 12px;
+    padding: clamp(20px, 5vw, 60px);
+    opacity: 0;
+    background-color: var(--color-secondary, #fff);
+    transition: opacity .3s linear;
+}
+
+.messagesListSectionOpen {
+    opacity: 1;
 }
 
