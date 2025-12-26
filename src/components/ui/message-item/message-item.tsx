@@ -32,7 +32,7 @@ export const MessageItemUI:FC<TMessagePropsUI> = ({
       <div className={styles.description}>
         <div className={styles.main}>
           <img className={styles.icon} src={image} alt="иконка сообщения о результате предложения" />
-          <div className={styles.text}>
+          <div className={styles.mainText}>
             <h3 className={styles.title}>{`${userName} ${message.title}`}</h3>
             <p className={styles.comment}>{message.comment}</p>
           </div>

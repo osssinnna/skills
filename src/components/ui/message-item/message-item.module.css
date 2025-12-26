@@ -8,14 +8,13 @@
   gap: 60px;
 }
 
+.description:not(:last-child) {
+  margin-bottom:16px;
+}
+
 .main {
    display: flex;
    gap: 8px;
-
-}
-
-.main:not(:last-child) {
-  margin-bottom:16px;
 }
 
 .date {
@@ -26,6 +25,11 @@
   line-height: 1.5;
   letter-spacing: 0.02em;
 }
+
+.mainText {
+  max-width: 250px;
+  width: 100%;
+} 
 
 .icon {
   width: 34px;
