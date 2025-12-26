@@ -1,0 +1,60 @@
+.messageItem {
+  background-color: var(--color-secondary,#fff);
+}
+
+.description {
+  display: flex;
+  justify-content: space-between;
+  gap: 60px;
+}
+
+.main {
+   display: flex;
+   gap: 8px;
+
+}
+
+.main:not(:last-child) {
+  margin-bottom:16px;
+}
+
+.date {
+  color: var(--color-caption, #69735D);
+  font-family: var(--main-font,'Roboto');
+  font-weight: var(--fw-text, 400);
+  font-size: 16px;
+  line-height: 1.5;
+  letter-spacing: 0.02em;
+}
+
+.icon {
+  width: 40px;
+  aspect-ratio: 1/1;
+}
+
+.title {
+  color: var(--main-text-color,#253017);
+  font-family: var(--main-font,'Roboto');
+  font-weight: var(--fw-text, 400);
+  font-size: 16px;
+  line-height: 1.5;
+  letter-spacing: 0.02em;
+}
+
+.comment {
+  color: var(--main-text-color,#253017);
+  font-family: var(--main-font,'Roboto');
+  font-weight: var(--fw-text, 400);
+  font-size: 12px;
+  line-height: 1.333333;
+  letter-spacing: 0.02em;
+}
+
+.date {
+  color: var(--color-caption, #69735D);
+  font-family: var(--main-font,'Roboto');
+  font-weight: var(--fw-text, 400);
+  font-size: 16px;
+  line-height: 1.5;
+  letter-spacing: 0.02em;
+}
