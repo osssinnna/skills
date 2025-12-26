@@ -8,7 +8,7 @@ import { Provider } from "react-redux";
 //  создадим тестовый стор чтобы не было ошибок в истории связ с dispatch и т.п.
 const dummyReducer = (state = {}) => state; // редюсер заглушка
 
-export const mockStore = configureStore({
+const mockStore = configureStore({
   reducer: {
     dummy: dummyReducer,
   },
