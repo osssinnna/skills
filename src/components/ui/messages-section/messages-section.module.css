@@ -1,0 +1,12 @@
+.messagesListSection {
+    background-color: var(--color-secondary, #fff);
+    padding: clamp(20px, 5vw, 60px);
+    border: 1px solid var(--color-caption, #69735D);
+    border-radius: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    width: 100%;
+    max-width: 556px;
+}
+
