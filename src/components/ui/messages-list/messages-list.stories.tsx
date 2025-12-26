@@ -1,7 +1,18 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { MessagesListUI } from "./messages-list";
 import { MemoryRouter } from "react-router-dom";
+import { configureStore } from '@reduxjs/toolkit';
+import { Provider } from "react-redux"; 
 
+
+//  создадим тестовый стор чтобы не было ошибок в истории связ с dispatch и т.п.
+const dummyReducer = (state = {}) => state; // редюсер заглушка
+
+export const mockStore = configureStore({
+  reducer: {
+    dummy: dummyReducer,
+  },
+});
 
 // Метаданные — настройки для Storybook
 const meta: Meta<typeof MessagesListUI> = {
@@ -12,9 +23,11 @@ parameters: {
 },
 decorators: [
   (Story) => (
-    <MemoryRouter>
-      <Story/>
-    </MemoryRouter>
+    <Provider store={mockStore}>
+      <MemoryRouter>
+        <Story/>
+      </MemoryRouter>
+    </Provider>
   )
 ],
 argTypes: {
@@ -26,6 +39,8 @@ export default meta;
 // Создаём тип для истории - гарантия соотв пропсам комп-та
 type Story =StoryObj<typeof MessagesListUI>;
 
+const today = new Date().toISOString();
+
 export const viewedMessagesList: Story = {
  
   args: {
@@ -33,19 +48,19 @@ export const viewedMessagesList: Story = {
     messages: [
         { userName:'Николай',
           userId: 12345,
-          date: 'Вчера',
+          date: today,
           viewed: true,
           typeMessage:'confirmed',
       },
         { userName:'Татьяна',
           userId: 123456,
-          date: '24 декабря',
+          date: '23.12.2025',
           viewed: true,
           typeMessage: 'offered',
       },
       ],
     onClick: () => {},
-    textButton: 'очистить'
+    textButton: 'Очистить'
     }
   }
 
@@ -54,21 +69,21 @@ export const viewedMessagesList: Story = {
   args: {
     title: 'Новые уведомления',
     messages: [
-        { userName:'Николай',
+        { userName:'Александр',
           userId: 12345,
-          date: 'Сегодня',
+          date: today,
           viewed: false,
           typeMessage:'confirmed',
       },
-        { userName:'Татьяна',
+        { userName:'Олег',
           userId: 123456,
-          date: 'Сегодня',
+          date: today,
           viewed: false,
           typeMessage: 'offered',
       },
       ],
     onClick: () => {},
-    textButton: 'Почитать все'
+    textButton: 'Прочитать все'
     }
   }
 
