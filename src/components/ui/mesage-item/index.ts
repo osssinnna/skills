@@ -1,1 +1,0 @@
-export  {MessageItemUI} from './message-item';
