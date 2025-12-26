@@ -3,7 +3,8 @@ import { MemoryRouter } from "react-router-dom";
 import { configureStore } from '@reduxjs/toolkit';
 import { Provider } from "react-redux";
 import { MessagesSection } from "./messages-section";
-
+import {AppHeader} from '../app-header/';
+import type { FC } from "react";
 
 //  создадим тестовый стор чтобы не было ошибок в истории связ с dispatch и т.п.
 const dummyReducer = (state = {}) => state; // редюсер заглушка
@@ -38,6 +39,16 @@ type Story =StoryObj<typeof MessagesSection>;
 
 const today = new Date().toISOString();
 
+const TestStory:FC = () => {
+
+
+  return <>
+            <AppHeader/>
+            <MessagesSection/>
+        </>
+}
+
+
 export const sectionMessages: Story = {
  
   args: {
@@ -70,6 +81,10 @@ export const sectionMessages: Story = {
       },
     ]
     }
+  }
+
+  export const withHeader: Story = {
+    render: () => <TestStory />,
   }
 
 
