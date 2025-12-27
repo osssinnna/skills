@@ -14,30 +14,26 @@ type TMessagesSectionUIProps = {
 
 
 export const MessagesSectionUI = forwardRef<HTMLElement, TMessagesSectionUIProps>(({unreadMessages, readMessages, isVisible}, ref) => {
-    const hasMessages = unreadMessages.length > 0 || readMessages.length > 0;
+  const emptyMessage = 'уведолений о предложениях у вас пока нет';
+  const hasMessages = unreadMessages.length > 0 || readMessages.length > 0;
   return (
     <section aria-hidden={!isVisible} aria-label={'Уведомления о предложениях'} ref={ref} className={clsx(styles.messagesListSection, isVisible ? styles.messagesListSectionOpen : '' )}>
       {hasMessages ? (
       <> 
         {
-          unreadMessages.length > 0 && (
+          unreadMessages.length > 0 ? (
             <MessagesList title="Новые уведомления" messages={unreadMessages} />
-          )
+          ) : <p className={styles.emptyState}>{`Новых ${emptyMessage}`}</p>
         }
         {
-          readMessages.length > 0 && (
+          readMessages.length > 0 ? (
             <MessagesList title="Просмотренные" messages={readMessages} />
-          )
+          ) :  <p className={styles.emptyState}>{`Просмотренных ${emptyMessage}`}</p>
         }
       </>
       
       ) : 
-      <p className={styles.emptyState}
-        role='status'
-      >
-        уведомлений  о новых предложениях пока нет
-      </p>
-  
+      <p className={styles.emptyState} role='status'>{emptyMessage[0].toUpperCase()+ emptyMessage.slice(1)}</p>
     }
     </section>
   )
