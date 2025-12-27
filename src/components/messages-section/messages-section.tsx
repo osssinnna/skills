@@ -1,17 +1,15 @@
-import React, { useEffect, useRef, useState, type FC } from 'react';
+import { useEffect, useRef, useState, type FC } from 'react';
 import { MessagesSectionUI } from '../ui/messages-section';
 import { useSelector } from '../../services/store';
 import type { TMessageNotifying } from '../../utils/types';
 import ReactDOM from 'react-dom';
 import {unreadTestMessages , readTestMessages} from '../ui/messages-section/mock-data';
-import { clearTimeoutRef } from '../../utils/clear-timeout';
 
 const messagesRoot = document.getElementById('messages') ?? document.body;
 
 export const MessagesSection:FC = () => {
   const [isRender, setRender] = useState(true);
   const [isVisible, setVisible] = useState(false);
-  const timeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null); //таймаут дляустановки флага анимации
   const sectionRef = useRef<HTMLElement | null>(null);
   // Для REDUX!!!!
   // const unreadMessages = useSelector(selectUnreadMessages)
@@ -20,14 +18,10 @@ export const MessagesSection:FC = () => {
   const readMessages = [...readTestMessages] as TMessageNotifying[];
   const unreadMessages = [...unreadTestMessages] as TMessageNotifying[];
 
-  const onClose = () => {
-    if(!isRender) return;
-    // сброс старого состояния таймера
-    clearTimeoutRef(timeoutRef)
-       //  просто удаляем класс анимации чтобы завершить ее при удалении
+  const onCloseAnim = () => {
+    //  просто удаляем класс анимации
     setVisible(false);
-    //  закрываем окно
-    timeoutRef.current = setTimeout(()=>setRender(false),350);
+    //  закрытие окна отрабатывает слушатель секции на соб'transitionend'
   }
 
   useEffect(()=>{
@@ -42,13 +36,13 @@ export const MessagesSection:FC = () => {
         const {target} = event;
         //  явдяется ли элемент DOM узлом и не содержит ли его наша секция?
         if(target instanceof Node && !sectionRef.current?.contains(target)){
-          onClose();
+          onCloseAnim();
         }
     }
     // обработка кл escape
     const handleEscape = (e: KeyboardEvent) => {
       if(e.key === 'Escape') {
-          onClose();
+          onCloseAnim();
       }
     }
     // вешаем слушатели клика и esc
@@ -63,12 +57,31 @@ export const MessagesSection:FC = () => {
       // удаляем слушатели
       document.removeEventListener('keydown', handleEscape);
       document.removeEventListener('mousedown', handleClick);
-      //  очищаем таймеры и анимацию
+      //  очищаем таймер и убираем анимацию
       cancelAnimationFrame(raf);
-      clearTimeoutRef(timeoutRef);
       clearTimeout(timer);
     }
   },[])
+
+  // useEffect для отработки механики закрытия секции  после анимации закрытия
+    useEffect(() => {
+      const sectionElement = sectionRef.current;
+      if(!sectionElement) return;
+      const handleCloseAfterAnim = (e: TransitionEvent) => {
+        //  анимация д б связана только с нашей секцией 
+        if(e.target !== sectionElement) return;
+          if(!isVisible) {
+            //  если isVisible стало false после отрработки onCloseAnim, то размонтир уомпонент
+            setRender(false);
+          }
+      }
+      //  полсе отработки 'transition' удалим элемент физически со стр  
+      sectionElement.addEventListener('transitionend', handleCloseAfterAnim);
+      return () => {
+        sectionElement.removeEventListener('transitionend', handleCloseAfterAnim);
+      };
+      // обязателньо подписаться на изм isVisible
+    },[isVisible])
 
 
   return <>
