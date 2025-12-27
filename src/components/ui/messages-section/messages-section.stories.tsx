@@ -39,13 +39,36 @@ type Story =StoryObj<typeof MessagesSectionUI>;
 
 
 export const sectionMessages: Story = {
- 
   args: {
     unreadMessages: unreadTestMessages,
     readMessages: readTestMessages,
     isVisible: true
     }
   }
+
+export const emptySectionReadMessages: Story = {
+  args: {
+    unreadMessages: unreadTestMessages,
+    readMessages: [],
+    isVisible: true
+    }
+}
+
+export const emptySectionNewMessages: Story = {
+  args: {
+    unreadMessages: [],
+    readMessages: readTestMessages,
+    isVisible: true
+    }
+}
+
+export const emptySectionAllMessages: Story = {
+  args: {
+    unreadMessages: [],
+    readMessages: [],
+    isVisible: true
+    }
+}
 
 
 
