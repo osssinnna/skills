@@ -11,7 +11,7 @@ const messagesRoot = document.getElementById('messages') ?? document.body;
 export const MessagesSection:FC = () => {
   const [isRender, setRender] = useState(true);
   const [isVisible, setVisible] = useState(false);
-  const timeoutRef = useRef<NodeJS.Timeout | null>(null); //таймаут дляустановки флага анимации
+  const timeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null); //таймаут дляустановки флага анимации
   const sectionRef = useRef<HTMLElement | null>(null);
   // Для REDUX!!!!
   // const unreadMessages = useSelector(selectUnreadMessages)
@@ -21,6 +21,7 @@ export const MessagesSection:FC = () => {
   const unreadMessages = [...unreadTestMessages] as TMessageNotifying[];
 
   const onClose = () => {
+    if(!isRender) return;
     // сброс старого состояния таймера
     clearTimeoutRef(timeoutRef)
        //  просто удаляем класс анимации чтобы завершить ее при удалении
