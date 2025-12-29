@@ -31,32 +31,32 @@ export const MessagesSection:FC = () => {
     })
     // обработка закрытия вне секции
 
-    const handleClick = (event: MouseEvent) => {
+    const handleCloseOutSide = (event: MouseEvent) => {
         if(!sectionRef.current) return;
         const {target} = event;
         //  явдяется ли элемент DOM узлом и не содержит ли его наша секция?
-        if(target instanceof Node && !sectionRef.current?.contains(target)){
+        if(target instanceof Node && !sectionRef.current?.contains(target) && event.button === 0){
           onCloseAnim();
         }
     }
     // обработка кл escape
-    const handleEscape = (e: KeyboardEvent) => {
+    const handleCloseEscape = (e: KeyboardEvent) => {
       if(e.key === 'Escape') {
           onCloseAnim();
       }
     }
     // вешаем слушатели клика и esc
-    document.addEventListener('keydown', handleEscape);
+    document.addEventListener('keydown', handleCloseEscape);
     //  небольшая задержка при клике  - безопсность - когда окно монтируется по клику на к-л элемент стр
     const timer = setTimeout(()=>{
-        document.addEventListener('mousedown', handleClick);
+        document.addEventListener('mousedown', handleCloseOutSide);
     },0)
     
     return () => {
       // при размонтировании
       // удаляем слушатели
-      document.removeEventListener('keydown', handleEscape);
-      document.removeEventListener('mousedown', handleClick);
+      document.removeEventListener('keydown', handleCloseEscape);
+      document.removeEventListener('mousedown', handleCloseOutSide);
       //  очищаем таймер и убираем анимацию
       cancelAnimationFrame(raf);
       clearTimeout(timer);
