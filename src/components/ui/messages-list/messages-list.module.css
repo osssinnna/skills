@@ -31,8 +31,18 @@
   transition: color 0.5 linear;
 }
 
-.messageListBtn:hover{
+.messageListBtn:hover {
   color: #3c5e22;
+}
+
+.messageListBtn:focus {
+  outline: none;
+}
+
+.messageListBtn:focus-visible {
+  border-radius: 5px;
+  padding: 2px 4px;
+  outline: 3px solid var(--color-primary-pressed, #508826);
 }
 
 .messageListBtn::after {
