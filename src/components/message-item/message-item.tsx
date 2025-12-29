@@ -28,16 +28,17 @@ export const MessageItem:FC<TMessageProps> = ({
     const navigate = useNavigate();
     //  переход чтобы посмотреь именно новое непросмотренное предложение обмена
     const handleToViewClick =  () => {
+      const id = userId
         // dispatch(markAsViewed(message.userId)) //  => расскоментировать когда будет рабоч слайс messagesSlice
         navigate('/404'); // пока заглушка
     }
 
     //  форматируем дату
-    const formatDate = calcData(date);
+    const formattedDate = calcData(date);
     //  определили содержание уведомления
     const message = valuesMessages[typeMessage];
 
     return (
-      <MessageItemUI image={iconMessage} userId={userId} userName={userName} message={message}  date={formatDate} onView={handleToViewClick} viewed={viewed}/>
+      <MessageItemUI image={iconMessage} userName={userName} message={message}  date={formattedDate} onView={handleToViewClick} viewed={viewed}/>
     )
 }
