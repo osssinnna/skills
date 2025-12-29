@@ -17,21 +17,22 @@ export const MessagesListUI:FC<TMessagesListUIProps> = ({
   onClick,
   textButton
   }) => {
-  
+    const ariaTitleId = title.startsWith('Новые') ? 'new-message' : 'readedMessages';
+    const ariaLabelBtn = title.startsWith('Новые') ? 'Отметить как прочитанные' : 'Убрать прочитанные сообщения из области уведомлений';
   return (
     <div className={styles.listContainer} >
         <div className={styles.listMain}>
-          <h2 className={styles.messagesListTitle}>{title}</h2>
-          <button onClick={onClick} className={styles.messageListBtn}>
+          <h2 id={ariaTitleId} className={styles.messagesListTitle}>{title}</h2>
+          <button aria-label={ariaLabelBtn} onClick={onClick} className={styles.messageListBtn}>
              {textButton}
           </button>
         </div>
         
-        <ul className={styles.messagesList}>
+        <ul aria-labelledby={ariaTitleId} aria-live='polite' className={styles.messagesList}>
           {
             messages.map((message) => (
               <li key={message.userId}>
-                <MessageItem key={message.userId} {...message}/>
+                <MessageItem {...message}/>
               </li>
                
             ))
