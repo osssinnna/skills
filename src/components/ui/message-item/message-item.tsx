@@ -8,7 +8,6 @@ type TMessage = {
 }
 type TMessagePropsUI = {
   userName: string;
-  userId: number; // - для перехода на карточку пользователя и отмечания соо как прочитаннок
   date: string; // - дата создания сообщения
   viewed: boolean; // - просмотрено ли сообщение
   onView?: () => void;
@@ -18,7 +17,6 @@ type TMessagePropsUI = {
 
 export const MessageItemUI:FC<TMessagePropsUI> = ({
   userName,
-  userId,
   date,
   viewed,
   onView,
@@ -28,7 +26,7 @@ export const MessageItemUI:FC<TMessagePropsUI> = ({
   }) => {
    
   return (
-    <div className={styles.messageItem} key={String(userId)}>
+    <div className={styles.messageItem}>
       <div className={styles.description}>
         <div className={styles.main}>
           <img className={styles.icon} src={image} alt="иконка сообщения о результате предложения" />
