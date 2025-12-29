@@ -1,4 +1,4 @@
-import type { FC } from 'react';
+import { useId, type FC } from 'react';
 import styles from './messages-list.module.css';
 import type { TMessageProps } from '../../message-item/message-item';
 import { MessageItem } from '../../message-item/message-item';
@@ -17,7 +17,7 @@ export const MessagesListUI:FC<TMessagesListUIProps> = ({
   onClick,
   textButton
   }) => {
-    const ariaTitleId = title.startsWith('Новые') ? 'new-message' : 'readedMessages';
+    const ariaTitleId = useId();
     const ariaLabelBtn = title.startsWith('Новые') ? 'Отметить как прочитанные' : 'Убрать прочитанные сообщения из области уведомлений';
   return (
     <div className={styles.listContainer} >
