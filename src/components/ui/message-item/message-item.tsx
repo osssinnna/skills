@@ -33,15 +33,18 @@ export const MessageItemUI:FC<TMessagePropsUI> = ({
         <div className={styles.main}>
           <img className={styles.icon} src={image} alt="иконка сообщения о результате предложения" />
           <div className={styles.mainText}>
-            <h3 className={styles.title}>{`${userName} ${message.title}`}</h3>
+            <h3 className={styles.title}>
+              <span>{userName} </span>
+              <span>{message.title}</span>
+            </h3>
             <p className={styles.comment}>{message.comment}</p>
           </div>
         </div>
-        <div className={styles.date}>{date}</div>
+        <time className={styles.date} dateTime={date}>{date}</time>
       </div>
       
       {!viewed && (
-        <ButtonUI onClick={onView} color={'primary'}>Перейти</ButtonUI>
+        <ButtonUI aria-label={`Перейти к просмотру предложения от ${userName}`} onClick={onView} color={'primary'}>Перейти</ButtonUI>
       )}
     </div>
   )
