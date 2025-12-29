@@ -83,6 +83,13 @@ export const MessagesSection:FC = () => {
       // обязателньо подписаться на изм isVisible
     },[isVisible])
 
+    //  фокус для доступности
+    useEffect(()=>{
+      if(isVisible && sectionRef.current){
+        sectionRef.current.focus();
+      }
+    },[isVisible])
+
 
   return <>
             {
