@@ -1,4 +1,4 @@
-import type { FC } from 'react';
+
 import styles from './messages-section.module.css';
 import { MessagesList } from '../../messages-list/messages-list';
 import type { TMessageNotifying } from '../../../utils/types';
