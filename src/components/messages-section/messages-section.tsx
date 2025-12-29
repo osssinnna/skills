@@ -7,14 +7,17 @@ import {unreadTestMessages , readTestMessages} from '../ui/messages-section/mock
 
 const messagesRoot = document.getElementById('messages') ?? document.body;
 
+
 export const MessagesSection:FC = () => {
   const [isRender, setRender] = useState(true);
   const [isVisible, setVisible] = useState(false);
   const sectionRef = useRef<HTMLElement | null>(null);
+  //  для сохранения фокуса предыдущего элемента, кот вызвал открытие этой секции - полезно для доступности
+  const lastFocusedElement = useRef<HTMLElement | null>(null);
   // Для REDUX!!!!
   // const unreadMessages = useSelector(selectUnreadMessages)
-    // const readMessages = useSelector(selectReadMessages)
-    //  временная заглушка - тестовые данные
+  // const readMessages = useSelector(selectReadMessages)
+  //  временная заглушка - тестовые данные
   const readMessages = [...readTestMessages] as TMessageNotifying[];
   const unreadMessages = [...unreadTestMessages] as TMessageNotifying[];
 
@@ -29,6 +32,7 @@ export const MessagesSection:FC = () => {
     const raf = requestAnimationFrame(() => {
       setVisible(true);
     })
+    // Работа с обработчиками
     // обработка закрытия вне секции
 
     const handleCloseOutSide = (event: MouseEvent) => {
@@ -66,7 +70,19 @@ export const MessagesSection:FC = () => {
   // useEffect для отработки механики закрытия секции  после анимации закрытия
     useEffect(() => {
       const sectionElement = sectionRef.current;
-      if(!sectionElement) return;
+      
+      if(!sectionElement) return;  
+      
+      // фокус для доступности секции
+      if(isVisible && sectionElement){
+        //  запоминаем предыдущий сфокусир элемент напр кнопка открытия секции
+        lastFocusedElement.current = document.activeElement as HTMLElement;
+        //  ставим фокус при открытии секции
+        sectionElement.focus();
+      } else {  //  в противном случае снимаем фокус с с секции и переводим его на предыдущий элемент
+        lastFocusedElement.current?.focus();
+      }
+      // обаботчик полного закрытия к-та
       const handleCloseAfterAnim = (e: TransitionEvent) => {
         //  анимация д б связана только с нашей секцией 
         if(e.target !== sectionElement) return;
@@ -82,15 +98,6 @@ export const MessagesSection:FC = () => {
       };
       // обязателньо подписаться на изм isVisible
     },[isVisible])
-
-    //  фокус для доступности
-    useEffect(()=>{
-      if(isVisible && sectionRef.current){
-        sectionRef.current.focus();
-      }
-    },[isVisible])
-
-
   return <>
             {
               isRender && (
@@ -101,7 +108,4 @@ export const MessagesSection:FC = () => {
               )
             }
         </>
-  
-  
-
 }
