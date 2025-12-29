@@ -3,11 +3,13 @@ import { MemoryRouter } from "react-router-dom";
 import { configureStore } from '@reduxjs/toolkit';
 import { Provider } from "react-redux";
 import { MessagesSection } from "./messages-section";
-import {AppHeader} from '../app-header/';
-import type { FC } from "react";
+import { useEffect, useRef, useState, type FC } from "react";
+import { AppHeaderUI } from "../ui/app-header";
+import { ButtonUI } from "../ui/button";
 
 //  создадим тестовый стор чтобы не было ошибок в истории связ с dispatch и т.п.
 const dummyReducer = (state = {}) => state; // редюсер заглушка
+
 
 const mockStore = configureStore({
   reducer: {
@@ -41,10 +43,50 @@ const today = new Date().toISOString();
 
 const TestStory:FC = () => {
 
-
-  return <>
-            <AppHeader/>
+return <>
+            <AppHeaderUI userName='Алексей' userAvatar='' isAuthOverride={true}/>
             <MessagesSection/>
+        </>
+}
+
+export const WithStoryTestOpenAndClose: FC = () => {
+  const [isShow, setShow] = useState(false);
+  const divRef = useRef<HTMLDivElement | null>(null);
+  const [focusedElement, setFocusedElement] = useState<string | null>(null);
+  const [isToggleBtn, setToggleBtn] = useState(false);
+  const handleClick = () => {
+      setShow(!isShow);
+      setToggleBtn(!isToggleBtn);
+      setTimeout(() => {
+        setFocusedElement(document.activeElement?.tagName ?? null);
+      }, 0);
+  }
+    useEffect(() => {
+      
+      const handleFocusChange = () => {
+        setFocusedElement(document.activeElement?.tagName ?? null);
+      }
+      const timer = setTimeout(() => handleFocusChange);
+
+      window.addEventListener('focusin', handleFocusChange);
+      return () => {
+        clearTimeout(timer)
+        window.removeEventListener('focusin', handleFocusChange);
+      }
+    }, []);
+//  сихронизируем переключение кнопки и наличие/отсутствие секции
+    useEffect(()=>{
+      if(!isToggleBtn && !document.body.contains(divRef.current)){
+         setTimeout(()=> setShow(false));
+      };
+    },[isToggleBtn])
+  return <> 
+            <div>
+              <h2>Закрытие по Escp, клику вне секции и проверка фокуса</h2>
+              <p>Текущий сфокусированный элемент {focusedElement}</p>
+            </div>
+            <ButtonUI onClick={handleClick} color='primary'>{!isToggleBtn ? 'Показать уведомления' : 'Скрыть уведомления'}</ButtonUI>
+            {isShow ? <div ref={divRef}><MessagesSection/></div> : ''}
         </>
 }
 
