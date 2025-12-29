@@ -120,6 +120,22 @@ export const vievedRejected: Story ={
   }
 }
 
+export const MessageTestText: Story = {
+  args: {
+    userName: 'Николай',
+    userId: 12345,
+    date: 'неизвестаня дата',
+    viewed: false,
+    onView: ()=>{},
+    image: iconMessage,
+    message: {
+      title: 'принял ваш обмен',
+      comment:  'Перейдите в профиль, чтобы обсудить детали Перейдите в профиль, чтобы обсудить детали'
+      
+    }
+  }
+};
+
 
 
 
