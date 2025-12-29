@@ -1,10 +1,13 @@
 .messageItem {
+  width: 100%;
+  max-width: 436px;
   background-color: var(--color-secondary,#fff);
 }
 
 .description {
   display: flex;
   justify-content: space-between;
+  align-items: flex-start;
   gap: 60px;
 }
 
@@ -18,18 +21,14 @@
 }
 
 .date {
+  display: block;
   color: var(--color-caption, #69735D);
   font-family: var(--main-font,'Roboto');
   font-weight: var(--fw-text, 400);
-  font-size: 16px;
+  font-size: clamp(8px, 2vw, 16px);
   line-height: 1.5;
   letter-spacing: 0.02em;
 }
-
-.mainText {
-  max-width: 250px;
-  width: 100%;
-} 
 
 .icon {
   width: 34px;
@@ -54,11 +53,3 @@
   letter-spacing: 0.02em;
 }
 
-.date {
-  color: var(--color-caption, #69735D);
-  font-family: var(--main-font,'Roboto');
-  font-weight: var(--fw-text, 400);
-  font-size: 16px;
-  line-height: 1.5;
-  letter-spacing: 0.02em;
-}
