@@ -17,7 +17,7 @@ export const MessagesSectionUI = forwardRef<HTMLElement, TMessagesSectionUIProps
   const emptyMessage = 'уведомлений о предложениях у вас пока нет';
   const hasMessages = unreadMessages.length > 0 || readMessages.length > 0;
   return (
-    <section aria-hidden={!isVisible} aria-label={'Уведомления о предложениях'} ref={ref} className={clsx(styles.messagesListSection, isVisible ? styles.messagesListSectionOpen : '' )}>
+    <section tabIndex={-1} role="region" aria-hidden={!isVisible} aria-label={'Уведомления о предложениях'} ref={ref} className={clsx(styles.messagesListSection, isVisible ? styles.messagesListSectionOpen : '' )}>
       {hasMessages ? (
       <> 
         {
