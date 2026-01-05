@@ -15,6 +15,7 @@ const mockGender = <GenderFilter gender={null} onChange={() => {}} />;
 const mockCities = (
   <CityFilter
     cities={["Москва", "Санкт-Петербург", "Новосибирск"]}
+    visibleCities={["Москва", "Санкт-Петербург", "Новосибирск"]}
     selectedCity="Москва"
     onChange={() => {}}
     showAll={false}
@@ -26,7 +27,6 @@ const mockSkills = (
     categories={[]}
     hasMore={false}
     showAll={false}
-    totalCategories={0}
     onToggleShowAll={() => {}}
   />
 );

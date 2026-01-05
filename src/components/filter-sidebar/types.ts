@@ -6,12 +6,12 @@ export type Filters = {
   mode: FilterMode;
   gender: "Мужской" | "Женский" | null;
   city: string | null;
-  skillIds: string[];
+  subcategoryIds: number[];
+  categoryIds: number[];
 };
 
 export type FilterSidebarProps = {
   filters: Filters;
-  onChange: (filters: Filters) => void;
   categoriesTree: (Category & { subcategories: Subcategory[] })[];
   cities: string[];
 };

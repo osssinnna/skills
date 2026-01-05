@@ -2,14 +2,11 @@ import { createSelector } from "@reduxjs/toolkit";
 import type { RootState } from "../store";
 import type { CategoryWithSubCategories } from "./type";
 
-export const selectSubcategories = (state: RootState) =>
-  state.categories.subcategories;
+export const selectSubcategories = (state: RootState) => state.categories.subcategories;
 
-export const selectCategories = (state: RootState) =>
-  state.categories.categories;
+export const selectCategories = (state: RootState) => state.categories.categories;
 
-export const selectCategoryIds = (state: RootState) =>
-  state.users.filters.categoryIds;
+export const selectCategoryIds = (state: RootState) => state.users.filters.categoryIds;
 
 export const selectSubcategoryIdsBySelectedCategories = createSelector(
   [selectSubcategories, selectCategoryIds],
@@ -27,8 +24,6 @@ export const selectCategoriesWithSubCategories = createSelector(
   (subcategories, categories): CategoryWithSubCategories[] =>
     categories.map((category) => ({
       ...category,
-      subcategories: subcategories.filter(
-        (sub) => sub.categoryId === category.id
-      ),
+      subcategories: subcategories.filter((sub) => sub.categoryId === category.id),
     }))
 );

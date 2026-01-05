@@ -1,12 +1,12 @@
 .filter {
   width: 324px;
-  padding: 24px 20px;
-  border-right: 1px solid #e6e6e6;
-
+  padding: 20px;
   font-size: 16px;
   line-height: 24px;
   letter-spacing: 0.02em;
   font-weight: 400;
+  grid-column: 1 / 2;
+  grid-row: 1 / -1;
 
   --hoverTextColor: #69735d;
   --accentColor: var(--color-primary);
@@ -16,13 +16,51 @@
   margin-bottom: 28px;
 }
 
+.filters {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
 .section:last-child {
   margin-bottom: 0;
 }
 
 .title {
+  margin: 0;
   margin-bottom: 12px;
   font-size: 15px;
   font-weight: 600;
 }
 
+.titleFilters {
+  font-family: var(--title-font);
+  font-style: normal;
+  font-weight: 500;
+  font-size: 24px;
+  line-height: 28px;
+  letter-spacing: -0.011em;
+  margin: 0;
+  padding: 12px 0;
+}
+
+.buttonReset {
+  gap: 12px;
+  background-color: transparent;
+  padding: 12px;
+  cursor: pointer;
+  font-family: inherit;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+  display: flex;
+  align-items: center;
+  letter-spacing: 0.02em;
+  color: var(--color-primary-pressed);
+  transition: color 0.3s ease-in-out;
+}
+
+.buttonReset:hover {
+  color: var(--main-text-color);
+}
