@@ -50,5 +50,5 @@ type UserData = {
 };
 
 export type SubcategoryDTO = {
-  id: string;
+  id: number;
 };

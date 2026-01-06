@@ -1,0 +1,30 @@
+.section {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  padding: 20px;
+}
+
+.buttonsTag {
+  --sec-textColorHover: #69735d;
+  gap: 8px;
+  background-color: var(--color-secondary);
+  border-radius: 12px;
+  padding: 12px;
+  cursor: pointer;
+  font-family: inherit;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+  display: flex;
+  align-items: center;
+  flex-wrap: nowrap;
+  letter-spacing: 0.02em;
+  white-space: nowrap;
+  transition: color 0.3s ease-in-out;
+}
+
+.buttonsTag:hover {
+  color: var(--sec-textColorHover);
+}

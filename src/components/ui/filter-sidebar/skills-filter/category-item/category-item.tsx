@@ -23,7 +23,7 @@ export const CategoryItem = ({
   }, [selectedCount, total]);
 
   return (
-    <div className={s.category}>
+    <li className={s.category}>
       <div className={s.categoryHeader}>
         <input
           ref={ref}
@@ -37,26 +37,33 @@ export const CategoryItem = ({
           {category.name}
         </span>
 
-        <button className={s.chevron} onClick={onToggleExpand}>
-          {expanded ? <IconButtonUI icon={up} /> : <IconButtonUI icon={down} />}
-        </button>
+        <div className={s.chevron} onClick={onToggleExpand}>
+          {expanded && <IconButtonUI icon={up} />}
+          {!expanded && (
+            <span className={s.downIconHover}>
+              <IconButtonUI icon={down} />
+            </span>
+          )}
+        </div>
       </div>
 
       {expanded && (
-        <div className={s.subcats}>
+        <ul className={s.subcats}>
           {category.subcategories.map((sub) => (
-            <label key={sub.id} className={s.subcat}>
-              <input
-                type="checkbox"
-                className={s.checkbox}
-                checked={selectedIds.includes(sub.id)}
-                onChange={() => onToggleSub(sub.id)}
-              />
-              <span className={s.subcatLabel}>{sub.name}</span>
-            </label>
+            <li key={sub.id}>
+              <label className={s.subcat}>
+                <input
+                  type="checkbox"
+                  className={s.checkbox}
+                  checked={selectedIds.includes(sub.id)}
+                  onChange={() => onToggleSub(sub.id)}
+                />
+                <span className={s.subcatLabel}>{sub.name}</span>
+              </label>
+            </li>
           ))}
-        </div>
+        </ul>
       )}
-    </div>
+    </li>
   );
 };

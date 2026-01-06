@@ -4,8 +4,8 @@ import type { Category, Subcategory } from "../../../utils/types";
 
 export type SkillsFilterProps = {
   categoriesTree: (Category & { subcategories: Subcategory[] })[];
-  selectedIds: string[];
-  onChange: (ids: string[]) => void;
+  selectedIds: number[];
+  onChange: (ids: number[]) => void;
 };
 
 export const SkillsFilter = ({
@@ -13,10 +13,10 @@ export const SkillsFilter = ({
   selectedIds,
   onChange,
 }: SkillsFilterProps) => {
-  const [expanded, setExpanded] = useState<string[]>([]);
+  const [expanded, setExpanded] = useState<number[]>([]);
   const [showAllCategories, setShowAllCategories] = useState(false);
 
-  const toggleSubcategory = (id: string) => {
+  const toggleSubcategory = (id: number) => {
     onChange(
       selectedIds.includes(id)
         ? selectedIds.filter((x) => x !== id)
@@ -66,7 +66,6 @@ export const SkillsFilter = ({
       })}
       hasMore={categoriesTree.length > 6}
       showAll={showAllCategories}
-      totalCategories={categoriesTree.length}
       onToggleShowAll={() => setShowAllCategories((prev) => !prev)}
     />
   );

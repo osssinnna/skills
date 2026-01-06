@@ -8,27 +8,28 @@ export const CityFilter = ({
   cities,
   selectedCity,
   onChange,
+  visibleCities,
   showAll,
   onToggleShowAll,
 }: Props) => {
-  const visibleCities = showAll ? cities : cities.slice(0, 3);
-
   return (
-    <div className={s.group}>
+    <ul className={s.group}>
       {visibleCities.map((city) => (
-        <label key={city} className={s.option}>
-          <input
-            type="checkbox"
-            className={s.checkbox}
-            checked={selectedCity === city}
-            onChange={(e) => onChange(e.target.checked ? city : null)}
-          />
-          <span className={s.label}>{city}</span>
-        </label>
+        <li key={city}>
+          <label className={s.option}>
+            <input
+              type="checkbox"
+              className={s.checkbox}
+              checked={selectedCity === city}
+              onChange={(e) => onChange(e.target.checked ? city : null)}
+            />
+            <span className={s.label}>{city}</span>
+          </label>
+        </li>
       ))}
 
       {cities.length > 3 && (
-        <button type="button" className={s.moreButton} onClick={onToggleShowAll}>
+        <div className={s.moreButton} onClick={onToggleShowAll}>
           {showAll ? (
             <>
               <span>Скрыть</span>
@@ -36,12 +37,12 @@ export const CityFilter = ({
             </>
           ) : (
             <>
-              <span>Смотреть все {cities.length}</span>
+              <span>Смотреть все</span>
               <IconButtonUI icon={down} />
             </>
           )}
-        </button>
+        </div>
       )}
-    </div>
+    </ul>
   );
 };
