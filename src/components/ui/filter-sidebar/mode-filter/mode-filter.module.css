@@ -4,7 +4,10 @@
   gap: 10px;
 
   --hoverTextColor: #69735d;
-  --accentColor: var(--color-primary);
+
+  margin: 0;
+  padding: 0;
+  list-style: none;
 }
 
 .option {
@@ -28,20 +31,20 @@
   appearance: none;
   width: 18px;
   height: 18px;
-  border: 2px solid #c7c7c7;
+  border: 2px solid var(--main-text-color);
   border-radius: 50%;
   position: relative;
   cursor: pointer;
 }
 
 .radio:checked {
-  border-color: var(--accentColor);
+  border-color: var(--color-primary-pressed);
 }
 
 .radio:checked::after {
   content: "";
   position: absolute;
   inset: 4px;
-  background: var(--accentColor);
+  background: var(--color-primary-pressed);
   border-radius: 50%;
 }

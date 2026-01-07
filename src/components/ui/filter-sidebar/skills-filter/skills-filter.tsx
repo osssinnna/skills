@@ -8,15 +8,14 @@ export const SkillsFilterUI = ({
   categories,
   hasMore,
   showAll,
-  totalCategories,
   onToggleShowAll,
 }: Props) => {
   return (
-    <div className={s.skills}>
+    <ul className={s.skills}>
       {categories}
 
       {hasMore && (
-        <button type="button" className={s.moreButton} onClick={onToggleShowAll}>
+        <div className={s.moreButton} onClick={onToggleShowAll}>
           {showAll ? (
             <>
               <span>Скрыть</span>
@@ -24,12 +23,12 @@ export const SkillsFilterUI = ({
             </>
           ) : (
             <>
-              <span>Смотреть все {totalCategories}</span>
+              <span>Смотреть все</span>
               <IconButtonUI icon={down} />
             </>
           )}
-        </button>
+        </div>
       )}
-    </div>
+    </ul>
   );
 };

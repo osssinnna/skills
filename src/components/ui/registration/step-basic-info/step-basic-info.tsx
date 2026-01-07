@@ -5,6 +5,7 @@ import type { Props } from "./types";
 import { ButtonUI } from "./../../button/button";
 import { Dropdown } from "../../dropdown";
 import { BirthDatePicker } from "../../birth-date-picker";
+import { genderIdToLabel, genderLabelToId, genderOptions } from "../../../registration";
 
 export const StepBasicInfoUI = ({
   values,
@@ -58,13 +59,9 @@ export const StepBasicInfoUI = ({
         <Dropdown
           label="Пол *"
           placeholder="Укажите пол"
-          options={[
-            { id: "Не указан", label: "Не указывать" },
-            { id: "Мужской", label: "Мужской" },
-            { id: "Женский", label: "Женский" },
-          ]}
-          selectedIds={values.gender ? [values.gender] : []}
-          onChange={(ids) => onChange("gender", ids[0] ?? "")}
+          options={genderOptions}
+          selectedIds={values.gender ? [genderLabelToId(values.gender)!] : []}
+          onChange={(ids) => onChange("gender", genderIdToLabel(ids[0] ?? null))}
           withoutIcon={true}
         />
       </div>

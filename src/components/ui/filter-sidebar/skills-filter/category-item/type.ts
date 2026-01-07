@@ -7,6 +7,6 @@ export type CategoryItemProps = {
   expanded: boolean;
   onToggleExpand: () => void;
   onToggleCategory: () => void;
-  selectedIds: string[];
-  onToggleSub: (id: string) => void;
+  selectedIds: number[];
+  onToggleSub: (id: number) => void;
 };

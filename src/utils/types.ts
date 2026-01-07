@@ -1,34 +1,35 @@
 export type Category = {
-  id: string;
+  id: number;
   name: string;
 };
 
 export type Subcategory = {
-  id: string;
+  id: number;
   name: string;
-  categoryId: string;
+  categoryId: number;
 };
 
 export type User = {
-  id: string;
+  id: number;
   avatarUrl: string;
   name: string;
   location: string;
   age: string;
-  gender: "Мужской" | "Женский" | "Не указан";
+  gender: "Мужской" | "Женский" | null;
   skillCanTeach: SkillCanTeach;
   images: string[];
   subcategoriesWantToLearn: Subcategory[];
+  categoriesWantToLearn: Category[];
   likesCount: number;
-  likedByUserIds: string[];
+  likedByUserIds: number[];
   createdAt: string;
 };
 
 export type SkillCanTeach = {
   name: string;
   description: string;
-  categoryId: string;
-  subcategoryId: string;
+  categoryId: number;
+  subcategoryId: number;
 };
 
 export type RegistrationData = {
@@ -41,13 +42,30 @@ type UserData = {
   name: string;
   location: string;
   birthDate: Date | null;
-  gender: "Мужской" | "Женский" | "Не указан";
+  gender: "Мужской" | "Женский" | null;
   avatarUrl: string;
-  skillCanTeach: SkillCanTeach;
+  skillCanTeach: {
+    name: string;
+    description: string;
+    categoryId: number | null;
+    subcategoryId: number | null;
+  };
   images: string[];
   subcategoriesWantToLearn: SubcategoryDTO[];
 };
 
 export type SubcategoryDTO = {
-  id: string;
+  id: number;
+};
+
+// уведомления
+
+export type TMessageExhanges = "confirmed" | "offered" | "rejected";
+
+export type TMessageNotifying = {
+  userName: string;
+  userId: number; //- для перехода на карточку пользователя и отмечания соо как прочитаннок
+  date: string; // - дата создания сообщения
+  viewed: boolean; //  - просмотрено ли сообщение
+  typeMessage: TMessageExhanges;
 };

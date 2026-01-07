@@ -1,10 +1,10 @@
 export type DropdownOption = {
-  id: string;
+  id: number;
   label: string;
 };
 
 export type DropdownGroup = {
-  id: string;
+  id: number;
   label: string;
   options: DropdownOption[];
 };
@@ -16,10 +16,10 @@ export type Props = {
   options?: DropdownOption[];
   groups?: DropdownGroup[];
 
-  selectedIds: string[];
+  selectedIds: number[];
   multiple?: boolean;
   disabled?: boolean;
 
-  onChange: (ids: string[]) => void;
+  onChange: (ids: number[]) => void;
   withoutIcon?: boolean;
 };

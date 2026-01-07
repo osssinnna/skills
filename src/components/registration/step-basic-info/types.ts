@@ -1,7 +1,7 @@
-import type { Subcategory } from "../../../utils/types";
+import type { Subcategory, User } from "../../../utils/types";
 
 export type CategoryWithSubs = {
-  id: string;
+  id: number;
   name: string;
   subcategories: Subcategory[];
 };
@@ -10,10 +10,10 @@ export type StepBasicInfoData = {
   name: string;
   location: string;
   birthDate: Date | null;
-  gender: "Мужской" | "Женский" | "Не указан";
+  gender: User["gender"];
   avatarUrl: string;
-  selectedCategoryIds: string[];
-  selectedSubcategoryIds: string[];
+  selectedCategoryIds: number[];
+  selectedSubcategoryIds: number[];
 };
 
 export type StepBasicInfoProps = {
@@ -27,5 +27,5 @@ export type FormValues = {
   name: string;
   location: string;
   birthDate: Date | null;
-  gender: string;
+  gender: User["gender"];
 };

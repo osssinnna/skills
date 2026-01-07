@@ -48,7 +48,7 @@ export const Register: React.FC = () => {
           images: formData.stepSkillCanTeach.images,
           skillCanTeach: formData.stepSkillCanTeach.skillCanTeach,
           subcategoriesWantToLearn: formData.stepBasicInfo.selectedSubcategoryIds.map(
-            (id: string) => ({
+            (id: number) => ({
               id,
             })
           ),

@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { useCategories } from "../hooks/use-categories";
 import { StepSkillCanTeachUI } from "../../ui/registration";
 import { useForm } from "../../../hooks/use-form";
 import type { StepSkillCanTeachProps } from "./types";
@@ -8,6 +7,11 @@ import {
   validateName,
   validateSubcategories,
 } from "../../../utils/validation-form";
+import { useSelector } from "react-redux";
+import {
+  selectCategoriesStatus,
+  selectCategoriesWithSubCategories,
+} from "../../../services/categoriesSlice/selectors";
 
 export const StepSkillCanTeach = ({
   data,
@@ -16,14 +20,17 @@ export const StepSkillCanTeach = ({
   onSubmit,
   isSubmitting,
 }: StepSkillCanTeachProps) => {
-  const { categories, isLoading } = useCategories();
+  const categories = useSelector(selectCategoriesWithSubCategories);
+  const status = useSelector(selectCategoriesStatus);
+
+  const isLoading = status === "loading";
 
   const { values, errors, setValue, validateForm, setErrors } = useForm(
     {
       name: data.skillCanTeach.name ?? "",
       description: data.skillCanTeach.description ?? "",
-      categoryId: data.skillCanTeach.categoryId ?? "",
-      subcategoryId: data.skillCanTeach.subcategoryId ?? "",
+      categoryId: data.skillCanTeach.categoryId ?? null,
+      subcategoryId: data.skillCanTeach.subcategoryId ?? null,
     },
     {
       name: validateName,
@@ -36,7 +43,7 @@ export const StepSkillCanTeach = ({
   const [previewOpen, setPreviewOpen] = useState(false);
 
   /* ===== Категории ===== */
-  const handleCategoryChange = (id: string) => {
+  const handleCategoryChange = (id: number) => {
     setValue("categoryId", id, true);
 
     const subcategoryError =
@@ -44,7 +51,7 @@ export const StepSkillCanTeach = ({
 
     setErrors((prev) => ({ ...prev, subcategoryId: subcategoryError }));
 
-    setValue("subcategoryId", "");
+    setValue("subcategoryId", null);
   };
 
   /* ===== Фотографии ===== */

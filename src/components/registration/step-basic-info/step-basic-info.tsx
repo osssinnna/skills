@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { useCategories } from "../hooks/use-categories";
 import { StepBasicInfoUI } from "../../ui/registration";
 
 import type { StepBasicInfoProps } from "./types";
@@ -9,15 +8,33 @@ import {
   validateLocation,
   validateName,
 } from "../../../utils/validation-form";
+import { useSelector } from "react-redux";
+import {
+  selectCategoriesError,
+  selectCategoriesStatus,
+  selectCategoriesWithSubCategories,
+} from "../../../services/categoriesSlice/selectors";
+import { genderModelToUi, genderUiToModel } from "../utils/gender-ui";
 
 export const StepBasicInfo = ({ data, onChange, onNext, onBack }: StepBasicInfoProps) => {
-  const { categories, isLoading, error: categoriesError } = useCategories();
+  const categories = useSelector(selectCategoriesWithSubCategories);
+  const status = useSelector(selectCategoriesStatus);
+  const error = useSelector(selectCategoriesError);
+
+  const isLoading = status === "loading";
+
+  const categoriesError =
+    status === "failed"
+      ? typeof error === "string"
+        ? error
+        : "Ошибка загрузки категорий"
+      : null;
 
   const { values, errors, setValue, validateForm, setErrors } = useForm(
     {
       name: data.name ?? "",
       location: data.location ?? "",
-      gender: data.gender ?? "Не указан",
+      gender: genderModelToUi(data.gender),
     },
     {
       name: validateName,
@@ -44,14 +61,15 @@ export const StepBasicInfo = ({ data, onChange, onNext, onBack }: StepBasicInfoP
 
     const missingSubcategories: string[] = [];
     data.selectedCategoryIds.forEach((catId) => {
-      const subsInCategory = data.selectedSubcategoryIds.filter((subId) =>
-        categories
-          .find((cat) => cat.id === catId)
-          ?.subcategories.some((sub) => sub.id === subId)
+      const category = categories.find((cat) => cat.id === catId);
+      if (!category) return;
+
+      const hasSub = data.selectedSubcategoryIds.some((subId) =>
+        category.subcategories.some((sub) => sub.id === subId)
       );
-      if (subsInCategory.length === 0) {
-        const catName = categories.find((cat) => cat.id === catId)?.name || catId;
-        missingSubcategories.push(catName);
+
+      if (!hasSub) {
+        missingSubcategories.push(category.name);
       }
     });
 
@@ -77,7 +95,7 @@ export const StepBasicInfo = ({ data, onChange, onNext, onBack }: StepBasicInfoP
       name: values.name,
       location: values.location,
       birthDate: birthDate,
-      gender: values.gender,
+      gender: genderUiToModel(values.gender),
     };
 
     localStorage.setItem("registration_step_basic_info", JSON.stringify(finalData));
@@ -105,7 +123,7 @@ export const StepBasicInfo = ({ data, onChange, onNext, onBack }: StepBasicInfoP
     setBirthDateError(date ? validateBirthDate(date) : undefined);
   };
 
-  const handleCategoriesChange = (ids: string[]) => {
+  const handleCategoriesChange = (ids: number[]) => {
     const validSubcategoryIds = data.selectedSubcategoryIds.filter((subId) =>
       categories.some(
         (cat) => ids.includes(cat.id) && cat.subcategories.some((sub) => sub.id === subId)
@@ -119,7 +137,7 @@ export const StepBasicInfo = ({ data, onChange, onNext, onBack }: StepBasicInfoP
     });
   };
 
-  const handleSubcategoriesChange = (subIds: string[]) => {
+  const handleSubcategoriesChange = (subIds: number[]) => {
     onChange({ ...data, selectedSubcategoryIds: subIds });
   };
 

@@ -5,6 +5,10 @@
 
   --hoverTextColor: #69735d;
   --accentColor: var(--color-primary);
+
+  margin: 0;
+  padding: 0;
+  list-style: none;
 }
 
 .option {
@@ -29,7 +33,7 @@
   appearance: none;
   width: 18px;
   height: 18px;
-  border: 2px solid #c7c7c7;
+  border: 2px solid var(--main-text-color);
   border-radius: 4px;
   position: relative;
   cursor: pointer;

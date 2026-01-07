@@ -74,10 +74,10 @@ export const validateBirthDate = (date: Date | null): string | undefined => {
   return undefined;
 };
 
-export const validateCategories = (value: string): string | undefined => {
-  return value.trim() ? undefined : "Введите категорию навыка";
+export const validateCategories = (value: number | null) => {
+  return value ? undefined : "Введите категорию навыка";
 };
 
-export const validateSubcategories = (value: string) => {
-  return value.trim() ? undefined : "Введите подкатегорию навыка";
+export const validateSubcategories = (value: number | null) => {
+  return value ? undefined : "Введите подкатегорию навыка";
 };

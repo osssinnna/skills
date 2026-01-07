@@ -39,7 +39,7 @@ const ICONS = {
   },
 };
 
-export const Checkbox: FC<CheckboxUIProps> = ({
+export const CheckBoxUI: FC<CheckboxUIProps> = ({
   id,
   label,
   checked,

@@ -2,7 +2,7 @@ import { Outlet } from "react-router-dom";
 import { AppHeader } from "../../components/app-header";
 import { FooterUI } from "../../components/ui/footer";
 
-export const PageLayout = () => {
+function PageLayout() {
   return (
     <>
       <AppHeader />
@@ -14,4 +14,6 @@ export const PageLayout = () => {
       <FooterUI />
     </>
   );
-};
+}
+
+export default PageLayout;

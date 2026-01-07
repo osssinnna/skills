@@ -2,8 +2,8 @@ export type Props = {
   values: {
     name: string;
     description: string;
-    categoryId: string;
-    subcategoryId: string;
+    categoryId: number | null;
+    subcategoryId: number | null;
   };
   errors: Partial<
     Record<"name" | "description" | "categoryId" | "subcategoryId", string>
@@ -18,8 +18,8 @@ export type Props = {
     value: string,
     validateNow?: boolean
   ) => void;
-  onCategoryChange: (id: string) => void;
-  onSubcategoryChange: (id: string) => void;
+  onCategoryChange: (id: number) => void;
+  onSubcategoryChange: (id: number) => void;
   onAddImage: (src: string) => void;
   onAddFile: (file: File) => void;
   onRemoveImage: (index: number) => void;
@@ -29,10 +29,10 @@ export type Props = {
 };
 
 export type CategoryWithSubs = {
-  id: string;
+  id: number;
   name: string;
   subcategories: {
-    id: string;
+    id: number;
     name: string;
   }[];
 };

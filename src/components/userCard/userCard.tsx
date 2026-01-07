@@ -9,11 +9,11 @@ export const UserCard = ({ user, onLikeToggle }: TUserCardProps) => {
   // пока пусть так
   const dummy = user.id ? true : false;
 
-  const [isButtonLiked, setIsButtonLiked] = useState(dummy);
+  const [isButtonLiked, setIsButtonLiked] = useState(false);
 
-  useEffect(() => {
-    setIsButtonLiked(dummy);
-  }, [dummy]);
+  // useEffect(() => {
+  //   setIsButtonLiked(dummy);
+  // }, [dummy]);
 
   const handleLikeToggle = useCallback(() => {
     setIsButtonLiked((prev) => !prev);

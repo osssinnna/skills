@@ -1,11 +1,9 @@
-import type { User } from "../../../../utils/types";
-
 export type Props = {
   values: {
     name: string;
     location: string;
     birthDate: Date | null;
-    gender: User["gender"];
+    gender: "Мужской" | "Женский" | "Не указан";
   };
 
   errors: Partial<Record<"name" | "location" | "birthDate" | "gender", string>>;
@@ -14,8 +12,8 @@ export type Props = {
   isLoading: boolean;
   formError: string;
 
-  selectedCategoryIds: string[];
-  selectedSubcategoryIds: string[];
+  selectedCategoryIds: number[];
+  selectedSubcategoryIds: number[];
 
   onChange: (
     field: "name" | "location" | "gender",
@@ -24,18 +22,18 @@ export type Props = {
   ) => void;
   onBirthDateChange: (date: Date | null) => void;
 
-  onCategoriesChange: (ids: string[]) => void;
-  onSubcategoriesChange: (ids: string[]) => void;
+  onCategoriesChange: (ids: number[]) => void;
+  onSubcategoriesChange: (ids: number[]) => void;
 
   onSubmit: () => void;
   onBack: () => void;
 };
 
 export type CategoryWithSubs = {
-  id: string;
+  id: number;
   name: string;
   subcategories: {
-    id: string;
+    id: number;
     name: string;
   }[];
 };

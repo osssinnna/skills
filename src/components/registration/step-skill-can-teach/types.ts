@@ -1,7 +1,10 @@
-import type { SkillCanTeach } from "../../../types/types";
-
 export type StepSkillCanTeachData = {
-  skillCanTeach: SkillCanTeach;
+  skillCanTeach: {
+    name: string;
+    description: string;
+    categoryId: number | null;
+    subcategoryId: number | null;
+  };
   images: string[];
 };
 

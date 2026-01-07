@@ -5,8 +5,8 @@ export const INITIAL_DATA: RegistrationFormData = {
   stepBasicInfo: {
     name: "",
     location: "",
-    birthDate: "",
-    gender: "Не указан",
+    birthDate: null,
+    gender: null,
     avatarUrl: "",
     selectedCategoryIds: [],
     selectedSubcategoryIds: [],
@@ -15,8 +15,8 @@ export const INITIAL_DATA: RegistrationFormData = {
     skillCanTeach: {
       name: "",
       description: "",
-      categoryId: "",
-      subcategoryId: "",
+      categoryId: null,
+      subcategoryId: null,
     },
     images: [],
   },

@@ -3,6 +3,9 @@
 
   --hoverTextColor: #69735d;
   --accentColor: var(--color-primary);
+  margin: 0;
+  padding: 0;
+  list-style: none;
 }
 
 /* ===== Header ===== */
@@ -12,7 +15,6 @@
   grid-template-columns: auto 1fr auto;
   align-items: center;
   gap: 10px;
-  padding: 6px 4px;
 }
 
 .categoryName {
@@ -20,7 +22,7 @@
   transition: color 0.2s ease;
 }
 
-.categoryName:hover {
+.categoryHeader:hover .categoryName {
   color: var(--hoverTextColor);
 }
 
@@ -33,15 +35,26 @@
   cursor: pointer;
 }
 
+.downIconHover {
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+.categoryHeader:hover .downIconHover {
+  opacity: 1;
+}
+
 /* ===== Subcategories ===== */
 
 .subcats {
   padding-left: 28px;
-  margin-top: 6px;
+  margin-top: 12px;
 
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 12px;
+
+  list-style: none;
 }
 
 .subcat {
@@ -52,6 +65,8 @@
   font-size: 16px;
   line-height: 24px;
   cursor: pointer;
+
+  list-style: none;
 }
 
 .subcatLabel {
@@ -68,10 +83,11 @@
   appearance: none;
   width: 18px;
   height: 18px;
-  border: 2px solid #c7c7c7;
+  border: 2px solid var(--main-text-color);
   border-radius: 4px;
   position: relative;
   cursor: pointer;
+  flex-shrink: 0;
 }
 
 .checkbox:checked {

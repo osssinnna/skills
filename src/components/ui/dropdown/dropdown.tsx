@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import clsx from "clsx";
 import s from "./dropdown.module.css";
-import { Checkbox } from "../checkbox/checkbox";
+import { CheckBoxUI } from "../checkbox";
 import type { Props } from "./types";
 import up from "../../../assets/icon-up.svg";
 import down from "../../../assets/icon-down.svg";
@@ -31,7 +31,7 @@ export const Dropdown = ({
     return () => document.removeEventListener("mousedown", handler);
   }, []);
 
-  const toggle = (id: string) => {
+  const toggle = (id: number) => {
     if (multiple) {
       onChange(
         selectedIds.includes(id)
@@ -44,9 +44,9 @@ export const Dropdown = ({
     }
   };
 
-  const allOptions = options ?? groups?.flatMap((g) => g.options) ?? [];
+  const allOptions = options ?? groups?.flatMap((group) => group.options) ?? [];
 
-  const firstLabel = allOptions.find((o) => o.id === selectedIds[0])?.label;
+  const firstLabel = allOptions.find((option) => option.id === selectedIds[0])?.label;
 
   const moreCount = selectedIds.length - 1;
 
@@ -78,29 +78,29 @@ export const Dropdown = ({
         {open && (
           <div className={clsx(s.categoryGroup, s.categoryGroupActive)}>
             {groups
-              ? groups.map((g) => (
-                  <div key={g.id} className={s.categorySubGroup}>
-                    <div className={s.categoryTitle}>{g.label}</div>
-                    {g.options.map((o) => (
-                      <Checkbox
-                        key={o.id}
-                        id={o.id}
-                        label={o.label}
-                        checked={selectedIds.includes(o.id)}
-                        onChange={() => toggle(o.id)}
+              ? groups.map((group) => (
+                  <div key={group.id} className={s.categorySubGroup}>
+                    <div className={s.categoryTitle}>{group.label}</div>
+                    {group.options.map((option) => (
+                      <CheckBoxUI
+                        key={option.id}
+                        id={String(option.id)}
+                        label={option.label}
+                        checked={selectedIds.includes(option.id)}
+                        onChange={() => toggle(option.id)}
                         disabled={disabled}
                         withoutIcon={withoutIcon}
                       />
                     ))}
                   </div>
                 ))
-              : options?.map((o) => (
-                  <Checkbox
-                    key={o.id}
-                    id={o.id}
-                    label={o.label}
-                    checked={selectedIds.includes(o.id)}
-                    onChange={() => toggle(o.id)}
+              : options?.map((option) => (
+                  <CheckBoxUI
+                    key={option.id}
+                    id={String(option.id)}
+                    label={option.label}
+                    checked={selectedIds.includes(option.id)}
+                    onChange={() => toggle(option.id)}
                     disabled={disabled}
                     withoutIcon={withoutIcon}
                   />
