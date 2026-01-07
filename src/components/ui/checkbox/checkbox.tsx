@@ -1,11 +1,11 @@
 import type { FC } from "react";
 import styles from "./checkbox.module.css";
 
-import emptySquare from "./images/emptySquare.svg";
-import checkedSquare from "./images/checkedSquare.svg";
-import emptyRound from "./images/emptyRoundCheckBox.svg";
-import checkedRound from "./images/checkedRound.svg";
-import mainAccordion from "./images/mainChecboxSquare.svg";
+import emptySquare from "./assets/images/emptySquare.svg";
+import checkedSquare from "./assets/images/checkedSquare.svg";
+import emptyRound from "./assets/images/emptyRoundCheckBox.svg";
+import checkedRound from "./assets/images/checkedRound.svg";
+import mainAccordion from "./assets/images/mainChecboxSquare.svg";
 import { IconButtonUI } from "../iconButton";
 
 export type CheckboxUIProps = {
@@ -37,7 +37,7 @@ const ICONS = {
   },
 };
 
-export const Checkbox: FC<CheckboxUIProps> = ({
+export const CheckBoxUI: FC<CheckboxUIProps> = ({
   id,
   label,
   checked,

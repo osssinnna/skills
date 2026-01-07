@@ -52,3 +52,17 @@ type UserData = {
 export type SubcategoryDTO = {
   id: number;
 };
+
+
+// уведомления
+
+export type TMessageExhanges = 'confirmed' | 'offered' | 'rejected';
+
+
+export type TMessageNotifying = {
+  userName: string;
+  userId: number; //- для перехода на карточку пользователя и отмечания соо как прочитаннок
+  date: string; // - дата создания сообщения
+  viewed: boolean; //  - просмотрено ли сообщение
+  typeMessage: TMessageExhanges;
+}
