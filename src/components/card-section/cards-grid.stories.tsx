@@ -1,11 +1,11 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { CardsGrid } from "./cards-grid";
-import mockUsers from "../../../mock/mockUser.json";
+import { CardsGrid } from "../ui/cards-grid/cards-grid";
+import mockUsers from "../../mock/mockUser.json";
 
 // Мокаем данные для Storybook
-const typedUsers = mockUsers.map(user => ({
+const typedUsers = mockUsers.map((user) => ({
   ...user,
-  gender: user.gender as 'Мужской' | 'Женский'
+  gender: user.gender as "Мужской" | "Женский",
 }));
 
 const meta: Meta<typeof CardsGrid> = {
@@ -15,7 +15,8 @@ const meta: Meta<typeof CardsGrid> = {
     layout: "padded",
     docs: {
       description: {
-        component: "Компонент сетки для отображения карточек пользователей в виде сетки. Автоматически адаптируется под размер экрана.",
+        component:
+          "Компонент сетки для отображения карточек пользователей в виде сетки. Автоматически адаптируется под размер экрана.",
       },
     },
   },
@@ -64,7 +65,8 @@ export const SingleUser: Story = {
   parameters: {
     docs: {
       description: {
-        story: "Сетка с одним пользователем. Показывает адаптивность компонента.",
+        story:
+          "Сетка с одним пользователем. Показывает адаптивность компонента.",
       },
     },
   },

@@ -45,7 +45,7 @@ const noop = () => {};
 export const Default: Story = {
   name: "PersonCard больше 2 тегов",
   args: {
-    person: mockPerson1,
+    user: mockPerson1,
     onLikeToggle: noop,
   },
 };
@@ -53,7 +53,7 @@ export const Default: Story = {
 export const DifferentData: Story = {
   name: "PersonCard 2 тега",
   args: {
-    person: mockPerson2,
+    user: mockPerson2,
     onLikeToggle: noop,
   },
 };
