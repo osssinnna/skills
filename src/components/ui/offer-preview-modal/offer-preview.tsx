@@ -1,5 +1,3 @@
-import { useNavigate } from "react-router-dom";
-
 import styles from "./offer-preview.module.css";
 import { ButtonUI } from "../button";
 import editIcon from "../../../assets/icon-edit.svg";
@@ -10,6 +8,8 @@ interface OfferPreviewProps {
   skillSubCategory: string;
   skillDescription: string;
   skillImg: string[];
+  onEdit: () => void; // Для редактирования
+  onConfirm: () => void; // Для сохранения
 }
 
 export const OfferPreview = ({
@@ -18,8 +18,9 @@ export const OfferPreview = ({
   skillSubCategory,
   skillDescription,
   skillImg,
+  onEdit,
+  onConfirm,
 }: OfferPreviewProps) => {
-  const navigate = useNavigate();
 
   if (!Array.isArray(skillImg) || skillImg.length === 0) {
     return null;
@@ -54,12 +55,12 @@ export const OfferPreview = ({
           </div>
 
           <div className={styles.actions}>
-            <ButtonUI color="secondary" onClick={() => navigate("/404")}>
+            <ButtonUI color="secondary" onClick={onEdit}>
               Редактировать
               <img src={editIcon} alt="" />
             </ButtonUI>
 
-            <ButtonUI color="primary" onClick={() => navigate("/404")}>
+            <ButtonUI color="primary" onClick={onConfirm}>
               Готово
             </ButtonUI>
           </div>

@@ -20,7 +20,7 @@ export const CardsGrid = memo<CardsGridProps>(({ users }) => {
   return (
     <div className={styles.grid}>
       {users.map((user) => (
-        <UserCard key={user.id} person={user} onLikeToggle={() => {}} />
+        <UserCard key={user.id} user={user} onLikeToggle={() => {}} />
       ))}
     </div>
   );

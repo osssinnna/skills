@@ -1,7 +1,8 @@
 .contain {
   margin: 0;
   box-sizing: border-box;
-  width: 527px;
+  width: 100%;
+  min-width: 527px;
   height: 48px;
   background-color: var(--color-secondary);
   display: flex;

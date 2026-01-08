@@ -4,9 +4,10 @@ import type { TUserCardUIProps } from "../ui/userCard/type";
 
 type TUserCardProps = Omit<TUserCardUIProps, "isLiked">;
 
-export const UserCard = ({ person, onLikeToggle }: TUserCardProps) => {
-  // Заглушка для лайка (потом заменить на логику с localStorage)
-  const dummy = Boolean(person.id);
+export const UserCard = ({ user, onLikeToggle }: TUserCardProps) => {
+  // Тут должна быть логика проверки localStorage, которая возвращает есть ли лайк
+  // пока пусть так
+  const dummy = user.id ? true : false;
 
   const [isButtonLiked, setIsButtonLiked] = useState(false);
 
@@ -15,16 +16,15 @@ export const UserCard = ({ person, onLikeToggle }: TUserCardProps) => {
   // }, [dummy]);
 
   const handleLikeToggle = useCallback(() => {
-    setIsButtonLiked(prev => !prev);
+    setIsButtonLiked((prev) => !prev);
     onLikeToggle();
   }, [onLikeToggle]);
 
   return (
     <UserCardUI
-      person={person}
+      user={user}
       isLiked={isButtonLiked}
       onLikeToggle={handleLikeToggle}
     />
   );
 };
-

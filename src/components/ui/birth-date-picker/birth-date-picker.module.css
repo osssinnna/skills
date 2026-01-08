@@ -3,9 +3,11 @@
   width: 100%;
   padding: 12px;
   border-radius: 12px;
-  border: 1px solid #a6a6a6;
-  font-size: 14px;
+  border: 1px solid var(--color-caption);
   outline: none;
+  font-size: 16px;
+  line-height: 24px;
+  letter-spacing: 0.02em;
 }
 
 .input:focus {
@@ -73,4 +75,5 @@
 /* ограничиваем высоту dropdown года */
 .popper :global(.react-datepicker__year-dropdown) {
   max-height: 240px; /* ~12 пунктов */
-  overflow-y: auto;}
+  overflow-y: auto;
+}

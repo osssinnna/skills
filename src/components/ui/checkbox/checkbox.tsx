@@ -5,8 +5,9 @@ import emptySquare from "./assets/images/emptySquare.svg";
 import checkedSquare from "./assets/images/checkedSquare.svg";
 import emptyRound from "./assets/images/emptyRoundCheckBox.svg";
 import checkedRound from "./assets/images/checkedRound.svg";
-import mainAccordion from "./assets/images/mainChecboxSquare.svg";
+import mainAccordion from "./assets/images/mainCheckboxSquare.svg";
 import { IconButtonUI } from "../iconButton";
+import clsx from "clsx";
 
 export type CheckboxUIProps = {
   id: string;
@@ -19,6 +20,7 @@ export type CheckboxUIProps = {
   name?: string;
 
   variant?: "square" | "round" | "accordion";
+  withoutIcon?: boolean;
   disabled?: boolean;
 };
 
@@ -45,6 +47,7 @@ export const CheckBoxUI: FC<CheckboxUIProps> = ({
   type = "checkbox",
   name,
   variant = "square",
+  withoutIcon = false,
   disabled = false,
 }) => {
   const icons = ICONS[variant];
@@ -61,13 +64,11 @@ export const CheckBoxUI: FC<CheckboxUIProps> = ({
         onChange={(e) => onChange(e.target.checked)}
       />
 
-      <IconButtonUI
-        icon={icons.empty}
-        iconActive={icons.checked}
-        isActive={checked}
-      />
+      {!withoutIcon && (
+        <IconButtonUI icon={icons.empty} iconActive={icons.checked} isActive={checked} />
+      )}
 
-      <span className={styles.text}>{label}</span>
+      <span className={clsx(styles.text, checked && styles.textChecked)}>{label}</span>
     </label>
   );
 };
