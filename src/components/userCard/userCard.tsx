@@ -21,6 +21,10 @@ export const UserCard = ({ user, onLikeToggle }: TUserCardProps) => {
   }, [onLikeToggle]);
 
   return (
-    <UserCardUI user={user} isLiked={isButtonLiked} onLikeToggle={handleLikeToggle} />
+    <UserCardUI
+      user={user}
+      isLiked={isButtonLiked}
+      onLikeToggle={handleLikeToggle}
+    />
   );
 };

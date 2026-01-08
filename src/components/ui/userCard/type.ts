@@ -1,7 +1,7 @@
 import type { User } from "../../../utils/types";
 
 export type TUserCardUIProps = {
-  person: User;
+  user: User;
   isLiked: boolean;
   onLikeToggle: () => void;
 };

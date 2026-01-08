@@ -1,0 +1,263 @@
+* {
+  box-sizing: border-box;
+}
+
+/* ================== ОБЩИЙ КОНТЕЙНЕР ================== */
+.personProfile {
+  margin-bottom: 60px;
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(0, 324px) 1fr;
+  gap: 24px;
+  align-items: start;
+  background-color: var(--background-color, #F9FAF7);
+}
+
+/* Панель иконок над блоками */
+.topActions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 16px;
+  align-items: center;
+  position: absolute;
+  right: 52px;
+  padding-top: 32px;
+  padding-bottom: 24px;
+  max-width: 916px;
+  width: 100%;
+  height: 24px;
+}
+
+/* ================== СЕКЦИЯ ПРОФИЛЯ ================== */
+.profileCardSection {
+  max-width: 324px;
+  width: 100%;
+  min-height: 444px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  padding: 32px;
+  border-radius: 12px;
+  background-color: #fff;
+  border: 2px solid #fff;
+}
+
+.profileCardContainer {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.profileCardHeader {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.avatar {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.profileTextInfo {
+  display: flex;
+  flex-direction: column;
+}
+
+.userName {
+  font-family: var(--title-font, "Jost"), system-ui, sans-serif;
+  font-weight: 500;
+  font-size: 24px;
+  line-height: 28px;
+  letter-spacing: -0.011em;
+  margin: 0;
+  color: var(--main-text-color, #253017);
+}
+
+.userMeta {
+  font-family: var(--main-font, "Roboto"), system-ui, sans-serif;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 16px;
+  letter-spacing: 0.02em;
+  margin-top: 4px;
+  color: var(--main-text-color, #253017);
+}
+
+/* описание пользователя */
+.userDescription {
+  font-family: var(--main-font, "Roboto"), system-ui, sans-serif;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 20px;
+  letter-spacing: 0.02em;
+  color: var(--main-text-color, #253017);
+  margin-top: 20px;
+}
+
+/* секции навыков */
+.skillsSection,
+.learningSection {
+  margin-top: 24px;
+}
+
+.skillsSection h4,
+.learningSection h4 {
+  font-family: var(--main-font, "Roboto"), system-ui, sans-serif;
+  font-size: 16px;
+  line-height: 24px;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  margin: 0 0 14px 0;
+  color: var(--main-text-color, #253017);
+}
+
+.tagsList {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+/* ================== СЕКЦИЯ НАВЫКА + ГАЛЕРЕИ ================== */
+.skillDetailsSection {
+  max-width: 1020px;
+  width: 100%;
+  min-height: 444px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 12px;
+  background-color: var(--color-secondary, #FFFFFF);
+  border: 2px solid var(--color-secondary, #FFFFFF);
+  padding: 32px 52px;
+}
+
+/* Внутренний блок фиксированного размера */
+.skillInnerSection {
+  max-width: 916px;
+  width: 100%;
+  height: 324px;
+  display: flex;
+  flex-direction: row;
+  gap: 32px;
+  align-items: stretch;
+}
+
+/* Левая колонка: контент */
+.skillContent {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+/* Кнопка всегда прижата к низу */
+.skillContent button {
+  margin-top: auto;
+}
+
+/* Заголовок */
+.skillContent h1 {
+  font-family: var(--title-font, "Jost"), system-ui, sans-serif;
+  font-weight: 500;
+  font-size: 32px;
+  line-height: 40px;
+  margin: 0 0 16px 0;
+  color: var(--main-text-color, #253017);
+}
+
+/* Категория */
+.skillCategory {
+  font-family: var(--main-font, "Roboto"), system-ui, sans-serif;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 16px;
+  letter-spacing: 0.02em;
+  margin: 0 0 8px 0;
+  color: var(--color-caption, #69735D);
+}
+
+/* Описание навыка */
+.skillText {
+  font-family: var(--main-font, "Roboto"), system-ui, sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+  letter-spacing: 0.02em;
+  margin: 20px 0 28px 0;
+  color: var(--main-text-color, #253017);
+}
+
+/* Правая колонка: галерея */
+.gallery {
+  display: flex;
+  flex-direction: row;
+  gap: 24px;
+  max-width: 440px;
+  width: 100%;
+  flex-shrink: 0;
+}
+
+/* Главное фото */
+.galleryMainImage {
+  max-width: 324px;
+  width: 100%;
+  max-height: 324px;
+  height: 100%;
+  overflow: hidden;
+  border-radius: 12px;
+  position: relative;
+}
+
+.galleryMainImage img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Миниатюры */
+.galleryThumbnails {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.galleryThumbnails img {
+  width: 92px;
+  height: 92px;
+  object-fit: cover;
+  border-radius: 12px;
+}
+
+/* Навигация */
+.galleryNav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: #e4e8df;
+  color: #69735d;
+  border: none;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 20px;
+}
+
+.galleryNav[disabled] {
+  opacity: 0.35;
+  cursor: default;
+}
+
+.galleryMainImage .galleryNav:first-of-type {
+  left: 12px;
+}
+
+.galleryMainImage .galleryNav:last-of-type {
+  right: 12px;
+}
+
