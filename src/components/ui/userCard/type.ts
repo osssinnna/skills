@@ -1,30 +1,7 @@
-export type TSubcategoryWantToLearn = {
-  id: number;
-  name: string;
-};
-
-export type TSubcategoriesWantToLearn = TSubcategoryWantToLearn[];
-
-export type TSkillCanTeach = {
-  id: number;
-  name: string;
-  description: string;
-};
-
-export type TUser = {
-  id: number;
-  avatarUrl: string;
-  name: string;
-  location: string;
-  age: string;
-  gender: string;
-  skillCanTeach: TSkillCanTeach;
-  images: string[];
-  subcategoriesWantToLearn: TSubcategoriesWantToLearn;
-};
+import type { User } from "../../../utils/types";
 
 export type TUserCardUIProps = {
-  user: TUser;
+  person: User;
   isLiked: boolean;
   onLikeToggle: () => void;
 };

@@ -1,48 +1,76 @@
-import type { TUser } from "../../ui/userCard/type";
+import type { User } from "../../../utils/types";
 
-export const mockPerson1: TUser = {
+export const mockPerson1: User = {
   id: 1,
-  avatarUrl:
-    "https://commons.wikimedia.org/wiki/Special:FilePath/A_drummer.jpg?width=200",
-  name: "Алексей Петров",
+  avatarUrl: "https://picsum.photos/id/1001/200/200",
+  name: "Максим Соколова",
   location: "Санкт-Петербург",
-  age: "34 года",
+  age: "32",
   gender: "Мужской",
   skillCanTeach: {
-    id: 101,
-    name: "Фотография",
-    description: "Основы съемки, работа с камерой и обработка фото.",
+    id: 1,
+    name: "Рисование и иллюстрация",
+    description: "Помогаю прокачать навык «Рисование и иллюстрация»",
+    subcategoryId: 9,
   },
   images: [
-    "https://picsum.photos/seed/101/400/300",
-    "https://picsum.photos/seed/102/400/300",
+    "https://picsum.photos/id/1001/600/400",
+    "https://picsum.photos/id/1051/600/400",
   ],
   subcategoriesWantToLearn: [
-    { id: 201, name: "Рисование" },
-    { id: 202, name: "Музыка" },
-    { id: 204, name: "Программирование" },
+    {
+      id: 6,
+      name: "Тайм-менеджмент",
+      categoryId: 1,
+    },
+    {
+      id: 1,
+      name: "Управление командой",
+      categoryId: 1,
+    },
   ],
+  categoriesWantToLearn: [
+    {
+      id: 1,
+      name: "Бизнес и карьера",
+    },
+  ],
+  likesCount: 71,
+  likedByUserIds: [21, 20, 35, 19, 40, 45],
+  createdAt: "2024-10-25T00:00:00Z",
 };
 
-export const mockPerson2: TUser = {
+export const mockPerson2: User = {
   id: 2,
-  avatarUrl:
-    "https://commons.wikimedia.org/wiki/Special:FilePath/Artist_painting_watercolor_%28Unsplash%29.jpg?width=200",
-  name: "Марина Соколова",
-  location: "Санкт-Петербург",
-  age: "32 года",
-  gender: "Женский",
+  avatarUrl: "https://picsum.photos/id/1002/200/200",
+  name: "Иван Соколова",
+  location: "Москва",
+  age: "28",
+  gender: "Мужской",
   skillCanTeach: {
-    id: 102,
-    name: "Веб-дизайн",
-    description: "Создание макетов сайтов, UI/UX дизайн и прототипирование.",
+    id: 2,
+    name: "Питание и ЗОЖ",
+    description: "Помогаю прокачать навык «Питание и ЗОЖ»",
+    subcategoryId: 38,
   },
   images: [
-    "https://picsum.photos/seed/103/400/300",
-    "https://picsum.photos/seed/104/400/300",
+    "https://picsum.photos/id/1002/600/400",
+    "https://picsum.photos/id/1052/600/400",
   ],
   subcategoriesWantToLearn: [
-    { id: 203, name: "Фотография" },
-    { id: 204, name: "Программирование" },
+    {
+      id: 6,
+      name: "Тайм-менеджмент",
+      categoryId: 1,
+    },
   ],
+  categoriesWantToLearn: [
+    {
+      id: 1,
+      name: "Бизнес и карьера",
+    },
+  ],
+  likesCount: 58,
+  likedByUserIds: [1, 17, 3],
+  createdAt: "2024-12-06T00:00:00Z",
 };
