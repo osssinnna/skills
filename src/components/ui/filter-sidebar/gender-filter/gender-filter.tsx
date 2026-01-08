@@ -3,22 +3,24 @@ import s from "./gender-filter.module.css";
 
 export const GenderFilter = ({ gender, onChange }: Props) => {
   return (
-    <div className={s.group}>
+    <ul className={s.group}>
       {[
         { value: null, label: "Не имеет значения" },
         { value: "Мужской" as const, label: "Мужской" },
         { value: "Женский" as const, label: "Женский" },
       ].map((opt) => (
-        <label key={String(opt.value)} className={s.option}>
-          <input
-            type="radio"
-            className={s.radio}
-            checked={gender === opt.value}
-            onChange={() => onChange(opt.value)}
-          />
-          <span className={s.label}>{opt.label}</span>
-        </label>
+        <li key={String(opt.value)}>
+          <label className={s.option}>
+            <input
+              type="radio"
+              className={s.radio}
+              checked={gender === opt.value}
+              onChange={() => onChange(opt.value)}
+            />
+            <span className={s.label}>{opt.label}</span>
+          </label>
+        </li>
       ))}
-    </div>
+    </ul>
   );
 };

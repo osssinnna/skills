@@ -1,16 +1,16 @@
 export type Category = {
-  id: string;
+  id: number;
   name: string;
 };
 
 export type Subcategory = {
-  id: string;
+  id: number;
   name: string;
-  categoryId: string;
+  categoryId: number;
 };
 
 export type User = {
-  id: string;
+  id: number;
   avatarUrl: string;
   name: string;
   location: string;
@@ -19,16 +19,17 @@ export type User = {
   skillCanTeach: SkillCanTeach;
   images: string[];
   subcategoriesWantToLearn: Subcategory[];
+  categoriesWantToLearn: Category[];
   likesCount: number;
-  likedByUserIds: string[];
+  likedByUserIds: number[];
   createdAt: string;
 };
 
 export type SkillCanTeach = {
   name: string;
   description: string;
-  categoryId: string;
-  subcategoryId: string;
+  id: number;
+  subcategoryId: number;
 };
 
 export type RegistrationData = {
@@ -49,5 +50,19 @@ type UserData = {
 };
 
 export type SubcategoryDTO = {
-  id: string;
+  id: number;
 };
+
+
+// уведомления
+
+export type TMessageExhanges = 'confirmed' | 'offered' | 'rejected';
+
+
+export type TMessageNotifying = {
+  userName: string;
+  userId: number; //- для перехода на карточку пользователя и отмечания соо как прочитаннок
+  date: string; // - дата создания сообщения
+  viewed: boolean; //  - просмотрено ли сообщение
+  typeMessage: TMessageExhanges;
+}

@@ -8,11 +8,11 @@ export const UserCard = ({ person, onLikeToggle }: TUserCardProps) => {
   // Заглушка для лайка (потом заменить на логику с localStorage)
   const dummy = Boolean(person.id);
 
-  const [isButtonLiked, setIsButtonLiked] = useState(dummy);
+  const [isButtonLiked, setIsButtonLiked] = useState(false);
 
-  useEffect(() => {
-    setIsButtonLiked(dummy);
-  }, [dummy]);
+  // useEffect(() => {
+  //   setIsButtonLiked(dummy);
+  // }, [dummy]);
 
   const handleLikeToggle = useCallback(() => {
     setIsButtonLiked(prev => !prev);

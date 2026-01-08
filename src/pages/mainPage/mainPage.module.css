@@ -1,0 +1,5 @@
+.sectionFilters {
+  display: grid;
+  grid-template-columns: 1fr 3fr;
+  grid-template-rows: min-content min-content auto;
+}
