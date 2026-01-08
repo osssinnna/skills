@@ -15,7 +15,7 @@ export const fetchUsers = createAsyncThunk(
     }
   }
 );
-
+ 
 const initialState: UsersState = {
   users: [],
   filters: {
