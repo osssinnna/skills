@@ -1,8 +1,8 @@
 import type { FC } from "react";
 import { useNavigate } from "react-router-dom";
 
-import styles from "./serverError500.module.css";
-import { ServerErrorImage } from "./serverErrorImage";
+import styles from "./server-error-500.module.css";
+import { ServerErrorImage } from "./server-error-500-image";
 import { ButtonUI } from "../../components/ui/button";
 
 export const ServerError500: FC = () => {

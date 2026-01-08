@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { BrowserRouter } from 'react-router-dom';
-import { ServerError500 } from './serverError500';
+import { ServerError500 } from './server-error-500';
 
 const meta: Meta<typeof ServerError500> = {
   title: 'Pages/ServerError500',
