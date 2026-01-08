@@ -10,12 +10,8 @@ import type { Subcategory } from "../../../utils/types";
 
 const MAX_VISIBLE_TAGS = 2;
 
-export const UserCardUI: FC<TUserCardUIProps> = ({
-  person,
-  isLiked,
-  onLikeToggle,
-}) => {
-  const firstName = person.name.split(" ")[0];
+export const UserCardUI: FC<TUserCardUIProps> = ({ user, isLiked, onLikeToggle }) => {
+  const firstName = user.name.split(" ")[0];
 
   // Функция для рендеринга тегов "Хочет научиться"
   const renderWantToLearnTags = (subcategories: Subcategory[]) => {
@@ -45,7 +41,7 @@ export const UserCardUI: FC<TUserCardUIProps> = ({
   return (
     <div className={style.card}>
       <div className={style.user}>
-        <img className={style.image} src={person.avatarUrl} alt={person.name} />
+        <img className={style.image} src={user.avatarUrl} alt={user.name} />
         <div className={style.info}>
           <div className={style.icon}>
             <IconButtonUI
@@ -57,7 +53,7 @@ export const UserCardUI: FC<TUserCardUIProps> = ({
           </div>
           <div className={style.text}>
             <h3>{firstName}</h3>
-            <p>{`${person.location}, ${person.age}`}</p>
+            <p>{`${user.location}, ${user.age}`}</p>
           </div>
         </div>
       </div>
@@ -66,18 +62,18 @@ export const UserCardUI: FC<TUserCardUIProps> = ({
         <div className={style.skill_container}>
           <h4>Может научить:</h4>
           <div className={style.skill_list}>
-            <TagSkillUI color="#F7E7F2">{person.skillCanTeach.name}</TagSkillUI>
+            <TagSkillUI color="#F7E7F2">{user.skillCanTeach.name}</TagSkillUI>
           </div>
         </div>
         <div className={style.skill_container}>
           <h4>Хочет научиться:</h4>
           <div className={style.skill_list}>
-            {renderWantToLearnTags(person.subcategoriesWantToLearn)}
+            {renderWantToLearnTags(user.subcategoriesWantToLearn)}
           </div>
         </div>
       </div>
       <div>
-        <ButtonUI color={"primary"} fulsSize={true} disabledToggle={false}>
+        <ButtonUI color={"primary"} fullSize={true} disabledToggle={false}>
           Подробнее
         </ButtonUI>
       </div>

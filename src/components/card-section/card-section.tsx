@@ -28,7 +28,7 @@ export const CardSection: React.FC<CardSectionProps> = ({
 
         {
           <div className={styles.actionButton}>
-            <ButtonUI color="secondary" fulsSize={false} disabledToggle={false}>
+            <ButtonUI color="secondary" fullSize={false} disabledToggle={false}>
               <div className={styles.buttonContent}>
                 <span>Смотреть все</span>
                 <IconChevronRight size={20} style={{ marginLeft: "8px" }} />

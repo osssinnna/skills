@@ -2,17 +2,31 @@ import { type FC } from "react";
 import { AppHeaderUI } from "../ui/app-header";
 
 export const AppHeader: FC = () => {
-  const name = "Guest"; // заглушка имени
-  const avatarUrl =
-    "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2a/African_hawk-eagle_%28Aquila_spilogaster%29.jpg/640px-African_hawk-eagle_%28Aquila_spilogaster%29.jpg"; // заглушка аватарки
+  const getInitialUserData = () => {
+    const storedUser = localStorage.getItem("user");
+    const storedIsAuth = localStorage.getItem("isAuth");
 
-  const isAuth = false;
+    if (storedIsAuth === "true" && storedUser) {
+      try {
+        const userData = JSON.parse(storedUser);
+        return {
+          name: userData.user?.name?.trim(),
+          avatarUrl: userData.user?.avatarUrl?.trim(),
+          isAuth: true,
+        };
+      } catch (e) {
+        console.error("Ошибка парсинга user из localStorage", e);
+      }
+    }
 
-  return (
-    <AppHeaderUI
-      userName={name}
-      userAvatar={avatarUrl}
-      isAuthOverride={isAuth} // временно
-    />
-  );
+    return {
+      name: "",
+      avatarUrl: "",
+      isAuth: false,
+    };
+  };
+
+  const { name, avatarUrl, isAuth } = getInitialUserData();
+
+  return <AppHeaderUI userName={name} userAvatar={avatarUrl} isAuth={isAuth} />;
 };
