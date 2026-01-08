@@ -1,11 +1,12 @@
 import style from "./userCardUI.module.css";
 import type { FC } from "react";
-import type { TUserCardUIProps, TSubcategoryWantToLearn } from "./type";
+import type { TUserCardUIProps } from "./type";
 import { IconButtonUI } from "../iconButton/iconButton";
 import { ButtonUI } from "../button/button";
 import { TagSkillUI } from "../tag";
 import iconLike from "../../../assets/icon-like.svg";
 import iconLikeFilled from "../../../assets/icon-like-filled.svg";
+import type { Subcategory } from "../../../utils/types";
 
 const MAX_VISIBLE_TAGS = 2;
 
@@ -17,7 +18,7 @@ export const UserCardUI: FC<TUserCardUIProps> = ({
   const firstName = person.name.split(" ")[0];
 
   // Функция для рендеринга тегов "Хочет научиться"
-  const renderWantToLearnTags = (subcategories: TSubcategoryWantToLearn[]) => {
+  const renderWantToLearnTags = (subcategories: Subcategory[]) => {
     if (subcategories.length <= MAX_VISIBLE_TAGS) {
       return subcategories.map((item) => (
         <TagSkillUI color="#F7E7F2" key={item.id}>
