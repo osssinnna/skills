@@ -1,3 +1,5 @@
+import type { OfferPreviewProps } from "../../../registration";
+
 export type Props = {
   values: {
     name: string;
@@ -13,6 +15,7 @@ export type Props = {
   images: string[];
   isSubmitting: boolean;
   previewOpen: boolean;
+  setPreviewOpen: (open: boolean) => void;
   onFieldChange: (
     name: "name" | "description" | "categoryId" | "subcategoryId",
     value: string,
@@ -26,6 +29,7 @@ export type Props = {
   onPreview: () => void;
   onConfirm: () => void;
   onBack: () => void;
+  previewData: OfferPreviewProps | null;
 };
 
 export type CategoryWithSubs = {

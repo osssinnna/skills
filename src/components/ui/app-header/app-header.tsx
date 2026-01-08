@@ -1,6 +1,6 @@
 import type { TAppHeaderUIProps } from "./type";
 import styles from "./app-header.module.css";
-import { useState, type FC } from "react";
+import { type FC } from "react";
 import { LogoUI } from "../logo";
 import down from "../../../assets/icon-down.svg";
 import like from "../../../assets/icon-like.svg";
@@ -11,24 +11,18 @@ import { IconButtonUI } from "./../iconButton";
 import { SearchInput } from "./../../search-input/search-input";
 import { NavLink } from "react-router-dom";
 
-export const AppHeaderUI: FC<TAppHeaderUIProps> = ({
-  userName,
-  userAvatar,
-  isAuthOverride, // временно
-}) => {
-  const [isAuth] = useState(isAuthOverride); // true - авторизован, false - не авторизован
-
+export const AppHeaderUI: FC<TAppHeaderUIProps> = ({ userName, userAvatar, isAuth }) => {
   return (
     <header className={styles.header}>
       <nav className={styles.nav}>
         <div className={styles.menu}>
-          <a href="/" className={styles.logo}>
+          <NavLink to="/" className={styles.logo}>
             <LogoUI />
-          </a>
+          </NavLink>
 
-          <a href="/about" className={styles.link}>
+          <NavLink to="/about" className={styles.link}>
             О проекте
-          </a>
+          </NavLink>
 
           {/* TODO: Это должен быть отдельный компонент */}
           <button className={styles.link}>
@@ -63,12 +57,12 @@ export const AppHeaderUI: FC<TAppHeaderUIProps> = ({
             <>
               <IconButtonUI icon={theme} />
               <div className={clsx(styles.menu, styles.menuAuth)}>
-                <a
-                  href="/login"
+                <NavLink
+                  to="/login"
                   className={clsx(styles.link, styles.button, styles.buttonSecondary)}
                 >
                   Вход
-                </a>
+                </NavLink>
 
                 <NavLink
                   to="/register"

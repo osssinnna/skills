@@ -33,7 +33,7 @@
   left: 0;
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 4px;
   background-color: #ffffff;
   z-index: 1;
   border: 1px solid transparent;
@@ -45,9 +45,6 @@
   border-radius: 0 0 12px 12px;
   max-height: 200px;
   overflow-y: auto;
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
 }
 
 .categoryGroupActive::-webkit-scrollbar {

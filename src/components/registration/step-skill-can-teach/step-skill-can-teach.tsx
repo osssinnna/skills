@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { StepSkillCanTeachUI } from "../../ui/registration";
 import { useForm } from "../../../hooks/use-form";
-import type { StepSkillCanTeachProps } from "./types";
+import type { OfferPreviewProps, StepSkillCanTeachProps } from "./types";
 import {
   validateCategories,
   validateName,
@@ -20,6 +20,7 @@ export const StepSkillCanTeach = ({
   onSubmit,
   isSubmitting,
 }: StepSkillCanTeachProps) => {
+  const [previewData, setPreviewData] = useState<OfferPreviewProps | null>(null);
   const categories = useSelector(selectCategoriesWithSubCategories);
   const status = useSelector(selectCategoriesStatus);
 
@@ -72,6 +73,29 @@ export const StepSkillCanTeach = ({
   const handlePreview = () => {
     if (!validateForm()) return;
 
+    const selectedCategory = categories.find((c) => c.id === values.categoryId);
+    const selectedSubcategory = selectedCategory?.subcategories.find(
+      (s) => s.id === values.subcategoryId
+    );
+
+    if (!selectedCategory || !selectedSubcategory) {
+      setErrors({
+        categoryId: "Категория не найдена",
+        subcategoryId: "Подкатегория не найдена",
+      });
+      return;
+    }
+
+    const previewData = {
+      skillName: values.name,
+      skillCategory: selectedCategory.name,
+      skillSubCategory: selectedSubcategory.name,
+      skillDescription: values.description,
+      skillImg: images,
+    };
+
+    setPreviewData(previewData);
+
     const finalData = {
       ...data,
       skillCanTeach: { ...values },
@@ -80,7 +104,7 @@ export const StepSkillCanTeach = ({
 
     localStorage.setItem("registration_step_skill_can_teach", JSON.stringify(finalData));
     onChange(finalData);
-    setPreviewOpen(true); // будущий попап
+    setPreviewOpen(true);
   };
 
   const handleConfirm = () => {
@@ -96,6 +120,8 @@ export const StepSkillCanTeach = ({
       images={images}
       isSubmitting={isSubmitting}
       previewOpen={previewOpen}
+      setPreviewOpen={setPreviewOpen}
+      previewData={previewData}
       onFieldChange={setValue}
       onCategoryChange={handleCategoryChange}
       onSubcategoryChange={(id) => setValue("subcategoryId", id)}

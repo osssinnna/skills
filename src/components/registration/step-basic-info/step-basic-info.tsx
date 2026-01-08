@@ -35,6 +35,7 @@ export const StepBasicInfo = ({ data, onChange, onNext, onBack }: StepBasicInfoP
       name: data.name ?? "",
       location: data.location ?? "",
       gender: genderModelToUi(data.gender),
+      avatarUrl: data.avatarUrl ?? "",
     },
     {
       name: validateName,
@@ -96,6 +97,7 @@ export const StepBasicInfo = ({ data, onChange, onNext, onBack }: StepBasicInfoP
       location: values.location,
       birthDate: birthDate,
       gender: genderUiToModel(values.gender),
+      avatarUrl: values.avatarUrl,
     };
 
     localStorage.setItem("registration_step_basic_info", JSON.stringify(finalData));
@@ -103,7 +105,10 @@ export const StepBasicInfo = ({ data, onChange, onNext, onBack }: StepBasicInfoP
     onNext();
   };
 
-  const handleFieldChange = (field: "name" | "location" | "gender", value: string) => {
+  const handleFieldChange = (
+    field: "name" | "location" | "gender" | "avatarUrl",
+    value: string
+  ) => {
     setValue(field, value);
 
     let error: string | undefined;

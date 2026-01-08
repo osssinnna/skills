@@ -13,7 +13,9 @@ export const StepSkillCanTeachUI = ({
   categories,
   isLoading,
   images,
+  previewData,
   previewOpen,
+  setPreviewOpen,
 
   onFieldChange,
   onCategoryChange,
@@ -32,7 +34,7 @@ export const StepSkillCanTeachUI = ({
         label="Название навыка"
         name="name"
         value={values.name}
-        onChange={(v) => onFieldChange("name", v)}
+        onChange={(e) => onFieldChange("name", e.target.value)}
         error={errors.name}
         required
       />
@@ -91,25 +93,18 @@ export const StepSkillCanTeachUI = ({
         </ButtonUI>
       </div>
 
-      {/* {previewOpen && (
-        <div className={s.previewStub}>
-          Preview modal will be here
-          <ButtonUI color="primary" onClick={onConfirm}>
-            Подтвердить
-          </ButtonUI>
-        </div>
-      )} */}
-
-      {previewOpen && (
+      {previewOpen && previewData && (
         <Modal
-          onClose={onConfirm}
+          onClose={() => setPreviewOpen(false)}
           children={
             <OfferPreview
-              skillName="rrr"
-              skillCategory="rrr"
-              skillSubCategory="ddd"
-              skillDescription="fdddd"
-              skillImg={["dd", "ddd"]}
+              skillName={previewData.skillName}
+              skillCategory={previewData.skillCategory}
+              skillSubCategory={previewData.skillSubCategory}
+              skillDescription={previewData.skillDescription}
+              skillImg={previewData.skillImg}
+              onEdit={() => setPreviewOpen(false)}
+              onConfirm={onConfirm}
             />
           }
         />

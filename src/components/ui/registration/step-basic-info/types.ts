@@ -4,9 +4,12 @@ export type Props = {
     location: string;
     birthDate: Date | null;
     gender: "Мужской" | "Женский" | "Не указан";
+    avatarUrl: string;
   };
 
-  errors: Partial<Record<"name" | "location" | "birthDate" | "gender", string>>;
+  errors: Partial<
+    Record<"name" | "location" | "birthDate" | "gender" | "avatarUrl", string>
+  >;
   categoriesError: string | null;
   categories: CategoryWithSubs[];
   isLoading: boolean;
@@ -16,7 +19,7 @@ export type Props = {
   selectedSubcategoryIds: number[];
 
   onChange: (
-    field: "name" | "location" | "gender",
+    field: "name" | "location" | "gender" | "avatarUrl",
     value: string,
     validate?: boolean
   ) => void;

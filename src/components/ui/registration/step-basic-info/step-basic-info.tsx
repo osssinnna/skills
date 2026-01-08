@@ -6,6 +6,8 @@ import { ButtonUI } from "./../../button/button";
 import { Dropdown } from "../../dropdown";
 import { BirthDatePicker } from "../../birth-date-picker";
 import { genderIdToLabel, genderLabelToId, genderOptions } from "../../../registration";
+import { AvatarUploader } from "./avatar-uploader";
+import { CityAutocomplete } from "../../city-autocomplete";
 
 export const StepBasicInfoUI = ({
   values,
@@ -34,13 +36,17 @@ export const StepBasicInfoUI = ({
         onSubmit();
       }}
     >
+      <AvatarUploader
+        avatarUrl={values.avatarUrl ?? null}
+        onChange={(url) => onChange("avatarUrl", url)}
+      />
       <Input
         label="Имя"
         name="name"
         value={values.name}
         placeholder="Имя"
         error={errors.name}
-        onChange={(v) => onChange("name", v)}
+        onChange={(e) => onChange("name", e.target.value)}
         required
       />
 
@@ -66,14 +72,11 @@ export const StepBasicInfoUI = ({
         />
       </div>
 
-      <Input
-        label="Местоположение"
-        name="location"
+      <CityAutocomplete
         value={values.location}
-        placeholder="Местоположение"
+        onChange={(value) => onChange("location", value)}
         error={errors.location}
-        onChange={(v) => onChange("location", v)}
-        required
+        placeholder="Местоположение"
       />
 
       {isLoading && <div>Загрузка категорий...</div>}

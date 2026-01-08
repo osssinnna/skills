@@ -28,4 +28,5 @@ export type FormValues = {
   location: string;
   birthDate: Date | null;
   gender: User["gender"];
+  avatarUrl: string;
 };

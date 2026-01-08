@@ -39,9 +39,7 @@ export const CardSection: React.FC<CardSectionProps> = ({
   }, [users.length, title, navigationTo]);
 
   // Определяем заголовок в зависимости от состояния
-  const sectionTitle = isExpanded
-    ? `Подходящие предложения: ${users.length}`
-    : title;
+  const sectionTitle = isExpanded ? `Подходящие предложения: ${users.length}` : title;
 
   return (
     <section className={styles.section} aria-label={`Секция: ${sectionTitle}`}>
@@ -53,7 +51,7 @@ export const CardSection: React.FC<CardSectionProps> = ({
             <div className={styles.actionButton}>
               <ButtonUI
                 color="secondary"
-                fulsSize={false}
+                fullSize={false}
                 disabledToggle={false}
                 onClick={handleSeeAllClick}
               >

@@ -9,6 +9,10 @@ export type InputUIProps = {
   warning?: string;
   required?: boolean;
   accept?: string;
-  onChange: (value: string) => void;
+  multiple?: boolean;
+
+  className?: string;
+
+  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   onKeyDown?: (e: React.KeyboardEvent<HTMLInputElement>) => void;
 };

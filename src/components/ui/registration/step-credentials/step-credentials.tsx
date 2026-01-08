@@ -44,8 +44,8 @@ export const StepCredentialsUI = ({
           value={values.email}
           placeholder="Введите email"
           error={errors.email}
-          onChange={(v) => {
-            onEmailChange(v);
+          onChange={(e) => {
+            onEmailChange(e.target.value);
           }}
           required
         />
@@ -62,8 +62,8 @@ export const StepCredentialsUI = ({
               ? "Пароль должен содержать не менее 8 знаков"
               : undefined
           }
-          onChange={(v) => {
-            onPasswordChange(v);
+          onChange={(e) => {
+            onPasswordChange(e.target.value);
           }}
           required
         />

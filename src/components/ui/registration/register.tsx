@@ -7,6 +7,9 @@ import s from "./register.module.css";
 import light from "../../../assets/images/light-bulb.png";
 import user from "../../../assets/images/user-info.png";
 import board from "../../../assets/images/school-board.png";
+import { LogoUI } from "./../logo/logo";
+import { NavLink } from "react-router-dom";
+import clsx from "clsx";
 
 export const RegisterUI = ({
   currentStep,
@@ -19,6 +22,15 @@ export const RegisterUI = ({
   return (
     <div className={s.multiStepRegister}>
       <div className={s.container}>
+        <div className={s.header}>
+          <NavLink to="/" className={s.logo}>
+            <LogoUI />
+          </NavLink>
+
+          <NavLink to="/" className={clsx(s.link, s.button, s.buttonSecondary)}>
+            <span>Закрыть</span> <span>✕</span>
+          </NavLink>
+        </div>
         <div className={s.progressBar}>
           <ProgressBar currentStep={currentStep} />
         </div>

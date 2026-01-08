@@ -15,3 +15,11 @@ export type StepSkillCanTeachProps = {
   onBack: () => void;
   isSubmitting: boolean;
 };
+
+export type OfferPreviewProps = {
+  skillName: string;
+  skillCategory: string;
+  skillSubCategory: string;
+  skillDescription: string;
+  skillImg: string[];
+};

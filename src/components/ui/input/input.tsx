@@ -16,6 +16,8 @@ export const Input = forwardRef<HTMLInputElement, Omit<InputUIProps, "ref">>(
       warning,
       required,
       isValid,
+      multiple,
+      className,
       onChange,
       onKeyDown,
     },
@@ -32,13 +34,19 @@ export const Input = forwardRef<HTMLInputElement, Omit<InputUIProps, "ref">>(
           id={name}
           name={name}
           type={type}
-          value={value}
+          value={type !== "file" ? value : undefined}
           accept={accept}
           placeholder={placeholder}
           required={required}
-          onChange={(e) => onChange(e.target.value)}
+          multiple={multiple}
+          onChange={onChange}
           onKeyDown={onKeyDown}
-          className={clsx(s.inputField, error && s.inputError, isValid && s.inputSuccess)}
+          className={clsx(
+            s.inputField,
+            error && s.inputError,
+            isValid && s.inputSuccess,
+            className
+          )}
         />
 
         {error && <div className={s.errorText}>{error}</div>}

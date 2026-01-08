@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import type { RegistrationFormData } from "./types";
 import {
   clearRegistrationStorage,
@@ -7,12 +7,22 @@ import {
 } from "../../components/registration";
 import type { RegistrationData } from "../../utils/types";
 import { RegisterUI } from "../../components/ui/registration";
+import { useNavigate } from "react-router-dom";
+import { fetchCategories } from "../../services/categoriesSlice/categoriesSlice";
+import { useDispatch } from "../../services/store";
 
 export const Register: React.FC = () => {
+  const navigate = useNavigate();
   const [currentStep, setCurrentStep] = useState(1);
   const [formData, setFormData] = useState<RegistrationFormData>(INITIAL_DATA);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [error, setError] = useState<string | null>(null);
+
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(fetchCategories());
+  }, []);
 
   // Восстановление из localStorage
   useRegistrationStorage(setFormData, setCurrentStep);
@@ -55,22 +65,17 @@ export const Register: React.FC = () => {
         },
       };
 
-      {
-        /* TODO: работа с api, отпарвка данных на сервер  */
-      }
-      // const response = await register(payload);
-      // saveAuthData(response);
+      // Сохраняем в localStorage данные зарегистрированного юзера
+      localStorage.setItem("user", JSON.stringify(payload));
+      // Сохраняем в localStorage информацию о том, что юзер авторизован
+      localStorage.setItem("isAuth", "true");
 
+      // Очищаем localStorage от информации о каждом шаге
       clearRegistrationStorage();
-      alert("🎉 Регистрация успешна!");
-      // TODO: navigate("/profile");
-    } catch (err: any) {
+      // Перенаправляем на страницу профиля
+      navigate("/profile");
+    } catch (err: unknown) {
       console.error("Registration error:", err);
-      setError(
-        err.response?.data?.message ||
-          err.message ||
-          "Ошибка регистрации. Попробуйте позже."
-      );
     } finally {
       setIsSubmitting(false);
     }
