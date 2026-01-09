@@ -25,8 +25,28 @@ const currentUserSlice = createSlice({
     userLogout(state) {
       state.data = null;
     },
+
+    // обновление данных пользователя из его профиля
+    updateUserProfile(state, action: PayloadAction<Partial<RegistrationData>>) {
+      if (state.data) {
+        if (action.payload.email !== undefined) {
+          state.data.email = action.payload.email;
+        }
+        
+        if (action.payload.password !== undefined) {
+          state.data.password = action.payload.password;
+        }
+        
+        if (action.payload.user && state.data.user) {
+          state.data.user = {
+            ...state.data.user,
+            ...action.payload.user
+          };
+        }
+      }
+    },
   },
 })
 
-export const { authChecked, registerUser, userLogout } = currentUserSlice.actions;
+export const { authChecked, registerUser, userLogout, updateUserProfile } = currentUserSlice.actions;
 export default currentUserSlice.reducer;

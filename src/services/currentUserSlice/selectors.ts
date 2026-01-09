@@ -56,7 +56,7 @@ export const selectUserImages = createSelector(
 // навыки, которым может научить
 export const selectUserSkillsToTeach = createSelector(
   [selectUserProfile],
-  (profile) => profile?.skillCanTeach || []
+  (profile) => profile?.skillCanTeach || null
 );
 
 // подкатегории, которым хочет научиться
