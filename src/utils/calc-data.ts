@@ -44,3 +44,26 @@ export const calcData = (dateInput: DateInput): string => {
 
   return format(parsedDate, 'd MMMM', { locale: ru });
 };
+
+// функция для расчета полных лет
+export const calculateAge = (birthDate: string | null): number | null => {
+  if (!birthDate) return null;
+
+  const parsedDate = parseMultiFormat(birthDate);
+  if (!parsedDate) return null;
+  if (!isValid(parsedDate)) return null;
+  
+  const today = new Date();
+
+  if (parsedDate > today) return null;
+  
+  let age = today.getFullYear() - parsedDate.getFullYear();
+  const monthDiff = today.getMonth() - parsedDate.getMonth();
+  
+  // если др еще не наступил в этом году, минус 1 год
+  if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < parsedDate.getDate())) {
+    age--;
+  }
+
+  return Math.max(0, age);
+};
