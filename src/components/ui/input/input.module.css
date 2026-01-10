@@ -62,3 +62,9 @@
 .inputSuccess {
   border-color: #1cab23;
 }
+
+.icon {
+  position: absolute;
+  top: 50%;
+  right: 20px;
+}

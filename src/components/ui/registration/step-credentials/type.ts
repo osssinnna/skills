@@ -5,6 +5,10 @@ type FieldErrors<T> = Partial<Record<keyof T, string>>;
 export type StepCredentialsUIProps = {
   values: StepCredentialsData;
   errors: FieldErrors<StepCredentialsData>;
+  currentStep: number | string;
+  icon: string;
+  showPassword: boolean;
+  togglePasswordVisibility: () => void;
   onEmailChange: (value: string) => void;
   onPasswordChange: (value: string) => void;
   onSubmit: () => void;

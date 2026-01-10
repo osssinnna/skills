@@ -140,10 +140,12 @@ export const StepBasicInfo = ({ data, onChange, onNext, onBack }: StepBasicInfoP
       selectedCategoryIds: ids,
       selectedSubcategoryIds: validSubcategoryIds,
     });
+    setFormError("");
   };
 
   const handleSubcategoriesChange = (subIds: number[]) => {
     onChange({ ...data, selectedSubcategoryIds: subIds });
+    setFormError("");
   };
 
   return (

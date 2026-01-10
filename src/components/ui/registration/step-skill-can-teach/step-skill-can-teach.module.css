@@ -55,3 +55,30 @@
   display: flex;
   gap: 20px;
 }
+
+.formGroup {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  justify-content: stretch;
+  align-items: stretch;
+  width: 100%;
+}
+
+.imageUploader + div {
+  top: 15px;
+  left: -20px;
+}
+
+.errorText {
+  position: absolute;
+  top: 100%;
+  padding: 2px;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 16px;
+  letter-spacing: 0.02em;
+
+  color: #bf3920;
+}

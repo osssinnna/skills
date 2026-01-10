@@ -9,6 +9,7 @@ import down from "../../../assets/icon-down.svg";
 export const Dropdown = ({
   label,
   placeholder,
+  error,
   options,
   groups,
   selectedIds,
@@ -61,6 +62,7 @@ export const Dropdown = ({
           className={clsx(
             s.moreButton,
             open && s.moreButtonActive,
+            error && s.error,
             selectedIds.length > 0 && s.checked
           )}
           onClick={() => setOpen((p) => !p)}
@@ -73,6 +75,7 @@ export const Dropdown = ({
               : placeholder}
           </span>
           {open ? <img src={up} /> : <img src={down} />}
+          {error && <div className={s.errorText}>{error}</div>}
         </button>
 
         {open && (

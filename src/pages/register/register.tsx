@@ -10,6 +10,10 @@ import { RegisterUI } from "../../components/ui/registration";
 import { useNavigate } from "react-router-dom";
 import { fetchCategories } from "../../services/categoriesSlice/categoriesSlice";
 import { useDispatch } from "../../services/store";
+import {
+  authChecked,
+  registerUser,
+} from "../../services/currentUserSlice/currentUserSlice";
 
 export const Register: React.FC = () => {
   const navigate = useNavigate();
@@ -42,6 +46,13 @@ export const Register: React.FC = () => {
   const handleSubmit = async () => {
     if (isSubmitting) return;
 
+    const date = new Date(formData.stepBasicInfo.birthDate!);
+    const formattedDate: string = date.toLocaleDateString("ru-RU", {
+      day: "2-digit",
+      month: "2-digit",
+      year: "numeric",
+    });
+
     setIsSubmitting(true);
     setError(null);
 
@@ -52,7 +63,7 @@ export const Register: React.FC = () => {
         user: {
           name: formData.stepBasicInfo.name,
           location: formData.stepBasicInfo.location,
-          birthDate: formData.stepBasicInfo.birthDate,
+          birthDate: formattedDate,
           gender: formData.stepBasicInfo.gender,
           avatarUrl: formData.stepBasicInfo.avatarUrl,
           images: formData.stepSkillCanTeach.images,
@@ -65,10 +76,8 @@ export const Register: React.FC = () => {
         },
       };
 
-      // Сохраняем в localStorage данные зарегистрированного юзера
-      localStorage.setItem("user", JSON.stringify(payload));
-      // Сохраняем в localStorage информацию о том, что юзер авторизован
-      localStorage.setItem("isAuth", "true");
+      dispatch(registerUser(payload));
+      dispatch(authChecked());
 
       // Очищаем localStorage от информации о каждом шаге
       clearRegistrationStorage();
