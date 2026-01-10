@@ -3,6 +3,11 @@ export interface Message {
   userId: number;
   date: string;
   viewed: boolean;
+  typeMessage: "confirmed" | "offered" | "rejected";
+  message: {
+    title: string;
+    comment: string;
+  };
 }
 
 export interface MessagesState {
