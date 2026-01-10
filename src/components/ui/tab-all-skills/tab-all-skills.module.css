@@ -8,6 +8,8 @@
   max-width: 100%;
   background-color: var(--color-secondary, #FFFFFF);
   width: 100%;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
 }
 
 .category {
@@ -20,7 +22,6 @@
   display: flex;
   align-items: center;
   gap: 12px;
-
 }
 
 .iconWrapper {
@@ -69,6 +70,10 @@
   color: var(--main-text-color, #253017);
   font-size: 14px;
   font-family: var(--main-font, 'Roboto');
+  background: none;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
 }
 
 .subcategoryButton:hover {
@@ -77,5 +82,4 @@
 
 .subcategoryButton:active {
   background-color: var(--color-primary, #ABD27A);
-  color: var(--color-primary-pressed, #508826);
 }

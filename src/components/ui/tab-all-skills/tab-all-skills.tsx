@@ -1,6 +1,5 @@
 import React, { useCallback, useMemo } from 'react';
 import styles from './tab-all-skills.module.css';
-import { ModalUI } from '../modal'; 
 import { getCategoryIconPath, getCategoryColor } from '../../../utils/category-icons';
 
 export type Subcategory = {
@@ -16,18 +15,18 @@ export type Category = {
 
 export type TabAllSkillsProps = {
   categories: Category[];
-  onClose: () => void;
-  isOpen: boolean; 
+  onClose?: () => void;
+  isOpen?: boolean;
 };
 
 export const TabAllSkills: React.FC<TabAllSkillsProps> = ({
   categories,
   onClose,
-  isOpen,
+  isOpen = true,
 }) => {
   const handleSubcategoryClick = useCallback((id: number) => {
     console.log('selected subcategory id:', id);
-    onClose();
+    onClose?.();
   }, [onClose]);
 
   const categoriesWithIcons = useMemo(() => 
@@ -39,51 +38,44 @@ export const TabAllSkills: React.FC<TabAllSkillsProps> = ({
     [categories]
   );
 
-  if (!isOpen) return null;
+  if (!isOpen || categories.length === 0) return null;
 
   return (
-    <div className={styles.modalWrapper}>
-      <ModalUI 
-        onClose={onClose}
-        isShowModalAnim={true}
-      >
-        <div className={styles.wrapper}>
-          {categoriesWithIcons.map((category) => (
-            <div key={category.id} className={styles.category}>
-              <div className={styles.categoryHeader}>
-                <div 
-                  className={styles.iconWrapper}
-                  style={{ backgroundColor: category.color }}
-                >
-                  <img 
-                    src={category.iconPath}
-                    alt={category.name}
-                    className={styles.categoryIcon}
-                    width={20}
-                    height={20}
-                    loading="lazy"
-                  />
-                </div>
-                <h3 className={styles.categoryTitle}>{category.name}</h3>
-              </div>
-
-              <ul className={styles.subcategories}>
-                {category.subcategories.map((sub) => (
-                  <li key={sub.id} className={styles.subcategoryItem}>
-                    <button
-                      type="button"
-                      className={styles.subcategoryButton}
-                      onClick={() => handleSubcategoryClick(sub.id)}
-                    >
-                      {sub.name}
-                    </button>
-                  </li>
-                ))}
-              </ul>
+    <div className={styles.wrapper}>
+      {categoriesWithIcons.map((category) => (
+        <div key={category.id} className={styles.category}>
+          <div className={styles.categoryHeader}>
+            <div 
+              className={styles.iconWrapper}
+              style={{ backgroundColor: category.color }}
+            >
+              <img 
+                src={category.iconPath}
+                alt={category.name}
+                className={styles.categoryIcon}
+                width={20}
+                height={20}
+                loading="lazy"
+              />
             </div>
-          ))}
+            <h3 className={styles.categoryTitle}>{category.name}</h3>
+          </div>
+
+          <ul className={styles.subcategories}>
+            {category.subcategories.map((sub) => (
+              <li key={sub.id} className={styles.subcategoryItem}>
+                <button
+                  type="button"
+                  className={styles.subcategoryButton}
+                  onClick={() => handleSubcategoryClick(sub.id)}
+                >
+                  {sub.name}
+                </button>
+              </li>
+            ))}
+          </ul>
         </div>
-      </ModalUI>
+      ))}
     </div>
   );
 };

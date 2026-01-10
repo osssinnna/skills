@@ -105,7 +105,21 @@ export const Closed: Story = {
   parameters: {
     docs: {
       description: {
-        story: 'Модалка закрыта - ничего не отображается',
+        story: 'Компонент скрыт - ничего не отображается',
+      },
+    },
+  },
+};
+
+export const WithoutCloseHandler: Story = {
+  args: {
+    isOpen: true,
+    onClose: undefined,
+  },
+  parameters: {
+    docs: {
+      description: {
+        story: 'Компонент без обработчика закрытия (просто блок)',
       },
     },
   },
