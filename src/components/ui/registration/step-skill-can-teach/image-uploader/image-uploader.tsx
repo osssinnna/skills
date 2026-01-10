@@ -7,11 +7,13 @@ import add from "../../../../../assets/gallery-add.svg";
 
 type Props = {
   images: string[];
+  error?: string;
+  className: string;
   onAdd: (src: string) => void;
   onRemove: (index: number) => void;
 };
 
-export const ImageUploader = ({ images, onAdd, onRemove }: Props) => {
+export const ImageUploader = ({ images, error, onAdd, onRemove, className }: Props) => {
   const fileInputRef = useRef<HTMLInputElement>(null);
   // const urlInputRef = useRef<HTMLInputElement>(null);
 
@@ -105,7 +107,8 @@ export const ImageUploader = ({ images, onAdd, onRemove }: Props) => {
           accept="image/*"
           multiple
           onChange={handleFileChange}
-          className={s.hiddenInput}
+          className={clsx(s.hiddenInput, className)}
+          error={error}
         />
       </div>
 

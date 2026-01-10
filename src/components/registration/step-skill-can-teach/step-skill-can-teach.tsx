@@ -4,7 +4,8 @@ import { useForm } from "../../../hooks/use-form";
 import type { OfferPreviewProps, StepSkillCanTeachProps } from "./types";
 import {
   validateCategories,
-  validateName,
+  validateDescriptionSkill,
+  validateNameSkill,
   validateSubcategories,
 } from "../../../utils/validation-form";
 import { useSelector } from "react-redux";
@@ -34,7 +35,8 @@ export const StepSkillCanTeach = ({
       subcategoryId: data.skillCanTeach.subcategoryId ?? null,
     },
     {
-      name: validateName,
+      name: validateNameSkill,
+      description: validateDescriptionSkill,
       categoryId: validateCategories,
       subcategoryId: validateSubcategories,
     }
@@ -42,6 +44,7 @@ export const StepSkillCanTeach = ({
 
   const [images, setImages] = useState<string[]>(data.images ?? []);
   const [previewOpen, setPreviewOpen] = useState(false);
+  const [imagesError, setImagesError] = useState<string>("");
 
   /* ===== Категории ===== */
   const handleCategoryChange = (id: number) => {
@@ -55,23 +58,58 @@ export const StepSkillCanTeach = ({
     setValue("subcategoryId", null);
   };
 
+  const handleSubcategoryChange = (id: number) => {
+    setValue("subcategoryId", id, true);
+
+    let error: string | undefined;
+
+    if (!id) error = "Выберите подкатегорию навыка";
+    setErrors((prev) => ({ ...prev, subcategoryId: error }));
+  };
+
   /* ===== Фотографии ===== */
   const handleAddImage = (src: string) => {
     setImages((prev) => [...prev, src]);
+    setImagesError("");
   };
 
   const handleAddFile = (file: File) => {
     const url = URL.createObjectURL(file);
     setImages((prev) => [...prev, url]);
+    setImagesError("");
   };
 
   const handleRemoveImage = (index: number) => {
     setImages((prev) => prev.filter((_, i) => i !== index));
   };
 
+  const handleFieldChange = (
+    field: "name" | "description" | "categoryId" | "subcategoryId",
+    value: string
+  ) => {
+    setValue(field, value);
+
+    let error: string | undefined;
+
+    if (field === "name") {
+      error = validateNameSkill(value);
+    } else if (field === "description") {
+      error = validateDescriptionSkill(value);
+    }
+
+    setErrors((prev) => ({ ...prev, [field]: error }));
+  };
+
   /* ===== Preview вместо submit ===== */
   const handlePreview = () => {
+    setImagesError("");
+
     if (!validateForm()) return;
+
+    if (images.length === 0) {
+      setImagesError("Добавьте хотя бы одно изображение");
+      return;
+    }
 
     const selectedCategory = categories.find((c) => c.id === values.categoryId);
     const selectedSubcategory = selectedCategory?.subcategories.find(
@@ -118,13 +156,14 @@ export const StepSkillCanTeach = ({
       categories={categories}
       isLoading={isLoading}
       images={images}
+      imagesError={imagesError}
       isSubmitting={isSubmitting}
       previewOpen={previewOpen}
       setPreviewOpen={setPreviewOpen}
       previewData={previewData}
-      onFieldChange={setValue}
+      onFieldChange={handleFieldChange}
       onCategoryChange={handleCategoryChange}
-      onSubcategoryChange={(id) => setValue("subcategoryId", id)}
+      onSubcategoryChange={handleSubcategoryChange}
       onAddImage={handleAddImage}
       onAddFile={handleAddFile}
       onRemoveImage={handleRemoveImage}

@@ -13,6 +13,7 @@ export const StepSkillCanTeachUI = ({
   categories,
   isLoading,
   images,
+  imagesError,
   previewData,
   previewOpen,
   setPreviewOpen,
@@ -44,6 +45,7 @@ export const StepSkillCanTeachUI = ({
           <Dropdown
             label="Категория навыка *"
             placeholder="Выберите категорию"
+            error={errors.categoryId}
             options={categories.map((c) => ({ id: c.id, label: c.name }))}
             selectedIds={values.categoryId ? [values.categoryId] : []}
             onChange={(ids) => onCategoryChange(ids[0] ?? "")}
@@ -52,6 +54,7 @@ export const StepSkillCanTeachUI = ({
           <Dropdown
             label="Подкатегория навыка *"
             placeholder="Выберите подкатегорию"
+            error={errors.subcategoryId}
             disabled={!values.categoryId}
             options={
               categories.find((c) => c.id === values.categoryId)
@@ -78,10 +81,17 @@ export const StepSkillCanTeachUI = ({
           className={s.textarea}
           required
         />
+        {errors.description && <div className={s.errorText}>{errors.description}</div>}
       </div>
 
       {/* Загрузчик изображений */}
-      <ImageUploader images={images} onAdd={onAddImage} onRemove={onRemoveImage} />
+      <ImageUploader
+        images={images}
+        onAdd={onAddImage}
+        onRemove={onRemoveImage}
+        error={imagesError}
+        className={s.imageUploader}
+      />
 
       <div className={s.buttons}>
         <ButtonUI type="button" onClick={onBack} color="secondary">

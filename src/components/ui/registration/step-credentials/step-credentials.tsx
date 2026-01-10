@@ -4,10 +4,16 @@ import { Input } from "../../input";
 import s from "./step-credentials.module.css";
 import google from "../../../../assets/google.svg";
 import apple from "../../../../assets/apple.svg";
+import { NavLink } from "react-router-dom";
+import clsx from "clsx";
 
 export const StepCredentialsUI = ({
   values,
   errors,
+  currentStep,
+  icon,
+  showPassword,
+  togglePasswordVisibility,
   onEmailChange,
   onPasswordChange,
   onSubmit,
@@ -53,7 +59,7 @@ export const StepCredentialsUI = ({
         <Input
           label="Пароль"
           name="password"
-          type="password"
+          type={showPassword ? "text" : "password"}
           value={values.password}
           placeholder="Придумайте надёжный пароль"
           error={errors.password}
@@ -66,6 +72,8 @@ export const StepCredentialsUI = ({
             onPasswordChange(e.target.value);
           }}
           required
+          icon={icon}
+          onClick={togglePasswordVisibility}
         />
 
         <ButtonUI
@@ -74,8 +82,14 @@ export const StepCredentialsUI = ({
           fullSize
           disabledToggle={!values.email || values.password.length < 8}
         >
-          Дальше
+          {currentStep === 1 ? "Далее" : "Войти"}
         </ButtonUI>
+
+        {currentStep !== 1 && (
+          <NavLink to="/register" className={clsx(s.link, s.button, s.buttonSecondary)}>
+            Зарегистрироваться
+          </NavLink>
+        )}
       </form>
     </div>
   );

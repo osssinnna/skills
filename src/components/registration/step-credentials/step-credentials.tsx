@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { StepCredentialsUI } from "../../ui/registration";
 import type { StepCredentialsProps } from ".";
 import { useForm } from "../../../hooks/use-form";
@@ -6,7 +6,8 @@ import {
   validateCredentialsEmail,
   validateCredentialsPassword,
 } from "../../../utils/validation-form";
-
+import show from "../../../assets/icon-eye.svg";
+import hide from "../../../assets/icon-eye-slash.svg";
 import emails from "../../../mock/emails.json";
 
 type CredentialsData = {
@@ -14,7 +15,11 @@ type CredentialsData = {
   password: string;
 };
 
-export const StepCredentials = ({ onNext }: StepCredentialsProps) => {
+export const StepCredentials = ({
+  onNext,
+  onChange,
+  currentStep,
+}: StepCredentialsProps) => {
   const { values, errors, setValue, validateForm, setErrors } = useForm<CredentialsData>(
     { email: "", password: "" },
     {
@@ -22,6 +27,7 @@ export const StepCredentials = ({ onNext }: StepCredentialsProps) => {
       password: validateCredentialsPassword,
     }
   );
+  const [showPassword, setShowPassword] = useState(false);
 
   const emailInputRef = useRef<HTMLInputElement>(null);
 
@@ -67,16 +73,29 @@ export const StepCredentials = ({ onNext }: StepCredentialsProps) => {
       }
 
       localStorage.setItem("registration_step_credentials", JSON.stringify(values));
-      onNext();
+      onChange?.(values);
+      onNext?.();
     } catch {
       setErrors({ email: "Ошибка сервера. Попробуйте позже" });
     }
+  };
+
+  const togglePasswordVisibility = () => {
+    setShowPassword((prev) => !prev);
+  };
+
+  const toggleIconPassword = () => {
+    return showPassword ? hide : show;
   };
 
   return (
     <StepCredentialsUI
       values={values}
       errors={errors}
+      showPassword={showPassword}
+      icon={toggleIconPassword()}
+      togglePasswordVisibility={togglePasswordVisibility}
+      currentStep={currentStep}
       onEmailChange={onEmailChange}
       onPasswordChange={onPasswordChange}
       onSubmit={handleSubmit}

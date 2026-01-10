@@ -65,6 +65,7 @@ export const StepBasicInfoUI = ({
         <Dropdown
           label="Пол *"
           placeholder="Укажите пол"
+          error={errors.gender}
           options={genderOptions}
           selectedIds={values.gender ? [genderLabelToId(values.gender)!] : []}
           onChange={(ids) => onChange("gender", genderIdToLabel(ids[0] ?? null))}

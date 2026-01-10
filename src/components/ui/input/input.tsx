@@ -2,6 +2,7 @@ import clsx from "clsx";
 import s from "./input.module.css";
 import type { InputUIProps } from "./type";
 import { forwardRef } from "react";
+import { IconButtonUI } from "../iconButton";
 
 export const Input = forwardRef<HTMLInputElement, Omit<InputUIProps, "ref">>(
   (
@@ -18,8 +19,10 @@ export const Input = forwardRef<HTMLInputElement, Omit<InputUIProps, "ref">>(
       isValid,
       multiple,
       className,
+      icon,
       onChange,
       onKeyDown,
+      onClick,
     },
     ref
   ) => {
@@ -49,6 +52,11 @@ export const Input = forwardRef<HTMLInputElement, Omit<InputUIProps, "ref">>(
           )}
         />
 
+        {icon && (
+          <div className={s.icon}>
+            <IconButtonUI icon={icon} onClick={onClick} />
+          </div>
+        )}
         {error && <div className={s.errorText}>{error}</div>}
         {!error && warning && <div className={s.warningText}>{warning}</div>}
       </div>
