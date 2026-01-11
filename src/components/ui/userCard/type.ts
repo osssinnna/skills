@@ -4,4 +4,5 @@ export type TUserCardUIProps = {
   user: User;
   isLiked: boolean;
   onLikeToggle: () => void;
+  onOpenDetails: () => void;
 };

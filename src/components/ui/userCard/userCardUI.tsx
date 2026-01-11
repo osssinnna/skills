@@ -10,7 +10,12 @@ import type { Subcategory } from "../../../utils/types";
 
 const MAX_VISIBLE_TAGS = 2;
 
-export const UserCardUI: FC<TUserCardUIProps> = ({ user, isLiked, onLikeToggle }) => {
+export const UserCardUI: FC<TUserCardUIProps> = ({
+  user,
+  isLiked,
+  onLikeToggle,
+  onOpenDetails,
+}) => {
   const firstName = user.name.split(" ")[0];
 
   // Функция для рендеринга тегов "Хочет научиться"
@@ -73,7 +78,12 @@ export const UserCardUI: FC<TUserCardUIProps> = ({ user, isLiked, onLikeToggle }
         </div>
       </div>
       <div>
-        <ButtonUI color={"primary"} fullSize={true} disabledToggle={false}>
+        <ButtonUI
+          color="primary"
+          fullSize={true}
+          disabledToggle={false}
+          onClick={onOpenDetails}
+        >
           Подробнее
         </ButtonUI>
       </div>
