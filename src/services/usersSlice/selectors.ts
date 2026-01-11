@@ -9,7 +9,9 @@ export const selectFilteredUsers = createSelector(
   [selectUsers, selectFilters, selectSubcategoryIdsBySelectedCategories],
   (users, filters, categorySubIds) => {
     const activeSubIds =
-      filters.subcategoryIds.length > 0 ? filters.subcategoryIds : categorySubIds;
+      filters.subcategoryIds.length > 0
+        ? filters.subcategoryIds
+        : categorySubIds;
 
     return users.filter((user) => {
       if (filters.gender && user.gender !== filters.gender) return false;
@@ -20,7 +22,9 @@ export const selectFilteredUsers = createSelector(
           activeSubIds.includes(sub.id)
         );
 
-        const hasTeach = activeSubIds.includes(user.skillCanTeach.subcategoryId);
+        const hasTeach = activeSubIds.includes(
+          user.skillCanTeach.subcategoryId
+        );
 
         if (filters.mode === "wantToLearn") return hasWant;
         if (filters.mode === "canTeach") return hasTeach;
@@ -43,10 +47,16 @@ export const selectHasActiveFilters = createSelector(
     filters.categoryIds.length > 0
 );
 
-export const selectPopularUsers = createSelector([selectFilteredUsers], (users) =>
-  users.slice(0, 10)
+export const selectPopularUsers = createSelector(
+  [selectFilteredUsers],
+  (users) => users.slice(0, 10)
 );
 
 export const selectNewUsers = createSelector([selectFilteredUsers], (users) =>
   [...users].reverse().slice(0, 10)
+);
+
+export const selectUserById = createSelector(
+  [selectUsers, (_, userId) => userId],
+  (users, userId) => users.find((user) => user.id === userId)
 );
