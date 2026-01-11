@@ -24,18 +24,21 @@ function MainPage() {
   const popularUsers = useSelector(selectPopularUsers);
   const newUsers = useSelector(selectNewUsers);
   const categoriesTree = useSelector(selectCategoriesWithSubCategories);
+  const searchInput = useSelector((store) => store.users.searchInput);
 
   useEffect(() => {
+    console.log(searchInput);
     dispatch(fetchUsers());
     dispatch(fetchCategories());
-  }, [dispatch]);
+  }, [dispatch, searchInput]);
 
   const isDefaultFilters =
     filters.mode === "all" &&
     filters.gender === null &&
     filters.city === null &&
     filters.subcategoryIds.length === 0 &&
-    filters.categoryIds.length === 0;
+    filters.categoryIds.length === 0 &&
+    searchInput === "";
 
   const filtersProps = {
     filters,
@@ -48,7 +51,11 @@ function MainPage() {
       <FilterSidebar {...filtersProps} />
       {isDefaultFilters ? (
         <>
-          <CardSection title="Популярное" users={popularUsers} maxPreviewCount={3} />
+          <CardSection
+            title="Популярное"
+            users={popularUsers}
+            maxPreviewCount={3}
+          />
           <CardSection title="Новое" users={newUsers} maxPreviewCount={3} />
           <CardSection title="Рекомендуем" users={users} maxPreviewCount={9} />
         </>
