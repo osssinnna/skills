@@ -18,7 +18,7 @@
 
 .filters {
   display: flex;
-  justify-content: space-between;
+  gap: 40px;
   align-items: center;
 }
 
@@ -47,7 +47,7 @@
 .buttonReset {
   gap: 12px;
   background-color: transparent;
-  padding: 12px;
+  padding: 2px 0;
   cursor: pointer;
   font-family: inherit;
   font-style: normal;
