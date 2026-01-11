@@ -1,58 +1,30 @@
-.stepCredentials {
+.authorizationWrapper {
+  display: grid;
+  justify-content: center;
+  min-height: 100vh;
+  background: var(--background-color);
+  padding: 5%;
+  padding-top: 0;
+}
+
+.container {
+  display: grid;
+  grid-template-rows: min-content min-content auto;
+  max-width: 1440px;
+}
+
+.header {
   display: flex;
-  flex-direction: column;
-  width: 100%;
-  gap: 24px;
-}
-
-.stepContainer {
-  display: flex;
-  flex-direction: column;
-  gap: 24px;
-}
-
-.socialButtons {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-}
-
-.socialButtons button {
-  border: 1px solid #69735d;
-  position: relative;
-}
-
-.socialIcon {
-  margin-right: 20px;
-}
-
-.orContainer {
-  display: flex;
+  justify-content: space-between;
   align-items: center;
-  gap: 16px;
-  color: #253017;
-  font-size: 14px;
-  text-transform: lowercase;
-}
-
-.orContainer::before,
-.orContainer::after {
-  content: "";
-  flex: 1;
-  height: 1px;
-  background-color: #e4e8df;
-}
-
-.orContainer span {
-  white-space: nowrap;
+  padding: 36px;
+  padding-bottom: 0;
 }
 
 .button {
   --btn-padding-vertical: 12px;
   --btn-padding-horizontal: 24px;
-
-  --color-text-btn: #0c0c0c;
-
+  --pr-colorActive: #ffffff;
   --sec-borderColorActive: #508826;
   --sec-colorBorderHover: #deebc5;
   --sec-textColorHover: #69735d;
@@ -60,6 +32,7 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  gap: 8px;
 
   padding: var(--btn-padding-vertical) var(--btn-padding-horizontal);
   border-radius: 12px;
@@ -79,8 +52,7 @@
 }
 
 .buttonSecondary {
-  background-color: #ffffff;
-  border: 1px solid transparent;
+  background-color: var(--pr-colorActive);
 }
 
 .buttonSecondary:hover {
@@ -91,12 +63,4 @@
 .buttonSecondary:active {
   border-color: var(--sec-borderColorActive);
   color: #253017;
-}
-
-.button:focus {
-  outline: none;
-}
-
-.button:focus-visible {
-  box-shadow: 0 0 0 3px var(--focusColor);
 }

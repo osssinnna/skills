@@ -13,6 +13,7 @@ export type Props = {
   categories: CategoryWithSubs[];
   isLoading: boolean;
   images: string[];
+  imagesError?: string;
   isSubmitting: boolean;
   previewOpen: boolean;
   setPreviewOpen: (open: boolean) => void;

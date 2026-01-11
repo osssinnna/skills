@@ -4,5 +4,7 @@ export type StepCredentialsData = {
 };
 
 export type StepCredentialsProps = {
-  onNext: () => void;
+  onNext?: () => void;
+  onChange?: (data: StepCredentialsData) => void;
+  currentStep: number | string;
 };

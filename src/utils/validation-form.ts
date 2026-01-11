@@ -55,6 +55,34 @@ export const validateName = (value: string): string | undefined => {
   return undefined;
 };
 
+export const validateNameSkill = (value: string): string | undefined => {
+  const trimmed = value.trim();
+
+  if (!trimmed) {
+    return "Введите название навыка";
+  }
+
+  if (trimmed.length < 2) {
+    return "Название навыка должно содержать не менее 2 символов";
+  }
+
+  return undefined;
+};
+
+export const validateDescriptionSkill = (value: string): string | undefined => {
+  const trimmed = value.trim();
+
+  if (!trimmed) {
+    return "Введите описание навыка";
+  }
+
+  if (trimmed.length < 10) {
+    return "Описание навыка должно содержать не менее 10 символов";
+  }
+
+  return undefined;
+};
+
 export const validateLocation = (value: string): string | undefined => {
   if (!value.trim()) {
     return "Введите местоположение";

@@ -12,6 +12,7 @@ export type DropdownGroup = {
 export type Props = {
   label: string;
   placeholder: string;
+  error?: string;
 
   options?: DropdownOption[];
   groups?: DropdownGroup[];

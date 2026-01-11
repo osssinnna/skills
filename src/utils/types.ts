@@ -41,7 +41,7 @@ export type RegistrationData = {
 type UserData = {
   name: string;
   location: string;
-  birthDate: Date | null;
+  birthDate: string | null;
   gender: "Мужской" | "Женский" | null;
   avatarUrl: string;
   skillCanTeach: {
