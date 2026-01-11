@@ -99,4 +99,6 @@
 .skill_list {
   font-size: 12px;
   font-weight: 400;
+  display: flex;
+  gap: 4px;
 }

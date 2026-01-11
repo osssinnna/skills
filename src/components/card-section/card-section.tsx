@@ -31,7 +31,7 @@ export const CardSection: React.FC<CardSectionProps> = ({
             <ButtonUI color="secondary" fullSize={false} disabledToggle={false}>
               <div className={styles.buttonContent}>
                 <span>Смотреть все</span>
-                <IconChevronRight size={20} style={{ marginLeft: "8px" }} />
+                <IconChevronRight size={20} />
               </div>
             </ButtonUI>
           </div>

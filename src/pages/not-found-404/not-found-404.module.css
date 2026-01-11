@@ -1,28 +1,29 @@
 .page {
-  min-height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  display: block;
+  padding: 204px 490px 84px 490px;
   background: var(--background-color);
 }
 
 .content {
   width: 460px;
+  height: 504px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 24px;
+  opacity: 1;
+  transform: rotate(0deg);
 }
 
 /* SVG */
 .content svg {
   width: 460px;
   height: 304px;
+  margin-bottom: 40px;
 }
 
 /* Заголовок */
 .title {
-  margin: 0;
+  margin: 0 0 4px 0;
   font-weight: var(--fw-title);
   font-size: 28px;
   line-height: 32px;
@@ -32,7 +33,7 @@
 
 /* Описание */
 .text {
-  margin: 0;
+  margin: 0 0 32px 0;
   max-width: 420px;
   font-weight: var(--fw-text);
   font-size: 16px;
@@ -45,7 +46,7 @@
 /* Кнопки */
 .actions {
   display: flex;
-  gap: 16px;
+  gap: 24px;
   justify-content: center;
 }
 

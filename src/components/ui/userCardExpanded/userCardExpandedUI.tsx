@@ -137,7 +137,7 @@ export const UserCardExpandedUI: FC<TUserCardExpandedUIProps> = ({
             <p className={style.skillCategory}>{user.skillCanTeach.category}</p>
             <p className={style.skillText}>{user.skillCanTeach.description}</p>
 
-            <ButtonUI color="primary" fulsSize>
+            <ButtonUI color="primary" fullSize>
               Предложить обмен
             </ButtonUI>
           </div>
