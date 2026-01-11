@@ -60,3 +60,33 @@ export const selectUserById = createSelector(
   [selectUsers, (_, userId) => userId],
   (users, userId) => users.find((user) => user.id === userId)
 );
+
+export const selectUsersByNameOrSkill = createSelector(
+  [
+    selectFilteredUsers, (_, search: string) => search,
+  ],
+  (users, search) => {
+    if (!search.trim()) {
+      return users; // если строка поиска пустая, возвращаем всех
+    }
+      
+    const lowerSearch = search.toLowerCase();
+
+    return users.filter((user) => {
+      // Поиск по имени и фамилии
+      const matchesName =
+        user.name.toLowerCase().includes(lowerSearch) 
+
+      // Поиск по скиллам
+      const matchesWant = user.subcategoriesWantToLearn.some((sub) =>
+        sub.name.toLowerCase().includes(lowerSearch)
+      );
+
+      const matchesTeach = user.skillCanTeach.name
+        .toLowerCase()
+        .includes(lowerSearch);
+
+      return matchesName || matchesWant || matchesTeach;
+    });
+  }
+);
