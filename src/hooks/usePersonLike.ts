@@ -1,20 +1,31 @@
 import { useState, useCallback } from "react";
-
-const checkIsLiked = (id: number | string) => {
-  // заглушка для проверки — пока всегда false
-  return false;
-};
+import {
+  getLikedUsersIds,
+  setLikedUsersIds,
+} from "../utils/liked-users-storage";
 
 export const usePersonLike = (
   personId: number | string,
-  onLikeToggle: (id?: number | string) => void
+  onLikeToggle?: (id?: number | string) => void
 ) => {
-  const [isLiked, setIsLiked] = useState(() => checkIsLiked(personId));
+  const id = String(personId);
+
+  const [isLiked, setIsLiked] = useState(() => getLikedUsersIds().includes(id));
 
   const toggleLike = useCallback(() => {
-    setIsLiked((prev) => !prev);
+    setIsLiked((prev) => {
+      const current = getLikedUsersIds();
+
+      const nextIds = prev
+        ? current.filter((x) => x !== id) // было лайкнуто → снимаем
+        : [...current, id]; // не было → добавляем
+
+      setLikedUsersIds(nextIds);
+      return !prev;
+    });
+
     onLikeToggle?.(personId);
-  }, [onLikeToggle, personId]);
+  }, [id, personId, onLikeToggle]);
 
   return { isLiked, toggleLike } as const;
 };

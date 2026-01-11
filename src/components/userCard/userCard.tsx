@@ -1,30 +1,33 @@
-import { useState, useEffect, useCallback } from "react";
+import { useCallback } from "react";
+import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
+
 import { UserCardUI } from "../ui/userCard/userCardUI";
 import type { TUserCardUIProps } from "../ui/userCard/type";
+
+import { usePersonLike } from "../../hooks/usePersonLike";
+import { selectCurrentUser } from "../../services/currentUserSlice/selectors"; // или selectIsAuthenticated
 
 type TUserCardProps = Omit<TUserCardUIProps, "isLiked">;
 
 export const UserCard = ({ user, onLikeToggle }: TUserCardProps) => {
-  // Тут должна быть логика проверки localStorage, которая возвращает есть ли лайк
-  // пока пусть так
-  const dummy = user.id ? true : false;
+  const navigate = useNavigate();
 
-  const [isButtonLiked, setIsButtonLiked] = useState(false);
+  // По ТЗ: если data === null → редирект на регистрацию
+  const data = useSelector(selectCurrentUser); // data | null
 
-  // useEffect(() => {
-  //   setIsButtonLiked(dummy);
-  // }, [dummy]);
+  const { isLiked, toggleLike } = usePersonLike(user.id, () => onLikeToggle());
 
   const handleLikeToggle = useCallback(() => {
-    setIsButtonLiked((prev) => !prev);
-    onLikeToggle();
-  }, [onLikeToggle]);
+    if (data === null) {
+      navigate("/register"); // роут существует :contentReference[oaicite:3]{index=3}
+      return;
+    }
+
+    toggleLike();
+  }, [data, navigate, toggleLike]);
 
   return (
-    <UserCardUI
-      user={user}
-      isLiked={isButtonLiked}
-      onLikeToggle={handleLikeToggle}
-    />
+    <UserCardUI user={user} isLiked={isLiked} onLikeToggle={handleLikeToggle} />
   );
 };
