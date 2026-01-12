@@ -20,6 +20,7 @@ export const AppHeaderUI: FC<TAppHeaderUIProps> = ({ userName, userAvatar, isAut
             <LogoUI />
           </NavLink>
 
+        <div className={styles.menuItem}>
           <NavLink to="/about" className={styles.link}>
             О проекте
           </NavLink>
@@ -29,6 +30,8 @@ export const AppHeaderUI: FC<TAppHeaderUIProps> = ({ userName, userAvatar, isAut
             Все навыки
             <img src={down} alt="Открыть категории" />
           </button>
+        </div>
+          
         </div>
 
         <div className={styles.search}>
