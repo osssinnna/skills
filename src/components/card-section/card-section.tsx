@@ -14,7 +14,7 @@ interface CardSectionProps {
 
 export const CardSection: React.FC<CardSectionProps> = ({
   title,
-  users,
+  users = [],
   maxPreviewCount,
   onOpen,
 }) => {
@@ -22,10 +22,11 @@ export const CardSection: React.FC<CardSectionProps> = ({
 
   // Отображаем только maxPreviewCount пользователей, если указано
   const displayedUsers = useMemo(() => {
+    const safeUsers = users || [];
     if (maxPreviewCount !== undefined) {
-      return users.slice(0, maxPreviewCount);
+      return safeUsers.slice(0, maxPreviewCount);
     }
-    return users;
+    return safeUsers;
   }, [users, maxPreviewCount]);
 
   return (
