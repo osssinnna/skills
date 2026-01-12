@@ -18,6 +18,8 @@ export const CardSection: React.FC<CardSectionProps> = ({
   maxPreviewCount,
   onOpen,
 }) => {
+  const isPreview = maxPreviewCount !== undefined;
+
   // Отображаем только maxPreviewCount пользователей, если указано
   const displayedUsers = useMemo(() => {
     if (maxPreviewCount !== undefined) {
@@ -31,7 +33,7 @@ export const CardSection: React.FC<CardSectionProps> = ({
       <div className={styles.header}>
         <h2 className={styles.title}>{title}</h2>
 
-        {onOpen && (
+        {isPreview && onOpen && (
           <div className={styles.actionButton}>
             <ButtonUI
               color="secondary"
