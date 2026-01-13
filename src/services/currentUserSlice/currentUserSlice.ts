@@ -4,8 +4,10 @@ import type { RegistrationData, CurrentUserState } from "./type";
 
 const initialState: CurrentUserState = {
   isAuthChecked: false,
-  data: null
+  data: null,
+  activeSection: null
 }
+
 
 const currentUserSlice = createSlice({
   name: 'currentUser',
@@ -45,8 +47,11 @@ const currentUserSlice = createSlice({
         }
       }
     },
+    // устанавливает активную секцию на главной странице
+    setActiveSection(state, action: PayloadAction<null | "popular" | "new" | "recommend">) {
+      state.activeSection = action.payload;
+    },
   },
 })
-
-export const { authChecked, registerUser, userLogout, updateUserProfile } = currentUserSlice.actions;
+export const { authChecked, registerUser, userLogout, updateUserProfile, setActiveSection } = currentUserSlice.actions;
 export default currentUserSlice.reducer;

@@ -64,3 +64,6 @@ export const selectUserSubcategoriesToLearn = createSelector(
   [selectUserProfile],
   (profile) => profile?.subcategoriesWantToLearn || []
 );
+
+// активная секция на главной странице: null | "popular" | "new" | "recommend"
+export const selectActiveSection = (state: RootState) => state.currentUser.activeSection;

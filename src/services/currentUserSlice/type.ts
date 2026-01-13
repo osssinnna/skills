@@ -32,4 +32,5 @@ export type RegistrationData = {
 export type CurrentUserState = {
   isAuthChecked: boolean;
   data: RegistrationData | null;
+  activeSection: null | "popular" | "new" | "recommend";
 };

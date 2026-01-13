@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { CardSection } from "../../components/card-section/card-section";
 import { useDispatch, useSelector } from "../../services/store";
 import type { RootState } from "../../services/store";
@@ -16,10 +16,12 @@ import { selectCategoriesWithSubCategories } from "../../services/categoriesSlic
 import { fetchCategories } from "../../services/categoriesSlice/categoriesSlice";
 import { FilterSidebar } from "../../components/filter-sidebar";
 import { ActiveFilterSection } from "../../components/ui/active-filter-section";
+import { selectActiveSection } from "../../services/currentUserSlice/selectors";
+import { setActiveSection } from "../../services/currentUserSlice/currentUserSlice";
 
 function MainPage() {
   const dispatch = useDispatch();
-  const [activeSection, setActiveSection] = useState<null | "popular" | "new" | "recommend">(null);
+  const activeSection = useSelector(selectActiveSection);
 
   const filters = useSelector(selectFilters);
   const users = useSelector(selectUsers) || [];
@@ -37,8 +39,8 @@ function MainPage() {
 
   // Сбрасываем активную секцию при изменении фильтров
   useEffect(() => {
-    setActiveSection(null);
-  }, [filters, searchInput]);
+    dispatch(setActiveSection(null));
+  }, [dispatch, filters, searchInput]);
 
   const isDefaultFilters =
     filters.mode === "all" &&
@@ -64,19 +66,19 @@ function MainPage() {
             title="Популярное"
             users={popularUsers}
             maxPreviewCount={3}
-            onOpen={() => setActiveSection("popular")}
+            onOpen={() => dispatch(setActiveSection("popular"))}
           />
           <CardSection
             title="Новое"
             users={newUsers}
             maxPreviewCount={3}
-            onOpen={() => setActiveSection("new")}
+            onOpen={() => dispatch(setActiveSection("new"))}
           />
           <CardSection
             title="Рекомендуем"
             users={users}
             maxPreviewCount={9}
-            onOpen={() => setActiveSection("recommend")}
+            onOpen={() => dispatch(setActiveSection("recommend"))}
           />
         </>
       )}
