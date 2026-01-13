@@ -1,6 +1,6 @@
 import type { TAppHeaderUIProps } from "./type";
 import styles from "./app-header.module.css";
-import { type FC } from "react";
+import { type FC, useState, useRef } from "react"; 
 import { LogoUI } from "../logo";
 import down from "../../../assets/icon-down.svg";
 import like from "../../../assets/icon-like.svg";
@@ -20,9 +20,18 @@ export const AppHeaderUI: FC<TAppHeaderUIProps> = ({
   isAuth,
 }) => {
   const categories = useSelector(selectCategoriesWithSubCategories);
+  const [isSkillsOpen, setIsSkillsOpen] = useState(false); 
+  const skillsButtonRef = useRef<HTMLButtonElement>(null); 
+  const toggleSkills = () => {
+    setIsSkillsOpen(!isSkillsOpen);
+  };
+
+  const closeSkills = () => {
+    setIsSkillsOpen(false);
+  };
+
   return (
     <>
-      <TabAllSkills categories={categories} isOpen={true}></TabAllSkills>
       <header className={styles.header}>
         <nav className={styles.nav}>
           <div className={styles.menu}>
@@ -35,10 +44,15 @@ export const AppHeaderUI: FC<TAppHeaderUIProps> = ({
                 О проекте
               </NavLink>
 
-              {/* TODO: Это должен быть отдельный компонент */}
-              <button className={styles.link}>
+              <button 
+                ref={skillsButtonRef}
+                className={styles.link} 
+                onClick={toggleSkills}
+                aria-expanded={isSkillsOpen}
+                aria-label="Открыть все навыки"
+              >
                 Все навыки
-                <img src={down} alt="Открыть категории" />
+                <img src={down} alt="" />
               </button>
             </div>
           </div>
@@ -100,8 +114,22 @@ export const AppHeaderUI: FC<TAppHeaderUIProps> = ({
               </>
             )}
           </div>
+
+          {isSkillsOpen && (
+            <div style={{ 
+              position: 'relative',
+              width: '100%'
+            }}>
+              <TabAllSkills 
+                categories={categories} 
+                isOpen={isSkillsOpen}
+                onClose={closeSkills}
+                centered={true}
+              />
+            </div>
+          )}
         </nav>
-      </header>{" "}
+      </header>
     </>
   );
 };

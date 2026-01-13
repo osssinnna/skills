@@ -1,49 +1,62 @@
 @import '../../../styles/variables.css';
 
 .wrapper {
+  position: absolute;
+  top: 100%; 
+  left: 0; 
+  z-index: 1001; 
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 110px; 
-  padding: 40px; 
-  max-width: 100%;
+  gap: 30px;
+  padding: 16px;
+  width: 700px; 
   background-color: var(--color-secondary, #FFFFFF);
-  width: 100%;
   border-radius: 12px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  transform-origin: top left; 
+  animation: fadeIn 0.2s ease-out;
+  border: 1px solid var(--color-caption, #69735D);
+  margin-top: -25px; 
+  box-sizing: border-box;
+}
+
+.wrapper.centered {
+  left: 50%;
+  transform: translateX(-50%);
 }
 
 .category {
   display: flex;
   flex-direction: column;
-  min-width: 250px; 
+  min-width: 180px;
 }
 
 .categoryHeader {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 8px;
 }
 
 .iconWrapper {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 32px; 
-  height: 32px; 
+  width: 24px;
+  height: 24px;
   border-radius: 50%; 
   flex-shrink: 0;
+  margin-top: 5px;
 }
 
 .categoryIcon {
-  width: 20px;
-  height: 20px;
+  width: 14px;
+  height: 14px;
   color: var(--main-text-color, #253017);
 }
 
 .categoryTitle {
-  font-size: 16px;
+  font-size: 14px;
   font-weight: var(--fw-title, 600);
-  line-height: 20px;
+  line-height: 18px;
   color: var(--main-text-color, #253017); 
   margin: 0;
   font-family: var(--title-font, 'Jost');
@@ -53,7 +66,7 @@
   list-style: none;
   padding: 0;
   margin: 0;
-  margin-left: 40px; 
+  margin-left: 25px;
   display: flex;
   flex-direction: column;
 }
@@ -65,21 +78,23 @@
 .subcategoryButton {
   width: 100%;
   text-align: left;
-  padding: 6px;
-  border-radius: 8px;
+  padding: 6px 8px;
+  border-radius: 6px;
   color: var(--main-text-color, #253017);
-  font-size: 14px;
+  font-size: 10px;
   font-family: var(--main-font, 'Roboto');
   background: none;
   border: none;
   cursor: pointer;
-  transition: background-color 0.2s ease;
+  transition: all 0.2s ease;
 }
 
 .subcategoryButton:hover {
   background-color: var(--color-primary-hover, #DEEBC5);
+  transform: translateX(2px);
 }
 
 .subcategoryButton:active {
   background-color: var(--color-primary, #ABD27A);
+  transform: scale(0.98);
 }

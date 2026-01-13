@@ -17,12 +17,13 @@ export type TabAllSkillsProps = {
   categories: Category[];
   onClose?: () => void;
   isOpen?: boolean;
+  centered?: boolean;
 };
 
 export const TabAllSkills: React.FC<TabAllSkillsProps> = ({
   categories,
   onClose,
-  isOpen = true,
+  isOpen = false,
 }) => {
   const handleSubcategoryClick = useCallback((id: number) => {
     console.log('selected subcategory id:', id);
