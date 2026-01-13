@@ -1,18 +1,28 @@
 import { type FC } from "react";
 import { AppHeaderUI } from "../ui/app-header";
+import { useSelector } from "../../services/store";
+import {
+  selectIsAuthChecked,
+  selectIsAuthenticated,
+  selectUserAvatar,
+  selectUserName,
+} from "../../services/currentUserSlice/selectors";
 
 export const AppHeader: FC = () => {
-  const name = "Guest"; // заглушка имени
-  const avatarUrl =
-    "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2a/African_hawk-eagle_%28Aquila_spilogaster%29.jpg/640px-African_hawk-eagle_%28Aquila_spilogaster%29.jpg"; // заглушка аватарки
+  const isAuthChecked = useSelector(selectIsAuthChecked);
+  const isAuth = useSelector(selectIsAuthenticated);
+  const userName = useSelector(selectUserName);
+  const userAvatar = useSelector(selectUserAvatar);
 
-  const isAuth = false;
+  if (!isAuthChecked) {
+    return <AppHeaderUI isAuth={false} userName="" userAvatar="" />;
+  }
 
   return (
     <AppHeaderUI
-      userName={name}
-      userAvatar={avatarUrl}
-      isAuthOverride={isAuth} // временно
+      userName={userName || ""}
+      userAvatar={userAvatar || ""}
+      isAuth={isAuth}
     />
   );
 };

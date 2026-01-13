@@ -25,6 +25,7 @@ const initialState: UsersState = {
     subcategoryIds: [],
     categoryIds: [],
   },
+  searchInput: "",
   status: "idle",
   error: null,
 };
@@ -41,6 +42,9 @@ const usersSlice = createSlice({
     },
     resetFilters(state) {
       state.filters = initialState.filters;
+    },
+    setSearchInput(state, action) {
+      state.searchInput = action.payload;
     },
   },
   extraReducers: (builder) => {
@@ -60,5 +64,5 @@ const usersSlice = createSlice({
   },
 });
 
-export const { setFilters, resetFilters } = usersSlice.actions;
+export const { setFilters, resetFilters, setSearchInput } = usersSlice.actions;
 export default usersSlice.reducer;

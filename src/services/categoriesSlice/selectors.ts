@@ -8,6 +8,10 @@ export const selectCategories = (state: RootState) => state.categories.categorie
 
 export const selectCategoryIds = (state: RootState) => state.users.filters.categoryIds;
 
+export const selectCategoriesStatus = (state: RootState) => state.categories.status;
+
+export const selectCategoriesError = (state: RootState) => state.categories.error;
+
 export const selectSubcategoryIdsBySelectedCategories = createSelector(
   [selectSubcategories, selectCategoryIds],
   (subcategories, categoryIds) => {

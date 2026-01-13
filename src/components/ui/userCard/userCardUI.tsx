@@ -1,23 +1,25 @@
 import style from "./userCardUI.module.css";
 import type { FC } from "react";
-import type { TUserCardUIProps, TSubcategoryWantToLearn } from "./type";
+import type { TUserCardUIProps } from "./type";
 import { IconButtonUI } from "../iconButton/iconButton";
 import { ButtonUI } from "../button/button";
 import { TagSkillUI } from "../tag";
 import iconLike from "../../../assets/icon-like.svg";
 import iconLikeFilled from "../../../assets/icon-like-filled.svg";
+import type { Subcategory } from "../../../utils/types";
 
 const MAX_VISIBLE_TAGS = 2;
 
 export const UserCardUI: FC<TUserCardUIProps> = ({
-  person,
+  user,
   isLiked,
   onLikeToggle,
+  onOpenDetails,
 }) => {
-  const firstName = person.name.split(" ")[0];
+  const firstName = user.name.split(" ")[0];
 
   // Функция для рендеринга тегов "Хочет научиться"
-  const renderWantToLearnTags = (subcategories: TSubcategoryWantToLearn[]) => {
+  const renderWantToLearnTags = (subcategories: Subcategory[]) => {
     if (subcategories.length <= MAX_VISIBLE_TAGS) {
       return subcategories.map((item) => (
         <TagSkillUI color="#F7E7F2" key={item.id}>
@@ -44,7 +46,7 @@ export const UserCardUI: FC<TUserCardUIProps> = ({
   return (
     <div className={style.card}>
       <div className={style.user}>
-        <img className={style.image} src={person.avatarUrl} alt={person.name} />
+        <img className={style.image} src={user.avatarUrl} alt={user.name} />
         <div className={style.info}>
           <div className={style.icon}>
             <IconButtonUI
@@ -56,7 +58,7 @@ export const UserCardUI: FC<TUserCardUIProps> = ({
           </div>
           <div className={style.text}>
             <h3>{firstName}</h3>
-            <p>{`${person.location}, ${person.age}`}</p>
+            <p>{`${user.location}, ${user.age}`}</p>
           </div>
         </div>
       </div>
@@ -65,18 +67,23 @@ export const UserCardUI: FC<TUserCardUIProps> = ({
         <div className={style.skill_container}>
           <h4>Может научить:</h4>
           <div className={style.skill_list}>
-            <TagSkillUI color="#F7E7F2">{person.skillCanTeach.name}</TagSkillUI>
+            <TagSkillUI color="#F7E7F2">{user.skillCanTeach.name}</TagSkillUI>
           </div>
         </div>
         <div className={style.skill_container}>
           <h4>Хочет научиться:</h4>
           <div className={style.skill_list}>
-            {renderWantToLearnTags(person.subcategoriesWantToLearn)}
+            {renderWantToLearnTags(user.subcategoriesWantToLearn)}
           </div>
         </div>
       </div>
       <div>
-        <ButtonUI color={"primary"} fulsSize={true} disabledToggle={false}>
+        <ButtonUI
+          color="primary"
+          fullSize={true}
+          disabledToggle={false}
+          onClick={onOpenDetails}
+        >
           Подробнее
         </ButtonUI>
       </div>

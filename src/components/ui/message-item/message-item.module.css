@@ -1,0 +1,55 @@
+.messageItem {
+  width: 100%;
+  max-width: 436px;
+  background-color: var(--color-secondary,#fff);
+}
+
+.description {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 60px;
+}
+
+.description:not(:last-child) {
+  margin-bottom:16px;
+}
+
+.main {
+   display: flex;
+   gap: 8px;
+}
+
+.date {
+  display: block;
+  color: var(--color-caption, #69735D);
+  font-family: var(--main-font,'Roboto');
+  font-weight: var(--fw-text, 400);
+  font-size: clamp(8px, 2vw, 16px);
+  line-height: 1.5;
+  letter-spacing: 0.02em;
+}
+
+.icon {
+  width: 34px;
+  aspect-ratio: 1/1;
+}
+
+.title {
+  color: var(--main-text-color,#253017);
+  font-family: var(--main-font,'Roboto');
+  font-weight: var(--fw-text, 400);
+  font-size: 16px;
+  line-height: 1.5;
+  letter-spacing: 0.02em;
+}
+
+.comment {
+  color: var(--main-text-color,#253017);
+  font-family: var(--main-font,'Roboto');
+  font-weight: var(--fw-text, 400);
+  font-size: 12px;
+  line-height: 1.333333;
+  letter-spacing: 0.02em;
+}
+

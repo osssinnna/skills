@@ -1,6 +1,9 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { UserCard } from "./userCard";
 import { mockPerson1, mockPerson2 } from "./mocks/personMocks";
+import { BrowserRouter, MemoryRouter } from "react-router-dom";
+import { Provider } from "react-redux";
+import store from "../../services/store";
 
 const meta: Meta<typeof UserCard> = {
   title: "Components/PersonCard",
@@ -23,15 +26,18 @@ const meta: Meta<typeof UserCard> = {
   tags: ["autodocs"],
   decorators: [
     (Story) => (
-      <div
-        style={{
-          // Темный фон, т.к. карточка белая
-          backgroundColor: "#818181ff",
-          padding: "100px",
-        }}
-      >
-        <Story />
-      </div>
+      <Provider store={store}>
+        <MemoryRouter>
+          <div
+            style={{
+              backgroundColor: "#818181ff",
+              padding: "100px",
+            }}
+          >
+            <Story />
+          </div>
+        </MemoryRouter>
+      </Provider>
     ),
   ],
 };
@@ -45,15 +51,25 @@ const noop = () => {};
 export const Default: Story = {
   name: "PersonCard больше 2 тегов",
   args: {
-    person: mockPerson1,
+    user: mockPerson1,
     onLikeToggle: noop,
   },
+  render: (args) => (
+    <MemoryRouter>
+      <UserCard {...args} />
+    </MemoryRouter>
+  ),
 };
 
 export const DifferentData: Story = {
   name: "PersonCard 2 тега",
   args: {
-    person: mockPerson2,
+    user: mockPerson2,
     onLikeToggle: noop,
   },
+  render: (args) => (
+    <MemoryRouter>
+      <UserCard {...args} />
+    </MemoryRouter>
+  ),
 };
