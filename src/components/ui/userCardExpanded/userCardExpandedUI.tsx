@@ -20,15 +20,16 @@ export const UserCardExpandedUI: FC<TUserCardExpandedUIProps> = ({
   user,
   isLiked,
   onLikeToggle,
+  onExchangeClick,
 }) => {
   const images = user.images || [];
   const [selectedIndex, setSelectedIndex] = useState(0);
   const navigate = useNavigate();
 
-  // fallback local like state when parent doesn't control it
+  // Локальное состояние лайка, если родительский компонент не контролирует его
   const [localLiked, setLocalLiked] = useState<boolean>(isLiked);
 
-  // keep local state in sync when controlled prop changes
+  // Синхронизация локального состояния с пропсом при его изменении
   if (isLiked !== localLiked) {
     setLocalLiked(isLiked);
   }
@@ -145,7 +146,7 @@ export const UserCardExpandedUI: FC<TUserCardExpandedUIProps> = ({
             <p className={style.skillCategory}>{user.skillCanTeach.category}</p>
             <p className={style.skillText}>{user.skillCanTeach.description}</p>
 
-            <ButtonUI color="primary" fullSize>
+            <ButtonUI color="primary" fullSize onClick={onExchangeClick}>
               Предложить обмен
             </ButtonUI>
           </div>

@@ -11,7 +11,11 @@ import { IconButtonUI } from "./../iconButton";
 import { SearchInput } from "./../../search-input/search-input";
 import { NavLink } from "react-router-dom";
 
-export const AppHeaderUI: FC<TAppHeaderUIProps> = ({ userName, userAvatar, isAuth }) => {
+export const AppHeaderUI: FC<TAppHeaderUIProps> = ({
+  userName,
+  userAvatar,
+  isAuth,
+}) => {
   return (
     <header className={styles.header}>
       <nav className={styles.nav}>
@@ -20,15 +24,17 @@ export const AppHeaderUI: FC<TAppHeaderUIProps> = ({ userName, userAvatar, isAut
             <LogoUI />
           </NavLink>
 
-          <NavLink to="/about" className={styles.link}>
-            О проекте
-          </NavLink>
+          <div className={styles.menuItem}>
+            <NavLink to="/about" className={styles.link}>
+              О проекте
+            </NavLink>
 
-          {/* TODO: Это должен быть отдельный компонент */}
-          <button className={styles.link}>
-            Все навыки
-            <img src={down} alt="Открыть категории" />
-          </button>
+            {/* TODO: Это должен быть отдельный компонент */}
+            <button className={styles.link}>
+              Все навыки
+              <img src={down} alt="Открыть категории" />
+            </button>
+          </div>
         </div>
 
         <div className={styles.search}>
@@ -47,9 +53,15 @@ export const AppHeaderUI: FC<TAppHeaderUIProps> = ({ userName, userAvatar, isAut
               <a href="/profile" className={styles.profile}>
                 <span className={styles.userName}>{userName}</span>
                 {userAvatar ? (
-                  <img src={userAvatar} alt={userName} className={styles.avatar} />
+                  <img
+                    src={userAvatar}
+                    alt={userName}
+                    className={styles.avatar}
+                  />
                 ) : (
-                  <div className={styles.avatarPlaceholder}>{userName?.[0] ?? "Г"}</div>
+                  <div className={styles.avatarPlaceholder}>
+                    {userName?.[0] ?? "Г"}
+                  </div>
                 )}
               </a>
             </>
@@ -58,15 +70,23 @@ export const AppHeaderUI: FC<TAppHeaderUIProps> = ({ userName, userAvatar, isAut
               <IconButtonUI icon={theme} />
               <div className={clsx(styles.menu, styles.menuAuth)}>
                 <NavLink
-                  to="/login"
-                  className={clsx(styles.link, styles.button, styles.buttonSecondary)}
+                  to="/register"
+                  className={clsx(
+                    styles.link,
+                    styles.button,
+                    styles.buttonSecondary
+                  )}
                 >
                   Вход
                 </NavLink>
 
                 <NavLink
                   to="/register"
-                  className={clsx(styles.link, styles.button, styles.buttonPrimary)}
+                  className={clsx(
+                    styles.link,
+                    styles.button,
+                    styles.buttonPrimary
+                  )}
                 >
                   Регистрация
                 </NavLink>

@@ -18,7 +18,7 @@
 
 .filters {
   display: flex;
-  justify-content: space-between;
+  gap: 40px;
   align-items: center;
 }
 
@@ -28,9 +28,9 @@
 
 .title {
   margin: 0;
-  margin-bottom: 12px;
-  font-size: 15px;
-  font-weight: 600;
+  margin-bottom: 20px;
+  font-size: 20px;
+  font-weight: 500;
 }
 
 .titleFilters {
@@ -47,7 +47,7 @@
 .buttonReset {
   gap: 12px;
   background-color: transparent;
-  padding: 12px;
+  padding: 2px 0;
   cursor: pointer;
   font-family: inherit;
   font-style: normal;

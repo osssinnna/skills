@@ -3,7 +3,7 @@ import type { PayloadAction } from "@reduxjs/toolkit";
 import type { RegistrationData, CurrentUserState } from "./type";
 
 const initialState: CurrentUserState = {
-  isAuthChecked: false,
+  isAuthChecked: true, // Проверка авторизации завершена по умолчанию
   data: null
 }
 
@@ -11,22 +11,22 @@ const currentUserSlice = createSlice({
   name: 'currentUser',
   initialState,
   reducers: {
-    // отмечает, что проверка авторизации выполнена
+    // Отметка о завершении проверки авторизации
     authChecked(state) {
       state.isAuthChecked = true;
     },
 
-    // сохраняет данные пользователя при регистрации
+    // Сохранение данных пользователя при регистрации
     registerUser(state, action: PayloadAction<RegistrationData>){
       state.data = action.payload
     },
 
-    // очищает данные пользователя при выходе
+    // Очистка данных пользователя при выходе
     userLogout(state) {
       state.data = null;
     },
 
-    // обновление данных пользователя из его профиля
+    // Обновление данных пользователя из профиля
     updateUserProfile(state, action: PayloadAction<Partial<RegistrationData>>) {
       if (state.data) {
         if (action.payload.email !== undefined) {
