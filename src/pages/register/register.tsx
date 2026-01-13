@@ -7,7 +7,7 @@ import {
 } from "../../components/registration";
 import type { RegistrationData } from "../../utils/types";
 import { RegisterUI } from "../../components/ui/registration";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { fetchCategories } from "../../services/categoriesSlice/categoriesSlice";
 import { useDispatch } from "../../services/store";
 import {
@@ -17,6 +17,7 @@ import {
 
 export const Register: React.FC = () => {
   const navigate = useNavigate();
+  const location = useLocation();
   const [currentStep, setCurrentStep] = useState(1);
   const [formData, setFormData] = useState<RegistrationFormData>(INITIAL_DATA);
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -26,7 +27,7 @@ export const Register: React.FC = () => {
 
   useEffect(() => {
     dispatch(fetchCategories());
-  }, []);
+  }, [dispatch]);
 
   // Восстановление из localStorage
   useRegistrationStorage(setFormData, setCurrentStep);
@@ -79,10 +80,12 @@ export const Register: React.FC = () => {
       dispatch(registerUser(payload));
       dispatch(authChecked());
 
-      // Очищаем localStorage от информации о каждом шаге
+      // Очищаем localStorage от данных регистрации
       clearRegistrationStorage();
-      // Перенаправляем на страницу профиля
-      navigate("/profile");
+      
+      // Редирект на страницу, с которой пользователь пришел, или на главную
+      const from = location.state?.from?.pathname || '/';
+      navigate(from, { replace: true });
     } catch (err: unknown) {
       console.error("Registration error:", err);
     } finally {
