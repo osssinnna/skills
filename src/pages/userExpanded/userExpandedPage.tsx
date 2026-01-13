@@ -20,18 +20,5 @@ export default function UserExpandedPage() {
   if (userId === null) return <div>Некорректный id</div>;
   if (!user) return <div>Пользователь не найден</div>;
 
-const expandedUser = {
-  ...user,
-  description: "",
-  gender: user.gender ?? "Не указан",
-
-
-  skillCanTeach: {
-    id: 0,
-    name: user.skillCanTeach.name,
-    description: "", 
-  },
-};
-
-  return <UserCardExpanded user={expandedUser} />;
+  return <UserCardExpanded user={user} />;
 }
