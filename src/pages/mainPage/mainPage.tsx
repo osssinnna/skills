@@ -16,8 +16,8 @@ import { selectCategoriesWithSubCategories } from "../../services/categoriesSlic
 import { fetchCategories } from "../../services/categoriesSlice/categoriesSlice";
 import { FilterSidebar } from "../../components/filter-sidebar";
 import { ActiveFilterSection } from "../../components/ui/active-filter-section";
-import { selectActiveSection } from "../../services/currentUserSlice/selectors";
-import { setActiveSection } from "../../services/currentUserSlice/currentUserSlice";
+import { selectActiveSection } from "../../services/usersSlice/selectors";
+import { setActiveSection } from "../../services/usersSlice/usersSlice";
 
 function MainPage() {
   const dispatch = useDispatch();

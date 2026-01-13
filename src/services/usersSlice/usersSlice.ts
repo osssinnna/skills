@@ -26,6 +26,7 @@ const initialState: UsersState = {
     categoryIds: [],
   },
   searchInput: "",
+  activeSection: null,
   status: "idle",
   error: null,
 };
@@ -39,6 +40,9 @@ const usersSlice = createSlice({
         ...state.filters,
         ...action.payload,
       };
+    },
+    setActiveSection(state, action: PayloadAction<null | "popular" | "new" | "recommend">) {
+      state.activeSection = action.payload;
     },
     resetFilters(state) {
       state.filters = initialState.filters;
@@ -64,5 +68,5 @@ const usersSlice = createSlice({
   },
 });
 
-export const { setFilters, resetFilters, setSearchInput } = usersSlice.actions;
+export const { setFilters, resetFilters, setSearchInput, setActiveSection } = usersSlice.actions;
 export default usersSlice.reducer;
