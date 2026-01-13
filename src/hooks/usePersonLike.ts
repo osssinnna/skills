@@ -1,30 +1,41 @@
-import { useState, useCallback } from "react";
-import {
-  getLikedUsersIds,
-  setLikedUsersIds,
-} from "../utils/liked-users-storage";
+import { useCallback, useMemo, useState } from "react";
+
+const STORAGE_KEY = "likedUsersIds";
+
+const readIds = (): string[] => {
+  try {
+    const raw = localStorage.getItem(STORAGE_KEY);
+    if (!raw) return [];
+    const parsed: unknown = JSON.parse(raw);
+    if (!Array.isArray(parsed)) return [];
+    return parsed.map(String);
+  } catch {
+    return [];
+  }
+};
+
+const writeIds = (ids: string[]) => {
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(Array.from(new Set(ids))));
+};
 
 export const usePersonLike = (
   personId: number | string,
   onLikeToggle?: (id?: number | string) => void
 ) => {
-  const id = String(personId);
+  const id = useMemo(() => String(personId), [personId]);
 
-  const [isLiked, setIsLiked] = useState(() => getLikedUsersIds().includes(id));
+  const [isLiked, setIsLiked] = useState(() => readIds().includes(id));
 
   const toggleLike = useCallback(() => {
     setIsLiked((prev) => {
-      const current = getLikedUsersIds();
+      const current = readIds();
+      const next = prev ? current.filter((x) => x !== id) : [...current, id];
 
-      const nextIds = prev
-        ? current.filter((x) => x !== id) // было лайкнуто → снимаем
-        : [...current, id]; // не было → добавляем
+      writeIds(next);
+      onLikeToggle?.(personId);
 
-      setLikedUsersIds(nextIds);
       return !prev;
     });
-
-    onLikeToggle?.(personId);
   }, [id, personId, onLikeToggle]);
 
   return { isLiked, toggleLike } as const;

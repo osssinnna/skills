@@ -8,6 +8,8 @@ export const selectFilters = (state: RootState) => state.users.filters;
 export const selectFilteredUsers = createSelector(
   [selectUsers, selectFilters, selectSubcategoryIdsBySelectedCategories],
   (users, filters, categorySubIds) => {
+    if (!users || !Array.isArray(users)) return [];
+
     const activeSubIds =
       filters.subcategoryIds.length > 0
         ? filters.subcategoryIds
@@ -49,11 +51,11 @@ export const selectHasActiveFilters = createSelector(
 
 export const selectPopularUsers = createSelector(
   [selectFilteredUsers],
-  (users) => users.slice(0, 10)
+  (users) => (users || []).slice(0, 10)
 );
 
 export const selectNewUsers = createSelector([selectFilteredUsers], (users) =>
-  [...users].reverse().slice(0, 10)
+  [...(users || [])].reverse().slice(0, 10)
 );
 
 export const selectUserById = createSelector(

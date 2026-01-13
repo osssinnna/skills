@@ -6,28 +6,36 @@ import { UserCardUI } from "../ui/userCard/userCardUI";
 import type { TUserCardUIProps } from "../ui/userCard/type";
 
 import { usePersonLike } from "../../hooks/usePersonLike";
-import { selectCurrentUser } from "../../services/currentUserSlice/selectors"; // или selectIsAuthenticated
+import { selectCurrentUser } from "../../services/currentUserSlice/selectors";
 
-type TUserCardProps = Omit<TUserCardUIProps, "isLiked">;
+type TUserCardProps = Omit<TUserCardUIProps, "isLiked" | "onOpenDetails">;
 
 export const UserCard = ({ user, onLikeToggle }: TUserCardProps) => {
   const navigate = useNavigate();
+  const currentUser = useSelector(selectCurrentUser);
 
-  // По ТЗ: если data === null → редирект на регистрацию
-  const data = useSelector(selectCurrentUser); // data | null
-
-  const { isLiked, toggleLike } = usePersonLike(user.id, () => onLikeToggle());
+  const { isLiked, toggleLike } = usePersonLike(user.id, onLikeToggle);
 
   const handleLikeToggle = useCallback(() => {
-    if (data === null) {
-      navigate("/register"); // роут существует :contentReference[oaicite:3]{index=3}
+    if (currentUser === null) {
+      navigate("/register");
       return;
     }
-
     toggleLike();
-  }, [data, navigate, toggleLike]);
+  }, [currentUser, navigate, toggleLike]);
+
+  const handleOpenDetails = useCallback(() => {
+    navigate(`/userExpanded/${user.id}`);
+  }, [navigate, user.id]);
+
+  const visibleIsLiked = currentUser === null ? false : isLiked;
 
   return (
-    <UserCardUI user={user} isLiked={isLiked} onLikeToggle={handleLikeToggle} />
+    <UserCardUI
+      user={user}
+      isLiked={visibleIsLiked}
+      onLikeToggle={handleLikeToggle}
+      onOpenDetails={handleOpenDetails}
+    />
   );
 };
