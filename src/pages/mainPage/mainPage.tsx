@@ -9,6 +9,7 @@ import {
   selectNewUsers,
   selectPopularUsers,
   selectUsers,
+  selectUsersByNameOrSkill,
 } from "../../services/usersSlice/selectors";
 import { fetchUsers } from "../../services/usersSlice/usersSlice";
 import style from "./mainPage.module.css";
@@ -19,18 +20,51 @@ import { ActiveFilterSection } from "../../components/ui/active-filter-section";
 
 function MainPage() {
   const dispatch = useDispatch();
-  const [activeSection, setActiveSection] = useState<null | "popular" | "new" | "recommend">(null);
+  const [activeSection, setActiveSection] = useState<
+    null | "popular" | "new" | "recommend"
+  >(null);
+  const searchInput = useSelector(
+    (store: RootState) => store.users.searchInput
+  );
 
   const filters = useSelector(selectFilters);
   const users = useSelector(selectUsers) || [];
-  const filteredUsers = useSelector(selectFilteredUsers) || [];
+  const filteredUsers = useSelector((state: RootState) =>
+    selectUsersByNameOrSkill(state, searchInput)
+  );
   const popularUsers = useSelector(selectPopularUsers) || [];
   const newUsers = useSelector(selectNewUsers) || [];
   const categoriesTree = useSelector(selectCategoriesWithSubCategories) || [];
-  const searchInput = useSelector((store: RootState) => store.users.searchInput);
+
+  const USERS_PER_LOAD = 21; // сколько пользователей показывать за один раз
+  const [displayedUsers, setDisplayedUsers] = useState<User[]>([]);
+  const [nextIndex, setNextIndex] = useState(0); // индекс следующего пользователя для подгрузки
+
+  const [displayedFilteredUsers, setDisplayedFilteredUsers] = useState<User[]>(
+    []
+  );
+  const [nextFilteredIndex, setNextFilteredIndex] = useState(0);
 
   useEffect(() => {
-    console.log(searchInput);
+    if (filteredUsers.length > 0) {
+      const initialLoad = filteredUsers.slice(0, USERS_PER_LOAD);
+      setDisplayedFilteredUsers(initialLoad);
+      setNextFilteredIndex(initialLoad.length);
+    } else {
+      setDisplayedFilteredUsers([]);
+      setNextFilteredIndex(0);
+    }
+  }, [filteredUsers]);
+
+  useEffect(() => {
+    if (users.length > 0) {
+      const initialLoad = users.slice(0, USERS_PER_LOAD);
+      setDisplayedUsers(initialLoad);
+      setNextIndex(initialLoad.length);
+    }
+  }, [users]);
+
+  useEffect(() => {
     dispatch(fetchUsers());
     dispatch(fetchCategories());
   }, [dispatch, searchInput]);
@@ -39,6 +73,21 @@ function MainPage() {
   useEffect(() => {
     setActiveSection(null);
   }, [filters, searchInput]);
+
+  const loadMoreUsers = () => {
+    const nextLoad = users.slice(nextIndex, nextIndex + USERS_PER_LOAD);
+    setDisplayedUsers((prev) => [...prev, ...nextLoad]);
+    setNextIndex((prev) => prev + nextLoad.length);
+  };
+
+  const loadMoreFilteredUsers = () => {
+    const nextLoad = filteredUsers.slice(
+      nextFilteredIndex,
+      nextFilteredIndex + USERS_PER_LOAD
+    );
+    setDisplayedFilteredUsers((prev) => [...prev, ...nextLoad]);
+    setNextFilteredIndex((prev) => prev + nextLoad.length);
+  };
 
   const isDefaultFilters =
     filters.mode === "all" &&
@@ -97,20 +146,57 @@ function MainPage() {
       )}
 
       {isDefaultFilters && activeSection === "recommend" && (
-        <CardSection
-          title={`Рекомендуем: ${users.length}`}
-          users={users}
-        />
+        <div>
+          <CardSection
+            title={`Рекомендуем: ${users.length}`}
+            users={displayedUsers}
+          />
+
+          {nextIndex < users.length && (
+            <div style={{ textAlign: "center", marginTop: "16px" }}>
+              <button
+                onClick={loadMoreUsers}
+                style={{
+                  padding: "8px 16px",
+                  background: "#333",
+                  color: "#fff",
+                  border: "none",
+                  cursor: "pointer",
+                }}
+              >
+                Показать ещё
+              </button>
+            </div>
+          )}
+        </div>
       )}
 
       {/* ❗ ФИЛЬТРЫ ВКЛЮЧЕНЫ - ВСЕГДА ОДНА ОТКРЫТАЯ СЕКЦИЯ */}
       {!isDefaultFilters && (
         <>
           <ActiveFilterSection />
+
           <CardSection
             title={`Подходящие предложения: ${filteredUsers.length}`}
-            users={filteredUsers}
+            users={displayedFilteredUsers}
           />
+
+          {nextFilteredIndex < filteredUsers.length && (
+            <div style={{ textAlign: "center", marginTop: "16px" }}>
+              <button
+                onClick={loadMoreFilteredUsers}
+                style={{
+                  padding: "8px 16px",
+                  background: "#333",
+                  color: "#fff",
+                  border: "none",
+                  cursor: "pointer",
+                }}
+              >
+                Показать ещё
+              </button>
+            </div>
+          )}
         </>
       )}
     </section>
