@@ -28,10 +28,12 @@ export const UserCard = ({ user, onLikeToggle }: TUserCardProps) => {
     navigate(`/skill/${user.id}`);
   }, [navigate, user.id]);
 
+  const visibleIsLiked = currentUser === null ? false : isLiked;
+
   return (
     <UserCardUI
       user={user}
-      isLiked={isLiked}
+      isLiked={visibleIsLiked}
       onLikeToggle={handleLikeToggle}
       onOpenDetails={handleOpenDetails}
     />

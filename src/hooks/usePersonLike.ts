@@ -8,7 +8,7 @@ const readIds = (): string[] => {
     if (!raw) return [];
     const parsed: unknown = JSON.parse(raw);
     if (!Array.isArray(parsed)) return [];
-    return parsed.map(String).filter(Boolean);
+    return parsed.map(String);
   } catch {
     return [];
   }
@@ -20,7 +20,7 @@ const writeIds = (ids: string[]) => {
 
 export const usePersonLike = (
   personId: number | string,
-  onLikeToggle?: ((id?: number | string) => void) | undefined
+  onLikeToggle?: (id?: number | string) => void
 ) => {
   const id = useMemo(() => String(personId), [personId]);
 
@@ -30,8 +30,8 @@ export const usePersonLike = (
     setIsLiked((prev) => {
       const current = readIds();
       const next = prev ? current.filter((x) => x !== id) : [...current, id];
-      writeIds(next);
 
+      writeIds(next);
       onLikeToggle?.(personId);
 
       return !prev;
