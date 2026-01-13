@@ -25,7 +25,7 @@ export const UserCard = ({ user, onLikeToggle }: TUserCardProps) => {
   }, [currentUser, navigate, toggleLike]);
 
   const handleOpenDetails = useCallback(() => {
-    navigate(`/userExpanded/${user.id}`);
+    navigate(`/skill/${user.id}`);
   }, [navigate, user.id]);
 
   return (

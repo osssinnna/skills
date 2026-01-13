@@ -10,7 +10,7 @@ function App() {
     <Routes>
       <Route path="/" element={<PageLayout />}>
         <Route index element={<MainPage />} />
-        <Route path="userExpanded/:id" element={<UserExpandedPage />} />
+        <Route path="skill/:id" element={<UserExpandedPage />} />
         <Route path="*" element={<NotFound404 />} />
       </Route>
 
