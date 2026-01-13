@@ -1,30 +1,39 @@
-import { useState, useEffect, useCallback } from "react";
+import { useCallback } from "react";
+import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
+
 import { UserCardUI } from "../ui/userCard/userCardUI";
 import type { TUserCardUIProps } from "../ui/userCard/type";
 
-type TUserCardProps = Omit<TUserCardUIProps, "isLiked">;
+import { usePersonLike } from "../../hooks/usePersonLike";
+import { selectCurrentUser } from "../../services/currentUserSlice/selectors";
+
+type TUserCardProps = Omit<TUserCardUIProps, "isLiked" | "onOpenDetails">;
 
 export const UserCard = ({ user, onLikeToggle }: TUserCardProps) => {
-  // Тут должна быть логика проверки localStorage, которая возвращает есть ли лайк
-  // пока пусть так
-  const dummy = user.id ? true : false;
+  const navigate = useNavigate();
+  const currentUser = useSelector(selectCurrentUser);
 
-  const [isButtonLiked, setIsButtonLiked] = useState(false);
-
-  // useEffect(() => {
-  //   setIsButtonLiked(dummy);
-  // }, [dummy]);
+  const { isLiked, toggleLike } = usePersonLike(user.id, onLikeToggle);
 
   const handleLikeToggle = useCallback(() => {
-    setIsButtonLiked((prev) => !prev);
-    onLikeToggle();
-  }, [onLikeToggle]);
+    if (currentUser === null) {
+      navigate("/register");
+      return;
+    }
+    toggleLike();
+  }, [currentUser, navigate, toggleLike]);
+
+  const handleOpenDetails = useCallback(() => {
+    navigate(`/userExpanded/${user.id}`);
+  }, [navigate, user.id]);
 
   return (
     <UserCardUI
       user={user}
-      isLiked={isButtonLiked}
+      isLiked={isLiked}
       onLikeToggle={handleLikeToggle}
+      onOpenDetails={handleOpenDetails}
     />
   );
 };
