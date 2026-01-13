@@ -29,4 +29,5 @@ export type TUserCardExpandedUIProps = {
   user: User;
   isLiked: boolean;
   onLikeToggle?: () => void;
+  onExchangeClick?: () => void;
 };
