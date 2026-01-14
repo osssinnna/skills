@@ -6,6 +6,7 @@ import { Register } from "../../pages/register";
 import UserExpandedPage from "../../pages/userExpanded/userExpandedPage";
 import FavoritePage from "../../pages/favorite/favorite";
 import { ProtectedRoute } from "../protected-route";
+import { ProfilePage } from "../../pages/profile/profilePage";
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
         <Route index element={<MainPage />} />
         <Route path="skill/:id" element={<UserExpandedPage />} />
         <Route path="favorite" element={<FavoritePage />} />
+        <Route path="profile" element={<ProfilePage />} />
         <Route path="*" element={<NotFound404 />} />
       </Route>
 

@@ -28,9 +28,9 @@ const saveUserToStorage = (data: RegistrationData | null): void => {
 };
 
 const initialState: CurrentUserState = {
-  isAuthChecked: true,
-  data: getUserFromStorage()
-}
+  isAuthChecked: false,
+  data: getUserFromStorage(),
+};
 
 const currentUserSlice = createSlice({
   name: 'currentUser',

@@ -64,3 +64,5 @@ export const selectUserSubcategoriesToLearn = createSelector(
   [selectUserProfile],
   (profile) => profile?.subcategoriesWantToLearn || []
 );
+
+// (moved) active section selector moved to `users` slice

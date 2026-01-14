@@ -4,28 +4,24 @@ import { useDispatch, useSelector } from "../../services/store";
 import type { RootState } from "../../services/store";
 import type { User } from "../../utils/types";
 import {
-  selectFilteredUsers,
   selectFilters,
   selectNewUsers,
   selectPopularUsers,
   selectUsers,
   selectUsersByNameOrSkill,
 } from "../../services/usersSlice/selectors";
-import { fetchUsers } from "../../services/usersSlice/usersSlice";
+import { fetchUsers, setActiveSection } from "../../services/usersSlice/usersSlice";
 import style from "./mainPage.module.css";
 import { selectCategoriesWithSubCategories } from "../../services/categoriesSlice/selectors";
 import { fetchCategories } from "../../services/categoriesSlice/categoriesSlice";
 import { FilterSidebar } from "../../components/filter-sidebar";
 import { ActiveFilterSection } from "../../components/ui/active-filter-section";
+import { selectActiveSection } from "../../services/usersSlice/selectors";
 
 function MainPage() {
   const dispatch = useDispatch();
-  const [activeSection, setActiveSection] = useState<
-    null | "popular" | "new" | "recommend"
-  >(null);
-  const searchInput = useSelector(
-    (store: RootState) => store.users.searchInput
-  );
+  const activeSection = useSelector(selectActiveSection); // Redux activeSection
+  const searchInput = useSelector((state: RootState) => state.users.searchInput);
 
   const filters = useSelector(selectFilters);
   const users = useSelector(selectUsers) || [];
@@ -36,15 +32,14 @@ function MainPage() {
   const newUsers = useSelector(selectNewUsers) || [];
   const categoriesTree = useSelector(selectCategoriesWithSubCategories) || [];
 
-  const USERS_PER_LOAD = 21; // сколько пользователей показывать за один раз
+  const USERS_PER_LOAD = 21; 
   const [displayedUsers, setDisplayedUsers] = useState<User[]>([]);
-  const [nextIndex, setNextIndex] = useState(0); // индекс следующего пользователя для подгрузки
+  const [nextIndex, setNextIndex] = useState(0);
 
-  const [displayedFilteredUsers, setDisplayedFilteredUsers] = useState<User[]>(
-    []
-  );
+  const [displayedFilteredUsers, setDisplayedFilteredUsers] = useState<User[]>([]);
   const [nextFilteredIndex, setNextFilteredIndex] = useState(0);
 
+  // Подгрузка фильтрованных пользователей
   useEffect(() => {
     if (filteredUsers.length > 0) {
       const initialLoad = filteredUsers.slice(0, USERS_PER_LOAD);
@@ -56,6 +51,7 @@ function MainPage() {
     }
   }, [filteredUsers]);
 
+  // Подгрузка всех пользователей
   useEffect(() => {
     if (users.length > 0) {
       const initialLoad = users.slice(0, USERS_PER_LOAD);
@@ -64,15 +60,16 @@ function MainPage() {
     }
   }, [users]);
 
+  // Загрузка пользователей и категорий
   useEffect(() => {
     dispatch(fetchUsers());
     dispatch(fetchCategories());
   }, [dispatch, searchInput]);
 
-  // Сбрасываем активную секцию при изменении фильтров
+  // Сброс активной секции при изменении фильтров или поиска
   useEffect(() => {
-    setActiveSection(null);
-  }, [filters, searchInput]);
+    dispatch(setActiveSection(null));
+  }, [dispatch, filters, searchInput]);
 
   const loadMoreUsers = () => {
     const nextLoad = users.slice(nextIndex, nextIndex + USERS_PER_LOAD);
@@ -81,10 +78,7 @@ function MainPage() {
   };
 
   const loadMoreFilteredUsers = () => {
-    const nextLoad = filteredUsers.slice(
-      nextFilteredIndex,
-      nextFilteredIndex + USERS_PER_LOAD
-    );
+    const nextLoad = filteredUsers.slice(nextFilteredIndex, nextFilteredIndex + USERS_PER_LOAD);
     setDisplayedFilteredUsers((prev) => [...prev, ...nextLoad]);
     setNextFilteredIndex((prev) => prev + nextLoad.length);
   };
@@ -106,6 +100,7 @@ function MainPage() {
   return (
     <section className={style.sectionFilters}>
       <FilterSidebar {...filtersProps} />
+
       {/* ❗ ФИЛЬТРОВ НЕТ */}
       {isDefaultFilters && activeSection === null && (
         <>
@@ -113,19 +108,19 @@ function MainPage() {
             title="Популярное"
             users={popularUsers}
             maxPreviewCount={3}
-            onOpen={() => setActiveSection("popular")}
+            onOpen={() => dispatch(setActiveSection("popular"))}
           />
           <CardSection
             title="Новое"
             users={newUsers}
             maxPreviewCount={3}
-            onOpen={() => setActiveSection("new")}
+            onOpen={() => dispatch(setActiveSection("new"))}
           />
           <CardSection
             title="Рекомендуем"
             users={users}
             maxPreviewCount={9}
-            onOpen={() => setActiveSection("recommend")}
+            onOpen={() => dispatch(setActiveSection("recommend"))}
           />
         </>
       )}
@@ -171,7 +166,7 @@ function MainPage() {
         </div>
       )}
 
-      {/* ❗ ФИЛЬТРЫ ВКЛЮЧЕНЫ - ВСЕГДА ОДНА ОТКРЫТАЯ СЕКЦИЯ */}
+      {/* ❗ ФИЛЬТРЫ ВКЛЮЧЕНЫ */}
       {!isDefaultFilters && (
         <>
           <ActiveFilterSection />

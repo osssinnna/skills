@@ -18,9 +18,16 @@ type Props = {
   onChange: (value: string) => void;
   error?: string;
   placeholder?: string;
+  label?: string;
 };
 
-export const CityAutocomplete = ({ value, onChange, error, placeholder }: Props) => {
+export const CityAutocomplete = ({
+  value,
+  onChange,
+  error,
+  placeholder,
+  label = "Местоположение",
+}: Props) => {
   const cities: City[] = citiesData.city;
   const [isOpen, setIsOpen] = useState(false);
   const wrapperRef = useRef<HTMLDivElement>(null);
@@ -49,7 +56,10 @@ export const CityAutocomplete = ({ value, onChange, error, placeholder }: Props)
 
   useEffect(() => {
     const handleClickOutside = (e: MouseEvent) => {
-      if (wrapperRef.current && !wrapperRef.current.contains(e.target as Node)) {
+      if (
+        wrapperRef.current &&
+        !wrapperRef.current.contains(e.target as Node)
+      ) {
         setIsOpen(false);
       }
     };
@@ -60,7 +70,7 @@ export const CityAutocomplete = ({ value, onChange, error, placeholder }: Props)
   return (
     <div className={s.wrapperLocation} ref={wrapperRef}>
       <Input
-        label="Местоположение"
+        label={label}
         name="location"
         value={value}
         placeholder={placeholder}
