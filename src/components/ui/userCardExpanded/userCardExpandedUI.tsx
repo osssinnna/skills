@@ -2,7 +2,10 @@ import style from "./userCardExpandedUI.module.css";
 import { useState } from "react";
 import type { FC } from "react";
 import { useNavigate } from "react-router-dom";
-import type { TUserCardExpandedUIProps, TSubcategoryWantToLearn } from "./types";
+import type {
+  TUserCardExpandedUIProps,
+  TSubcategoryWantToLearn,
+} from "./types";
 import { IconButtonUI } from "../iconButton/iconButton";
 import { ButtonUI } from "../button/button";
 import { TagSkillUI } from "../tag";
@@ -17,21 +20,23 @@ export const UserCardExpandedUI: FC<TUserCardExpandedUIProps> = ({
   user,
   isLiked,
   onLikeToggle,
+  onExchangeClick,
 }) => {
   const images = user.images || [];
   const [selectedIndex, setSelectedIndex] = useState(0);
   const navigate = useNavigate();
 
-  // fallback local like state when parent doesn't control it
+  // Локальное состояние лайка, если родительский компонент не контролирует его
   const [localLiked, setLocalLiked] = useState<boolean>(isLiked);
 
-  // keep local state in sync when controlled prop changes
+  // Синхронизация локального состояния с пропсом при его изменении
   if (isLiked !== localLiked) {
     setLocalLiked(isLiked);
   }
 
   const showPrev = () => setSelectedIndex((i) => (i > 0 ? i - 1 : i));
-  const showNext = () => setSelectedIndex((i) => (i < images.length - 1 ? i + 1 : i));
+  const showNext = () =>
+    setSelectedIndex((i) => (i < images.length - 1 ? i + 1 : i));
   const selectThumbnail = (index: number) => setSelectedIndex(index);
 
   const firstName = user.name.split(" ")[0];
@@ -100,7 +105,11 @@ export const UserCardExpandedUI: FC<TUserCardExpandedUIProps> = ({
       <div className={style.profileCardSection}>
         <div className={style.profileCardContainer}>
           <div className={style.profileCardHeader}>
-            <img className={style.avatar} src={user.avatarUrl} alt={user.name} />
+            <img
+              className={style.avatar}
+              src={user.avatarUrl}
+              alt={user.name}
+            />
 
             <div className={style.profileTextInfo}>
               <h3 className={style.userName}>{firstName}</h3>
@@ -137,7 +146,7 @@ export const UserCardExpandedUI: FC<TUserCardExpandedUIProps> = ({
             <p className={style.skillCategory}>{user.skillCanTeach.category}</p>
             <p className={style.skillText}>{user.skillCanTeach.description}</p>
 
-            <ButtonUI color="primary" fulsSize>
+            <ButtonUI color="primary" fullSize onClick={onExchangeClick}>
               Предложить обмен
             </ButtonUI>
           </div>
@@ -176,7 +185,9 @@ export const UserCardExpandedUI: FC<TUserCardExpandedUIProps> = ({
                     key={idx}
                     src={src}
                     alt={`${user.name} ${idx + 1}`}
-                    className={idx === selectedIndex ? style.thumbnailActive : ""}
+                    className={
+                      idx === selectedIndex ? style.thumbnailActive : ""
+                    }
                     onClick={() => selectThumbnail(idx)}
                   />
                 ))}

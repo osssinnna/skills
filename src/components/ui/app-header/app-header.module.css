@@ -26,8 +26,14 @@
   gap: 32px;
 }
 
+.menuItem {
+  display: flex;
+  
+  gap: 24px;
+}
+
 .menuRight {
-  gap: 12px;
+  gap: 32px;
 }
 
 .menuIcons {

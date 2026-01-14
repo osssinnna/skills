@@ -13,6 +13,7 @@ export type User = {
   id: number;
   avatarUrl: string;
   name: string;
+  description: string;
   location: string;
   age: string;
   gender: "Мужской" | "Женский" | null;

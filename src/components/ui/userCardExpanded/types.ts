@@ -1,3 +1,5 @@
+import type { User } from "../../../utils/types";
+
 export type TSubcategoryWantToLearn = {
   id: number;
   name: string;
@@ -21,11 +23,11 @@ export type TUser = {
   skillCanTeach: TSkillCanTeach;
   images: string[];
   subcategoriesWantToLearn: TSubcategoryWantToLearn[];
-
 };
 
 export type TUserCardExpandedUIProps = {
-  user: TUser;
+  user: User;
   isLiked: boolean;
-  onLikeToggle?: () => void;  
+  onLikeToggle?: () => void;
+  onExchangeClick?: () => void;
 };

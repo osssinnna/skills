@@ -3,10 +3,7 @@
   top: 50%;
   left: 50%;
   z-index: 9999;
-  width: 100%;
-  max-width: 556px;
   border-radius: 12px;
-  opacity: 0;
   background-color: var( --color-secondary, #ffffff);
   transition:  opacity 0.3s ease-in-out;
   transform: translate(-50%, -50%);
