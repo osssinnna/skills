@@ -1,4 +1,4 @@
-import type { FC } from "react";
+import { memo, type FC } from "react";
 import { UserCard } from "../../userCard/userCard";
 import styles from "./cards-grid.module.css";
 import type { User } from "../../../utils/types";
@@ -6,7 +6,7 @@ import type { User } from "../../../utils/types";
 interface CardsGridProps {
   users: User[];
   onLikeToggle?: (userId: number) => void;
-  columns?: number; 
+  columns?: number;
 }
 
 export const CardsGrid = memo<CardsGridProps>(({ users, columns = 3 }) => {
@@ -19,14 +19,20 @@ export const CardsGrid = memo<CardsGridProps>(({ users, columns = 3 }) => {
   }
 
   return (
-    <div 
+    <div
       className={styles.grid}
       style={{
-        gridTemplateColumns: `repeat(${columns}, 1fr)` // +вариативность
+        gridTemplateColumns: `repeat(${columns}, 1fr)`, // +вариативность
       }}
     >
       {users.map((user) => (
-        <UserCard key={user.id} user={user} />
+        <UserCard
+          key={user.id}
+          user={user}
+          onLikeToggle={function (): void {
+            throw new Error("Function not implemented.");
+          }}
+        />
       ))}
     </div>
   );
