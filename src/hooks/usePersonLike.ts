@@ -1,8 +1,11 @@
-import { useCallback, useEffect, useMemo, useState } from "react";
+import { useCallback, useSyncExternalStore } from "react";
 
 const STORAGE_KEY = "likedUsersIds";
+const isBrowser = typeof window !== "undefined";
 
 const readIds = (): string[] => {
+  if (!isBrowser) return [];
+  
   try {
     const raw = localStorage.getItem(STORAGE_KEY);
     if (!raw) return [];
@@ -15,42 +18,44 @@ const readIds = (): string[] => {
 };
 
 const writeIds = (ids: string[]) => {
+  if (!isBrowser) return;
+  
   localStorage.setItem(STORAGE_KEY, JSON.stringify(Array.from(new Set(ids))));
   window.dispatchEvent(new CustomEvent("likedUsersChanged"));
+};
+
+const subscribe = (callback: () => void) => {
+  if (!isBrowser) return () => {};
+  
+  window.addEventListener("likedUsersChanged", callback);
+  window.addEventListener("storage", callback);
+  return () => {
+    window.removeEventListener("likedUsersChanged", callback);
+    window.removeEventListener("storage", callback);
+  };
 };
 
 export const usePersonLike = (
   personId: number | string,
   onLikeToggle?: (id?: number | string) => void
 ) => {
-  const id = useMemo(() => String(personId), [personId]);
+  const id = String(personId);
 
-  const [isLiked, setIsLiked] = useState(() => readIds().includes(id));
-
-  useEffect(() => {
-    const handleLikedUsersChanged = () => {
-      setIsLiked(readIds().includes(id));
-    };
-
-    window.addEventListener("likedUsersChanged", handleLikedUsersChanged);
-    window.addEventListener("storage", handleLikedUsersChanged);
-
-    return () => {
-      window.removeEventListener("likedUsersChanged", handleLikedUsersChanged);
-      window.removeEventListener("storage", handleLikedUsersChanged);
-    };
-  }, [id]);
+  const isLiked = useSyncExternalStore(
+    subscribe,
+    () => readIds().includes(id),
+    () => false // SSR fallback
+  );
 
   const toggleLike = useCallback(() => {
-    setIsLiked((prev) => {
-      const current = readIds();
-      const next = prev ? current.filter((x) => x !== id) : [...current, id];
-
-      writeIds(next);
-      onLikeToggle?.(personId);
-
-      return !prev;
-    });
+    const current = readIds();
+    const currentlyLiked = current.includes(id);
+    const next = currentlyLiked 
+      ? current.filter((x) => x !== id) 
+      : [...current, id];
+    
+    writeIds(next);
+    onLikeToggle?.(personId);
   }, [id, personId, onLikeToggle]);
 
   return { isLiked, toggleLike } as const;
