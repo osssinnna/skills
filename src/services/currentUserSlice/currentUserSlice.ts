@@ -2,10 +2,12 @@ import { createSlice } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
 import type { RegistrationData, CurrentUserState } from "./type";
 
+
 const initialState: CurrentUserState = {
-  isAuthChecked: true, // Проверка авторизации завершена по умолчанию
-  data: null
-}
+  isAuthChecked: false, // проверка авторизации ещё не выполнена
+  data: null,
+};
+
 
 const currentUserSlice = createSlice({
   name: 'currentUser',
@@ -47,6 +49,5 @@ const currentUserSlice = createSlice({
     },
   },
 })
-
 export const { authChecked, registerUser, userLogout, updateUserProfile } = currentUserSlice.actions;
 export default currentUserSlice.reducer;

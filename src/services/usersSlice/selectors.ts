@@ -90,3 +90,5 @@ export const selectUsersByNameOrSkill = createSelector(
     });
   }
 );
+
+export const selectActiveSection = (state: RootState) => state.users.activeSection;

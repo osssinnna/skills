@@ -14,6 +14,7 @@ export type UsersState = {
   users: User[];
   filters: Filters;
   searchInput: string;
+  activeSection: null | "popular" | "new" | "recommend";
   status: "idle" | "loading" | "succeeded" | "failed";
   error: unknown | null;
 };
