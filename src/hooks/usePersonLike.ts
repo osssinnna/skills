@@ -1,4 +1,4 @@
-import { useCallback, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 
 const STORAGE_KEY = "likedUsersIds";
 
@@ -16,6 +16,7 @@ const readIds = (): string[] => {
 
 const writeIds = (ids: string[]) => {
   localStorage.setItem(STORAGE_KEY, JSON.stringify(Array.from(new Set(ids))));
+  window.dispatchEvent(new CustomEvent("likedUsersChanged"));
 };
 
 export const usePersonLike = (
@@ -25,6 +26,20 @@ export const usePersonLike = (
   const id = useMemo(() => String(personId), [personId]);
 
   const [isLiked, setIsLiked] = useState(() => readIds().includes(id));
+
+  useEffect(() => {
+    const handleLikedUsersChanged = () => {
+      setIsLiked(readIds().includes(id));
+    };
+
+    window.addEventListener("likedUsersChanged", handleLikedUsersChanged);
+    window.addEventListener("storage", handleLikedUsersChanged);
+
+    return () => {
+      window.removeEventListener("likedUsersChanged", handleLikedUsersChanged);
+      window.removeEventListener("storage", handleLikedUsersChanged);
+    };
+  }, [id]);
 
   const toggleLike = useCallback(() => {
     setIsLiked((prev) => {

@@ -1,6 +1,6 @@
 import type { TAppHeaderUIProps } from "./type";
 import styles from "./app-header.module.css";
-import { type FC } from "react";
+import { type FC, useState, useRef, useEffect } from "react";
 import { LogoUI } from "../logo";
 import down from "../../../assets/icon-down.svg";
 import like from "../../../assets/icon-like.svg";
@@ -9,13 +9,49 @@ import theme from "../../../assets/icon-theme.svg";
 import clsx from "clsx";
 import { IconButtonUI } from "./../iconButton";
 import { SearchInput } from "./../../search-input/search-input";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
+import { useDispatch } from "../../../services/store";
+import { userLogout } from "../../../services/currentUserSlice/currentUserSlice";
 
 export const AppHeaderUI: FC<TAppHeaderUIProps> = ({
   userName,
   userAvatar,
   isAuth,
 }) => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const dropdownRef = useRef<HTMLDivElement>(null);
+  const timeoutRef = useRef<NodeJS.Timeout | null>(null);
+
+  const handleMouseEnter = () => {
+    if (timeoutRef.current) {
+      clearTimeout(timeoutRef.current);
+      timeoutRef.current = null;
+    }
+    setIsDropdownOpen(true);
+  };
+
+  const handleMouseLeave = () => {
+    timeoutRef.current = setTimeout(() => {
+      setIsDropdownOpen(false);
+    }, 200);
+  };
+
+  useEffect(() => {
+    return () => {
+      if (timeoutRef.current) {
+        clearTimeout(timeoutRef.current);
+      }
+    };
+  }, []);
+
+  const handleLogout = () => {
+    dispatch(userLogout());
+    setIsDropdownOpen(false);
+    navigate("/");
+  };
+
   return (
     <header className={styles.header}>
       <nav className={styles.nav}>
@@ -47,23 +83,42 @@ export const AppHeaderUI: FC<TAppHeaderUIProps> = ({
               <div className={clsx(styles.menu, styles.menuIcons)}>
                 <IconButtonUI icon={theme} />
                 <IconButtonUI icon={notifications} />
-                <IconButtonUI icon={like} />
+                <NavLink to="/favorite" className={styles.iconLink}>
+                  <IconButtonUI icon={like} />
+                </NavLink>
               </div>
 
-              <a href="/profile" className={styles.profile}>
-                <span className={styles.userName}>{userName}</span>
-                {userAvatar ? (
-                  <img
-                    src={userAvatar}
-                    alt={userName}
-                    className={styles.avatar}
-                  />
-                ) : (
-                  <div className={styles.avatarPlaceholder}>
-                    {userName?.[0] ?? "Г"}
+              <div
+                className={styles.profileContainer}
+                ref={dropdownRef}
+                onMouseEnter={handleMouseEnter}
+                onMouseLeave={handleMouseLeave}
+              >
+                <a href="/profile" className={styles.profile}>
+                  <span className={styles.userName}>{userName}</span>
+                  {userAvatar ? (
+                    <img
+                      src={userAvatar}
+                      alt={userName}
+                      className={styles.avatar}
+                    />
+                  ) : (
+                    <div className={styles.avatarPlaceholder}>
+                      {userName?.[0] ?? "Г"}
+                    </div>
+                  )}
+                </a>
+                {isDropdownOpen && (
+                  <div className={styles.dropdown}>
+                    <button
+                      className={styles.logoutButton}
+                      onClick={handleLogout}
+                    >
+                      Выйти
+                    </button>
                   </div>
                 )}
-              </a>
+              </div>
             </>
           ) : (
             <>
