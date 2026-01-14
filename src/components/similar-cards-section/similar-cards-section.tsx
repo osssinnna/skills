@@ -2,7 +2,7 @@ import React, { useMemo } from "react";
 import { CardsGrid } from "../ui/cards-grid/cards-grid";
 import styles from "./similar-cards-section.module.css";
 import type { User } from "../../utils/types";
-import navigationIcon from "../../../assets/navigation.svg";
+import navigationIcon from "../../assets/navigation.svg";
 
 interface SimilarCardsSectionProps {
   title: string;
