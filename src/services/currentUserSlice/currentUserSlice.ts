@@ -6,7 +6,7 @@ const STORAGE_KEY = "currentUser";
 
 const getUserFromStorage = (): RegistrationData | null => {
   if (typeof window === "undefined") return null;
-  
+
   try {
     const raw = localStorage.getItem(STORAGE_KEY);
     if (!raw) return null;
@@ -19,7 +19,7 @@ const getUserFromStorage = (): RegistrationData | null => {
 
 const saveUserToStorage = (data: RegistrationData | null): void => {
   if (typeof window === "undefined") return;
-  
+
   if (data === null) {
     localStorage.removeItem(STORAGE_KEY);
   } else {
@@ -29,11 +29,11 @@ const saveUserToStorage = (data: RegistrationData | null): void => {
 
 const initialState: CurrentUserState = {
   isAuthChecked: false,
-  data: getUserFromStorage(),
+  data: getUserFromStorage() ? null : getUserFromStorage(),
 };
 
 const currentUserSlice = createSlice({
-  name: 'currentUser',
+  name: "currentUser",
   initialState,
   reducers: {
     authChecked(state) {
@@ -74,8 +74,14 @@ const currentUserSlice = createSlice({
       state.data = getUserFromStorage();
     },
   },
-})
+});
 
-export const { authChecked, registerUser, userLogout, updateUserProfile, loadUserFromStorage } = currentUserSlice.actions;
+export const {
+  authChecked,
+  registerUser,
+  userLogout,
+  updateUserProfile,
+  loadUserFromStorage,
+} = currentUserSlice.actions;
 
 export default currentUserSlice.reducer;
