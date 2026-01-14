@@ -7,8 +7,12 @@ import type { TUserCardExpandedUIProps } from "../ui/userCardExpanded/types";
 
 import { usePersonLike } from "../../hooks/usePersonLike";
 import { selectCurrentUser } from "../../services/currentUserSlice/selectors";
+import { useExchangeUsers } from "../../hooks/useExchangeUsers";
 
-type TUserCardExpandedProps = Omit<TUserCardExpandedUIProps, "isLiked" | "onExchangeClick">;
+type TUserCardExpandedProps = Omit<
+  TUserCardExpandedUIProps,
+  "isLiked" | "onExchangeClick" | "isExcahnged"
+>;
 
 export const UserCardExpanded = ({
   user,
@@ -28,10 +32,14 @@ export const UserCardExpanded = ({
     toggleLike();
   }, [currentUser, navigate, location, toggleLike]);
 
+  const { hasExchange, toggleExchange } = useExchangeUsers();
+
   const handleExchangeClick = useCallback(() => {
     if (currentUser === null) {
       // Перенаправление на регистрацию с сохранением текущей страницы
       navigate("/register", { state: { from: location } });
+    } else {
+      toggleExchange(user.id);
     }
   }, [currentUser, navigate, location]);
 
@@ -39,6 +47,7 @@ export const UserCardExpanded = ({
     <UserCardExpandedUI
       user={user}
       isLiked={isLiked}
+      isExcahnged={hasExchange(user.id)}
       onLikeToggle={handleLikeToggle}
       onExchangeClick={handleExchangeClick}
     />
