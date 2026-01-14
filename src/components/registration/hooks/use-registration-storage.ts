@@ -45,5 +45,6 @@ export const useRegistrationStorage = (
 };
 
 export const clearRegistrationStorage = () => {
+  if (typeof window === "undefined") return;
   Object.values(STORAGE_KEYS).forEach((key) => localStorage.removeItem(key));
 };

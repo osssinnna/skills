@@ -84,9 +84,21 @@ a {
     background-color:var(--toast-hover-bg-color,#0eec33);
 }
 
-.toast:hover:not(:has(.buttonClose:hover)) .toastLink {
+.toast:hover .toastLink {
   visibility: visible;
   opacity: 1;
+}
+
+@supports selector(:has(*)) {
+  .toast:hover:not(:has(.buttonClose:hover)) .toastLink {
+    visibility: visible;
+    opacity: 1;
+  }
+  
+  .toast:hover .toastLink {
+    visibility: hidden;
+    opacity: 0;
+  }
 } 
 .toastMessage {
   color: var(--main-text-color, #253017);

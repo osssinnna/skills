@@ -1,4 +1,4 @@
-import { memo } from "react";
+import type { FC } from "react";
 import { UserCard } from "../../userCard/userCard";
 import styles from "./cards-grid.module.css";
 import type { User } from "../../../utils/types";
@@ -26,7 +26,7 @@ export const CardsGrid = memo<CardsGridProps>(({ users, columns = 3 }) => {
       }}
     >
       {users.map((user) => (
-        <UserCard key={user.id} user={user} onLikeToggle={() => {}} />
+        <UserCard key={user.id} user={user} />
       ))}
     </div>
   );

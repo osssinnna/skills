@@ -13,6 +13,7 @@ const MAX_VISIBLE_TAGS = 2;
 export const UserCardUI: FC<TUserCardUIProps> = ({
   user,
   isLiked,
+  hasExchange,
   onLikeToggle,
   onOpenDetails,
 }) => {
@@ -79,12 +80,12 @@ export const UserCardUI: FC<TUserCardUIProps> = ({
       </div>
       <div>
         <ButtonUI
-          color="primary"
+          color={hasExchange ? "secondary" : "primary"}
           fullSize={true}
           disabledToggle={false}
           onClick={onOpenDetails}
         >
-          Подробнее
+          {hasExchange ? <>Обмен предложен</> : <>Подробнее</>}
         </ButtonUI>
       </div>
     </div>
