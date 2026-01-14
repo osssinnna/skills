@@ -1,6 +1,6 @@
 import type { TAppHeaderUIProps } from "./type";
 import styles from "./app-header.module.css";
-import { type FC, useState, useRef } from "react"; 
+import { type FC, useState, useRef } from "react";
 import { LogoUI } from "../logo";
 import down from "../../../assets/icon-down.svg";
 import like from "../../../assets/icon-like.svg";
@@ -10,18 +10,20 @@ import clsx from "clsx";
 import { IconButtonUI } from "./../iconButton";
 import { SearchInput } from "./../../search-input/search-input";
 import { NavLink } from "react-router-dom";
-import { useSelector } from "../../../services/store";
+import { useDispatch, useSelector } from "../../../services/store";
 import { selectCategoriesWithSubCategories } from "../../../services/categoriesSlice/selectors";
 import { TabAllSkills } from "../tab-all-skills/tab-all-skills";
+import { setActiveSection } from "../../../services/usersSlice/usersSlice";
 
 export const AppHeaderUI: FC<TAppHeaderUIProps> = ({
   userName,
   userAvatar,
   isAuth,
 }) => {
+  const dispatch = useDispatch();
   const categories = useSelector(selectCategoriesWithSubCategories);
-  const [isSkillsOpen, setIsSkillsOpen] = useState(false); 
-  const skillsButtonRef = useRef<HTMLButtonElement>(null); 
+  const [isSkillsOpen, setIsSkillsOpen] = useState(false);
+  const skillsButtonRef = useRef<HTMLButtonElement>(null);
   const toggleSkills = () => {
     setIsSkillsOpen(!isSkillsOpen);
   };
@@ -36,7 +38,9 @@ export const AppHeaderUI: FC<TAppHeaderUIProps> = ({
         <nav className={styles.nav}>
           <div className={styles.menu}>
             <NavLink to="/" className={styles.logo}>
-              <LogoUI />
+              <button onClick={() => dispatch(setActiveSection(null))}>
+                <LogoUI />
+              </button>
             </NavLink>
 
             <div className={styles.menuItem}>
@@ -44,9 +48,9 @@ export const AppHeaderUI: FC<TAppHeaderUIProps> = ({
                 О проекте
               </NavLink>
 
-              <button 
+              <button
                 ref={skillsButtonRef}
-                className={styles.link} 
+                className={styles.link}
                 onClick={toggleSkills}
                 aria-expanded={isSkillsOpen}
                 aria-label="Открыть все навыки"
@@ -116,12 +120,14 @@ export const AppHeaderUI: FC<TAppHeaderUIProps> = ({
           </div>
 
           {isSkillsOpen && (
-            <div style={{ 
-              position: 'relative',
-              width: '100%'
-            }}>
-              <TabAllSkills 
-                categories={categories} 
+            <div
+              style={{
+                position: "relative",
+                width: "100%",
+              }}
+            >
+              <TabAllSkills
+                categories={categories}
                 isOpen={isSkillsOpen}
                 onClose={closeSkills}
                 centered={true}
