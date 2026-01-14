@@ -19,6 +19,7 @@ const MAX_VISIBLE_TAGS = 4;
 export const UserCardExpandedUI: FC<TUserCardExpandedUIProps> = ({
   user,
   isLiked,
+  isExcahnged,
   onLikeToggle,
   onExchangeClick,
 }) => {
@@ -143,11 +144,14 @@ export const UserCardExpandedUI: FC<TUserCardExpandedUIProps> = ({
           {/* Левая колонка: контент */}
           <div className={style.skillContent}>
             <h1>{user.skillCanTeach.name}</h1>
-            <p className={style.skillCategory}>{user.skillCanTeach.category}</p>
             <p className={style.skillText}>{user.skillCanTeach.description}</p>
 
-            <ButtonUI color="primary" fullSize onClick={onExchangeClick}>
-              Предложить обмен
+            <ButtonUI
+              color={isExcahnged ? "secondary" : "primary"}
+              fullSize
+              onClick={onExchangeClick}
+            >
+              {isExcahnged ? <>Обмен предложен</> : <>Предложить обмен</>}
             </ButtonUI>
           </div>
 

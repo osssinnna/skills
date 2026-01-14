@@ -7,8 +7,12 @@ import type { TUserCardUIProps } from "../ui/userCard/type";
 
 import { usePersonLike } from "../../hooks/usePersonLike";
 import { selectCurrentUser } from "../../services/currentUserSlice/selectors";
+import { useExchangeUsers } from "../../hooks/useExchangeUsers";
 
-type TUserCardProps = Omit<TUserCardUIProps, "isLiked" | "onOpenDetails">;
+type TUserCardProps = Omit<
+  TUserCardUIProps,
+  "isLiked" | "onOpenDetails" | "hasExchange"
+>;
 
 export const UserCard = ({ user, onLikeToggle }: TUserCardProps) => {
   const navigate = useNavigate();
@@ -24,6 +28,8 @@ export const UserCard = ({ user, onLikeToggle }: TUserCardProps) => {
     toggleLike();
   }, [currentUser, navigate, toggleLike]);
 
+  const { hasExchange } = useExchangeUsers();
+
   const handleOpenDetails = useCallback(() => {
     navigate(`/skill/${user.id}`);
   }, [navigate, user.id]);
@@ -34,6 +40,7 @@ export const UserCard = ({ user, onLikeToggle }: TUserCardProps) => {
     <UserCardUI
       user={user}
       isLiked={visibleIsLiked}
+      hasExchange={hasExchange(user.id)}
       onLikeToggle={handleLikeToggle}
       onOpenDetails={handleOpenDetails}
     />
