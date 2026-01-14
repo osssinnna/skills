@@ -6,9 +6,10 @@ import type { User } from "../../../utils/types";
 interface CardsGridProps {
   users: User[];
   onLikeToggle?: (userId: number) => void;
+  columns?: number; 
 }
 
-export const CardsGrid: FC<CardsGridProps> = ({ users }) => {
+export const CardsGrid = memo<CardsGridProps>(({ users, columns = 3 }) => {
   if (users.length === 0) {
     return (
       <div className={styles.emptyState}>
@@ -18,10 +19,15 @@ export const CardsGrid: FC<CardsGridProps> = ({ users }) => {
   }
 
   return (
-    <div className={styles.grid}>
+    <div 
+      className={styles.grid}
+      style={{
+        gridTemplateColumns: `repeat(${columns}, 1fr)` // +вариативность
+      }}
+    >
       {users.map((user) => (
         <UserCard key={user.id} user={user} />
       ))}
     </div>
   );
-};
+});
