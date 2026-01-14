@@ -24,14 +24,14 @@ export const AppHeaderUI: FC<TAppHeaderUIProps> = ({
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const categories = useSelector(selectCategoriesWithSubCategories);
-  
+
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
   const timeoutRef = useRef<NodeJS.Timeout | null>(null);
-  
+
   const [isSkillsOpen, setIsSkillsOpen] = useState(false);
   const skillsButtonRef = useRef<HTMLButtonElement>(null);
-  
+
   const toggleSkills = () => {
     setIsSkillsOpen(!isSkillsOpen);
   };
@@ -118,7 +118,7 @@ export const AppHeaderUI: FC<TAppHeaderUIProps> = ({
                   onMouseEnter={handleMouseEnter}
                   onMouseLeave={handleMouseLeave}
                 >
-                  <a href="/profile" className={styles.profile}>
+                  <NavLink to="/profile" className={styles.profile}>
                     <span className={styles.userName}>{userName}</span>
                     {userAvatar ? (
                       <img
@@ -131,7 +131,7 @@ export const AppHeaderUI: FC<TAppHeaderUIProps> = ({
                         {userName?.[0] ?? "Г"}
                       </div>
                     )}
-                  </a>
+                  </NavLink>
                   {isDropdownOpen && (
                     <div className={styles.dropdown}>
                       <button

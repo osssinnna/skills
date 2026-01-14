@@ -26,13 +26,7 @@ export const CardsGrid = memo<CardsGridProps>(({ users, columns = 3 }) => {
       }}
     >
       {users.map((user) => (
-        <UserCard
-          key={user.id}
-          user={user}
-          onLikeToggle={function (): void {
-            throw new Error("Function not implemented.");
-          }}
-        />
+        <UserCard key={user.id} user={user} />
       ))}
     </div>
   );
