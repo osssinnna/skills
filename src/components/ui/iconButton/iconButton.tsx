@@ -11,7 +11,11 @@ export const IconButtonUI: FC<TIconButtonUIPropsUI> = ({
   const currentIcon = isActive && iconActive ? iconActive : icon;
 
   return (
-    <button className={styles.button} onClick={onClick} type="button">
+    <button
+      className={styles.button}
+      onClick={onClick}
+      type="button"
+    >
       <img
         src={currentIcon}
         alt=""

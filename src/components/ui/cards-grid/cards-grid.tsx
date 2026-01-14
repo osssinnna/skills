@@ -1,4 +1,4 @@
-import { memo } from "react";
+import type { FC } from "react";
 import { UserCard } from "../../userCard/userCard";
 import styles from "./cards-grid.module.css";
 import type { User } from "../../../utils/types";
@@ -8,7 +8,7 @@ interface CardsGridProps {
   onLikeToggle?: (userId: number) => void;
 }
 
-export const CardsGrid = memo<CardsGridProps>(({ users }) => {
+export const CardsGrid: FC<CardsGridProps> = ({ users }) => {
   if (users.length === 0) {
     return (
       <div className={styles.emptyState}>
@@ -20,8 +20,8 @@ export const CardsGrid = memo<CardsGridProps>(({ users }) => {
   return (
     <div className={styles.grid}>
       {users.map((user) => (
-        <UserCard key={user.id} user={user} onLikeToggle={() => {}} />
+        <UserCard key={user.id} user={user} />
       ))}
     </div>
   );
-});
+};

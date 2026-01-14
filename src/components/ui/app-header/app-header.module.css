@@ -114,8 +114,20 @@
   color: inherit;
 }
 
+.iconLink {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  color: inherit;
+}
+
 .search {
   width: 100%;
+}
+
+.profileContainer {
+  position: relative;
 }
 
 .profile {
@@ -147,6 +159,42 @@
 .profile:focus-visible {
   outline: 2px solid var(--focusColor);
   outline-offset: 2px;
+}
+
+.dropdown {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  margin-top: 4px;
+  background: #ffffff;
+  border: 1px solid #e5e5e5;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+  min-width: 120px;
+  overflow: hidden;
+}
+
+.logoutButton {
+  width: 100%;
+  padding: 12px 16px;
+  background: transparent;
+  border: none;
+  text-align: left;
+  font-size: 16px;
+  line-height: 24px;
+  letter-spacing: 0.02em;
+  color: #0c0c0c;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.logoutButton:hover {
+  background-color: #f5f5f5;
+}
+
+.logoutButton:active {
+  background-color: #e5e5e5;
 }
 
 .button {

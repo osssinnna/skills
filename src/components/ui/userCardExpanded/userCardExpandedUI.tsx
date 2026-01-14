@@ -1,5 +1,5 @@
 import style from "./userCardExpandedUI.module.css";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import type { FC } from "react";
 import { useNavigate } from "react-router-dom";
 import type {
@@ -27,13 +27,13 @@ export const UserCardExpandedUI: FC<TUserCardExpandedUIProps> = ({
   const [selectedIndex, setSelectedIndex] = useState(0);
   const navigate = useNavigate();
 
-  // Локальное состояние лайка, если родительский компонент не контролирует его
   const [localLiked, setLocalLiked] = useState<boolean>(isLiked);
 
-  // Синхронизация локального состояния с пропсом при его изменении
-  if (isLiked !== localLiked) {
+  useEffect(() => {
     setLocalLiked(isLiked);
-  }
+  }, [isLiked]);
+
+  const displayLiked = onLikeToggle ? isLiked : localLiked;
 
   const showPrev = () => setSelectedIndex((i) => (i > 0 ? i - 1 : i));
   const showNext = () =>
@@ -74,7 +74,7 @@ export const UserCardExpandedUI: FC<TUserCardExpandedUIProps> = ({
           <IconButtonUI
             icon={iconLike}
             iconActive={iconLikeFilled}
-            isActive={localLiked}
+            isActive={displayLiked}
             onClick={() => {
               if (onLikeToggle) {
                 onLikeToggle();
