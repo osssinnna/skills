@@ -10,11 +10,13 @@ import type { TypedUseSelectorHook } from "react-redux";
 import UsersReduсer from "./usersSlice/usersSlice";
 import categoriesReduсer from "./categoriesSlice/categoriesSlice";
 import currentUserReduсer from "./currentUserSlice/currentUserSlice";
+import messagesReducer from "./messagesSlice/messagesSlice";
 
 export const rootReducer = combineReducers({
   users: UsersReduсer,
   categories: categoriesReduсer,
   currentUser: currentUserReduсer,
+  messages: messagesReducer,
 });
 
 const store = configureStore({

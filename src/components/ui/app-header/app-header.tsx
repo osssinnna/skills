@@ -15,6 +15,7 @@ import { userLogout } from "../../../services/currentUserSlice/currentUserSlice"
 import { selectCategoriesWithSubCategories } from "../../../services/categoriesSlice/selectors";
 import { TabAllSkills } from "../tab-all-skills/tab-all-skills";
 import { setActiveSection } from "../../../services/usersSlice/usersSlice";
+import { MessagesSection } from "../../messages-section";
 
 export const AppHeaderUI: FC<TAppHeaderUIProps> = ({
   userName,
@@ -24,6 +25,7 @@ export const AppHeaderUI: FC<TAppHeaderUIProps> = ({
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const categories = useSelector(selectCategoriesWithSubCategories);
+  const [isMessagesOpen, setIsMessagesOpen] = useState(false);
 
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
@@ -106,11 +108,15 @@ export const AppHeaderUI: FC<TAppHeaderUIProps> = ({
               <>
                 <div className={clsx(styles.menu, styles.menuIcons)}>
                   <IconButtonUI icon={theme} />
-                  <IconButtonUI icon={notifications} />
+                  <IconButtonUI
+                    icon={notifications}
+                    onClick={() => setIsMessagesOpen(!isMessagesOpen)}
+                  />
                   <NavLink to="/favorite" className={styles.iconLink}>
                     <IconButtonUI icon={like} />
                   </NavLink>
                 </div>
+                {isMessagesOpen && <MessagesSection />}
 
                 <div
                   className={styles.profileContainer}

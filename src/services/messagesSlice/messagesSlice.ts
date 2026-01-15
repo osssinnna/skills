@@ -36,10 +36,21 @@ const messagesSlice = createSlice({
         msg.viewed = true;
       });
     },
+
+    clearRecentlyViewed(state, action: PayloadAction<number>) {
+      state.messages = state.messages.filter(
+        (msg) => msg.userId !== action.payload
+      );
+    },
   },
 });
 
-export const { setMessages, pushMessage, markAsViewed, markAllAsViewed } =
-  messagesSlice.actions;
+export const {
+  setMessages,
+  pushMessage,
+  markAsViewed,
+  markAllAsViewed,
+  clearRecentlyViewed,
+} = messagesSlice.actions;
 
 export default messagesSlice.reducer;
