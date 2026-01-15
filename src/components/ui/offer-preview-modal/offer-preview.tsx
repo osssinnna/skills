@@ -21,7 +21,6 @@ export const OfferPreview = ({
   onEdit,
   onConfirm,
 }: OfferPreviewProps) => {
-
   if (!Array.isArray(skillImg) || skillImg.length === 0) {
     return null;
   }

@@ -115,8 +115,10 @@
   letter-spacing: 0.02em;
   color: #253017;
 
+  word-wrap: break-word; /* старое, но поддерживается */
+  overflow-wrap: break-word; /* современное */
+  max-height: 150px;
   overflow: hidden;
-  text-overflow: ellipsis;
 }
 
 /* ===============================
