@@ -2,7 +2,10 @@ import type { FC } from "react";
 import { useDispatch } from "../../services/store";
 import { MessagesListUI } from "../ui/messages-list/messages-list";
 import type { TMessageProps } from "../message-item/message-item";
-import { markAsViewed } from "../../services/messagesSlice/messagesSlice";
+import {
+  clearRecentlyViewed,
+  markAsViewed,
+} from "../../services/messagesSlice/messagesSlice";
 
 export type TMessagesListProps = {
   title: string;
@@ -24,7 +27,7 @@ export const MessagesList: FC<TMessagesListProps> = ({
     if (isViewedAllMessages) {
       // очистить недавно просмотренные
       messages.forEach((message) => {
-        // dispatch(clerRecentlyViewed(message.userId))
+        dispatch(clearRecentlyViewed(message.userId));
       });
     } else {
       //  отмечаем новые как просмотренные

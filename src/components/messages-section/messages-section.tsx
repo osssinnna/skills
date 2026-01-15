@@ -1,12 +1,11 @@
 import { useEffect, useRef, useState, type FC } from "react";
 import { MessagesSectionUI } from "../ui/messages-section";
-import { useDispatch, useSelector } from "../../services/store";
+import { useSelector } from "../../services/store";
 import ReactDOM from "react-dom";
 import {
   selectReadMessages,
   selectUnreadMessages,
 } from "../../services/messagesSlice/selectors";
-import { markAllAsViewed } from "../../services/messagesSlice/messagesSlice";
 
 const messagesRoot = document.getElementById("messages") ?? document.body;
 
@@ -19,19 +18,12 @@ export const MessagesSection: FC = () => {
 
   const unreadMessages = useSelector(selectUnreadMessages);
   const readMessages = useSelector(selectReadMessages);
-  const dispatch = useDispatch();
 
   const onCloseAnim = () => {
     //  просто удаляем класс анимации
     setVisible(false);
     //  закрытие окна отрабатывает слушатель секции на соб'transitionend'
   };
-
-  useEffect(() => {
-    if (isVisible) {
-      dispatch(markAllAsViewed());
-    }
-  }, [isVisible, dispatch]);
 
   useEffect(() => {
     //  создаем кадр анимации  после маунта к-та
