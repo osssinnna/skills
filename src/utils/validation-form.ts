@@ -24,7 +24,7 @@ export const validateCredentialsEmail = (value: string): string | undefined => {
     trimmed.endsWith(".") ||
     !hasBasicEmailStructure(trimmed)
   ) {
-    return undefined;
+    return "Введите корректный email адрес";
   }
 
   if (!fullEmailRegex.test(trimmed)) {
@@ -34,7 +34,9 @@ export const validateCredentialsEmail = (value: string): string | undefined => {
   return undefined;
 };
 
-export const validateCredentialsPassword = (value: string): string | undefined => {
+export const validateCredentialsPassword = (
+  value: string
+): string | undefined => {
   if (value.length < 8) {
     return "Пароль должен содержать не менее 8 знаков";
   }

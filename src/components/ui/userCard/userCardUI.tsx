@@ -7,6 +7,8 @@ import { TagSkillUI } from "../tag";
 import iconLike from "../../../assets/icon-like.svg";
 import iconLikeFilled from "../../../assets/icon-like-filled.svg";
 import type { Subcategory } from "../../../utils/types";
+import { useSelector } from "../../../services/store";
+import { selectCurrentUser } from "../../../services/currentUserSlice/selectors";
 
 const MAX_VISIBLE_TAGS = 2;
 
@@ -17,6 +19,7 @@ export const UserCardUI: FC<TUserCardUIProps> = ({
   onLikeToggle,
   onOpenDetails,
 }) => {
+  const currentUser = useSelector(selectCurrentUser);
   const firstName = user.name.split(" ")[0];
 
   // Функция для рендеринга тегов "Хочет научиться"
@@ -80,12 +83,12 @@ export const UserCardUI: FC<TUserCardUIProps> = ({
       </div>
       <div>
         <ButtonUI
-          color={hasExchange ? "secondary" : "primary"}
+          color={hasExchange && currentUser ? "secondary" : "primary"}
           fullSize={true}
           disabledToggle={false}
           onClick={onOpenDetails}
         >
-          {hasExchange ? <>Обмен предложен</> : <>Подробнее</>}
+          {hasExchange && currentUser ? <>Обмен предложен</> : <>Подробнее</>}
         </ButtonUI>
       </div>
     </div>
