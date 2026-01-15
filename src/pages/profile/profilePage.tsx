@@ -17,27 +17,41 @@ import userIcon from "../../assets/user.svg";
 import calendarIcon from "../../assets/calendar.svg";
 
 import { Dropdown } from "../../components/ui/dropdown";
-
-const initialData = {
-  email: "test@mail.com",
-  name: "Иван Иванов",
-  birthDate: "1995-05-20",
-  gender: "Не указан",
-  city: "Москва",
-  about: "О себе...",
-};
+import { useDispatch, useSelector } from "react-redux";
+import type { RootState } from "../../services/store";
+import { updateUserProfile } from "../../services/currentUserSlice/currentUserSlice";
 
 export const ProfilePage: React.FC = () => {
   const navigate = useNavigate();
+  const currentUser = useSelector((state: RootState) => state.currentUser.data);
+  const initialData = currentUser
+    ? {
+        email: currentUser.email,
+        name: currentUser.user?.name || "",
+        birthDate: currentUser.user?.birthDate || "",
+        gender: currentUser.user?.gender || null,
+        location: currentUser.user?.location || "",
+        about: currentUser.user?.about || "",
+      }
+    : {
+        email: "",
+        name: "",
+        birthDate: "",
+        gender: "Не указан",
+        location: "",
+        about: "",
+      };
+
   const [formData, setFormData] = useState(initialData);
   const [activeTab, setActiveTab] = useState("personal");
   const [avatar, setAvatar] = useState(initAvatar);
-  const [selectedGenderIds, setSelectedGenderIds] = useState<number[]>([3]); // по умолчанию "Не указан"
+  const [selectedGenderIds, setSelectedGenderIds] = useState<number[]>([3]);
 
+  const dispatch = useDispatch();
   const genderOptions = [
-    { id: 1, value: "male", label: "Мужской" },
-    { id: 2, value: "female", label: "Женский" },
-    { id: 3, value: "other", label: "Не указан" },
+    { id: 1, value: "Мужской", label: "Мужской" },
+    { id: 2, value: "Женский", label: "Женский" },
+    { id: 3, value: null, label: "Не указан" },
   ];
 
   const handleTabClick = (tab: string) => {
@@ -52,18 +66,9 @@ export const ProfilePage: React.FC = () => {
       formData[key as keyof typeof formData] !==
       initialData[key as keyof typeof initialData]
   );
-
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
-
-    setFormData((prev) => ({
-      ...prev,
-      [name]: value,
-    }));
-  };
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
+    setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
   const handleAvatarChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -71,21 +76,34 @@ export const ProfilePage: React.FC = () => {
     if (file) {
       const reader = new FileReader();
       reader.onload = () => {
-        setAvatar(reader.result as string);
+        const avatarUrl = reader.result as string;
+        setAvatar(avatarUrl);
+        setFormData((prev) => ({ ...prev, avatar: avatarUrl }));
       };
       reader.readAsDataURL(file);
     }
   };
 
-  const handleAboutChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-    const textarea = e.target;
-    textarea.style.height = "auto";
-    textarea.style.height = textarea.scrollHeight + "px";
-
-    setFormData((prev) => ({
-      ...prev,
-      about: textarea.value,
-    }));
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!currentUser) return;
+    const genderValue: "Мужской" | "Женский" | null =
+      formData.gender === "Мужской" || formData.gender === "Женский"
+        ? formData.gender
+        : null;
+    dispatch(
+      updateUserProfile({
+        user: {
+          ...currentUser.user,
+          name: formData.name,
+          birthDate: formData.birthDate,
+          gender: genderValue,
+          location: formData.location,
+          about: formData.about,
+          avatarUrl: avatar,
+        },
+      })
+    );
   };
 
   useEffect(() => {
@@ -97,6 +115,19 @@ export const ProfilePage: React.FC = () => {
       gender: selected?.value || "other",
     }));
   }, [selectedGenderIds]);
+
+  useEffect(() => {
+    if (currentUser) {
+      setFormData({
+        email: currentUser.email,
+        name: currentUser.user?.name || "",
+        birthDate: currentUser.user?.birthDate || "",
+        gender: currentUser.user?.gender || null,
+        location: currentUser.user?.location || "",
+        about: currentUser.user?.about || "",
+      });
+    }
+  }, [currentUser]);
 
   return (
     <>
@@ -117,14 +148,14 @@ export const ProfilePage: React.FC = () => {
             Мои обмены
           </button>
           <button
-            onClick={() => handleTabClick("favorites")}
+            onClick={() => navigate("/favorite")}
             className={activeTab === "favorites" ? style.activeTab : ""}
           >
             <img src={likeIcon} alt="" className={style.sidebarIcon} />
             Избранное
           </button>
           <button
-            onClick={() => handleTabClick("skills")}
+            onClick={() => navigate("/")}
             className={activeTab === "skills" ? style.activeTab : ""}
           >
             <img src={ideaIcon} alt="" className={style.sidebarIcon} />
@@ -148,6 +179,7 @@ export const ProfilePage: React.FC = () => {
                 type="email"
                 value={formData.email}
                 onChange={handleChange}
+                placeholder="Введите почту"
               />
 
               <button type="button" className={style.changePassword}>
@@ -159,6 +191,7 @@ export const ProfilePage: React.FC = () => {
                 name="name"
                 value={formData.name}
                 onChange={handleChange}
+                placeholder="Введите имя"
               />
 
               <div className={style.row}>
@@ -218,9 +251,9 @@ export const ProfilePage: React.FC = () => {
               </div>
 
               <CityAutocomplete
-                value={formData.city}
+                value={formData.location}
                 onChange={(value) =>
-                  setFormData((prev) => ({ ...prev, city: value }))
+                  setFormData((prev) => ({ ...prev, location: value }))
                 }
                 placeholder="Введите город"
                 label="Город"

@@ -19,6 +19,7 @@ export type UserData = {
   skillCanTeach: SkillCanTeach;
   images: string[];
   subcategoriesWantToLearn: SubcategoryDTO[];
+  about?: string;
 };
 
 // данные для регистрации
