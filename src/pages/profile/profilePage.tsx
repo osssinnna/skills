@@ -47,6 +47,10 @@ export const ProfilePage: React.FC = () => {
   const [avatar, setAvatar] = useState(initAvatar);
   const [selectedGenderIds, setSelectedGenderIds] = useState<number[]>([3]);
 
+  const [isPasswordEdit, setIsPasswordEdit] = useState(false);
+  const [newPassword, setNewPassword] = useState("");
+  const [passwordError, setPasswordError] = useState<string | null>(null);
+
   const dispatch = useDispatch();
   const genderOptions = [
     { id: 1, value: "Мужской", label: "Мужской" },
@@ -93,6 +97,7 @@ export const ProfilePage: React.FC = () => {
         : null;
     dispatch(
       updateUserProfile({
+        email: formData.email,
         user: {
           ...currentUser.user,
           name: formData.name,
@@ -112,7 +117,7 @@ export const ProfilePage: React.FC = () => {
     );
     setFormData((prev) => ({
       ...prev,
-      gender: selected?.value || "other",
+      gender: selected?.value || null,
     }));
   }, [selectedGenderIds]);
 
@@ -182,9 +187,69 @@ export const ProfilePage: React.FC = () => {
                 placeholder="Введите почту"
               />
 
-              <button type="button" className={style.changePassword}>
+              <button
+                type="button"
+                className={style.changePassword}
+                onClick={() => setIsPasswordEdit(true)}
+              >
                 Изменить пароль
               </button>
+              {isPasswordEdit && (
+                <div className={style.passwordEditBlock}>
+                  <Input
+                    label="Новый пароль"
+                    name="password"
+                    type="password"
+                    value={newPassword}
+                    onChange={(e) => {
+                      const value = e.target.value;
+                      setNewPassword(value);
+
+                      if (value.length === 0) {
+                        setPasswordError(null);
+                      } else if (value.length < 8) {
+                        setPasswordError("Не менее 8 символов");
+                      } else {
+                        setPasswordError(null);
+                      }
+                    }}
+                    placeholder="Введите новый пароль"
+                  />
+                  {passwordError && (
+                    <span className={style.passwordError}>{passwordError}</span>
+                  )}
+
+                  <div className={style.passwordActions}>
+                    <ButtonUI
+                      type="button"
+                      color="primary"
+                      disabledToggle={!!passwordError || newPassword.length < 8}
+                      onClick={() => {
+                        dispatch(
+                          updateUserProfile({
+                            password: newPassword,
+                          })
+                        );
+                        setNewPassword("");
+                        setIsPasswordEdit(false);
+                      }}
+                    >
+                      Сохранить
+                    </ButtonUI>
+
+                    <ButtonUI
+                      type="button"
+                      color="secondary"
+                      onClick={() => {
+                        setNewPassword("");
+                        setIsPasswordEdit(false);
+                      }}
+                    >
+                      Отмена
+                    </ButtonUI>
+                  </div>
+                </div>
+              )}
 
               <Input
                 label="Имя"

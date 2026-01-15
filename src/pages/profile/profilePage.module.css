@@ -191,3 +191,20 @@
   cursor: pointer;
   padding: 0;
 }
+
+.passwordEditBlock {
+  border-radius: 8px;
+}
+
+.passwordActions {
+  display: flex;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.passwordError {
+  display: block;
+  margin-top: 4px;
+  color: #d32f2f;
+  font-size: 12px;
+}
