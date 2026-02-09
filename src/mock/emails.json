@@ -1,0 +1,18 @@
+[
+  {
+    "id": "1",
+    "email": "test@example.com"
+  },
+  {
+    "id": "2",
+    "email": "user@yandex.ru"
+  },
+  {
+    "id": "3",
+    "email": "step@yandex.ru"
+  },
+  {
+    "id": "4",
+    "email": "admin@company.com"
+  }
+]

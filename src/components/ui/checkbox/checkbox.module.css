@@ -1,0 +1,39 @@
+.visuallyHidden {
+  position: absolute;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  inline-size: 1px;
+  block-size: 1px;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+.label {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 0;
+  cursor: pointer;
+  padding: 4px 20px;
+}
+
+.label:hover {
+  background-color: var(--color-primary-disabled);
+}
+
+.label button {
+  pointer-events: none;
+}
+
+.text {
+  color: #253017;
+  font-family: var(--main-text, "Roboto");
+  font-weight: var(--fw-text, 400);
+  font-size: 16px;
+  line-height: 1.5;
+  letter-spacing: 0.02em;
+}
+
+.textChecked {
+  color: var(--color-primary-pressed);
+}

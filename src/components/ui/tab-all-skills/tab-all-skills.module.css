@@ -1,0 +1,99 @@
+@import '../../../styles/variables.css';
+
+.wrapper {
+  position: absolute;
+  top: 100%; 
+  left: 0; 
+  z-index: 1001; 
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 20px;
+  padding: 20px;
+  width: 1136px; 
+  background-color: var(--color-secondary, #FFFFFF);
+  border-radius: 12px;
+  transform-origin: top left; 
+  animation: fadeIn 0.2s ease-out;
+  border: 1px solid var(--color-caption, #69735D);
+  box-sizing: border-box;
+}
+
+.wrapper.centered {
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.category {
+  display: flex;
+  flex-direction: column;
+  min-width: 180px;
+}
+
+.categoryHeader {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.iconWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  border-radius: 100%; 
+  flex-shrink: 0;
+  margin-top: 5px;
+}
+
+.categoryIcon {
+  width: 24px;
+  height: 24px;
+  color: var(--main-text-color, #253017);
+}
+
+.categoryTitle {
+  font-size: 20px;
+  font-weight: var(--fw-title, 600);
+  line-height: 18px;
+  color: var(--main-text-color, #253017); 
+  margin: 0;
+  font-family: var(--title-font, 'Jost');
+}
+
+.subcategories {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  margin-left: 25px;
+  display: flex;
+  flex-direction: column;
+}
+
+.subcategoryItem {
+  margin: 0;
+}
+
+.subcategoryButton {
+  width: 100%;
+  text-align: left;
+  padding: 6px 20px;
+  border-radius: 6px;
+  color: var(--main-text-color, #253017);
+  font-size: 15px;
+  font-family: var(--main-font, 'Roboto');
+  background: none;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.subcategoryButton:hover {
+  background-color: var(--color-primary-hover, #DEEBC5);
+  transform: translateX(2px);
+}
+
+.subcategoryButton:active {
+  background-color: var(--color-primary, #ABD27A);
+  transform: scale(0.98);
+}

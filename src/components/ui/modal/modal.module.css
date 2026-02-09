@@ -1,0 +1,30 @@
+.modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  z-index: 9999;
+  border-radius: 12px;
+  background-color: var( --color-secondary, #ffffff);
+  transition:  opacity 0.3s ease-in-out;
+  transform: translate(-50%, -50%);
+}
+
+.modalOpen {
+  opacity: 1;
+}
+
+.modal:focus {
+  outline: none;
+}
+
+.modalContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 80px 60px;
+}
+
+
+
+

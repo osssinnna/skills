@@ -1,0 +1,1 @@
+export { UserCardExpanded } from "./userCardExpanded";

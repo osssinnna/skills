@@ -1,0 +1,30 @@
+  :root {
+  --fw-text: 400;
+  --fw-title: 600;
+  --fw-subtitle: 500;
+  --main-font: 'Roboto';
+  --title-font: 'Jost';
+  --open-sans-font: 'Open Sans', sans-serif;
+  
+  --main-text-color: #253017;
+  --disabled-text-color:#9CA197;
+  --color-primary: #ABD27A;
+  --color-primary-pressed:#508826; /*цвет нажатых кнопок и ссылок  */
+  --color-primary-hover:#DEEBC5;
+  --color-primary-disabled:#E4E8DF;
+  --color-secondary: #FFFFFF; /*цвет карточек и инпутов  */
+  --color-caption:#69735D; /*цвет подписи в инпутах  */
+  --background-color:#F9FAF7;
+
+  --alarm-color:#E0796E;
+  --error-color:#BF3920;
+    
+  /* tags */
+  --tag-business: #EEE7F7;
+  --tag-creativity: #FFE7F2;
+  --tag-languages: #EBE5C5;
+  --tag-education: #E7F2F6;
+  --tag-home: #F7EBE5;
+  --tag-health: #E9F7E7;
+  --tag-additional: #E8ECF7;
+}

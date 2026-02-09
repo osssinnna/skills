@@ -1,0 +1,66 @@
+.authorizationWrapper {
+  display: grid;
+  justify-content: center;
+  min-height: 100vh;
+  background: var(--background-color);
+  padding: 5%;
+  padding-top: 0;
+}
+
+.container {
+  display: grid;
+  grid-template-rows: min-content min-content auto;
+  max-width: 1440px;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 36px;
+  padding-bottom: 0;
+}
+
+.button {
+  --btn-padding-vertical: 12px;
+  --btn-padding-horizontal: 24px;
+  --pr-colorActive: #ffffff;
+  --sec-borderColorActive: #508826;
+  --sec-colorBorderHover: #deebc5;
+  --sec-textColorHover: #69735d;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+
+  padding: var(--btn-padding-vertical) var(--btn-padding-horizontal);
+  border-radius: 12px;
+
+  font-size: 16px;
+  line-height: 1.5;
+  letter-spacing: 0.02em;
+  font-weight: 400;
+
+  color: var(--color-text-btn);
+  text-decoration: none;
+
+  transition:
+    background-color 0.3s ease-in-out,
+    color 0.3s ease-in-out,
+    border-color 0.3s ease-in-out;
+}
+
+.buttonSecondary {
+  background-color: var(--pr-colorActive);
+}
+
+.buttonSecondary:hover {
+  border-color: var(--sec-colorBorderHover);
+  color: var(--sec-textColorHover);
+}
+
+.buttonSecondary:active {
+  border-color: var(--sec-borderColorActive);
+  color: #253017;
+}
