@@ -8,11 +8,11 @@ import styles from "./message-item.module.css";
 // }
 type TMessagePropsUI = {
   userName: string;
-  date: string; // - дата создания сообщения
-  viewed: boolean; // - просмотрено ли сообщение
-  typeMessage: "confirmed" | "offered" | "rejected";
+  date: string;
+  viewed: boolean;
   onView?: () => void;
   image?: string;
+  message: { title: string; comment: string };
 };
 
 export const MessageItemUI: FC<TMessagePropsUI> = ({

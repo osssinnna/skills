@@ -1,11 +1,35 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { CardsGrid } from "../ui/cards-grid/cards-grid";
 import mockUsers from "../../mock/mockUser.json";
+import type { User } from "../../utils/types";
 
 // Мокаем данные для Storybook
-const typedUsers = mockUsers.map((user) => ({
-  ...user,
-  gender: user.gender as "Мужской" | "Женский",
+const typedUsers: User[] = (mockUsers as any[]).map((user) => ({
+  id: user.id,
+  avatarUrl: user.avatarUrl,
+  name: user.name,
+  description: user.description ?? "",
+  location: user.location,
+  age: user.age,
+  gender: (user.gender ?? null) as "Мужской" | "Женский" | null,
+  skillCanTeach: {
+    name: user.skillCanTeach?.name ?? "",
+    description: user.skillCanTeach?.description ?? "",
+    categoryId: user.skillCanTeach?.categoryId ?? 0,
+    subcategoryId: user.skillCanTeach?.subcategoryId ?? 0,
+  },
+  images: user.images ?? [],
+  subcategoriesWantToLearn: (user.subcategoriesWantToLearn ?? []).map(
+    (s: any) => ({
+      id: s.id,
+      name: s.name ?? "",
+      categoryId: s.categoryId ?? 0,
+    })
+  ),
+  categoriesWantToLearn: user.categoriesWantToLearn ?? [],
+  likesCount: user.likesCount ?? 0,
+  likedByUserIds: user.likedByUserIds ?? [],
+  createdAt: user.createdAt ?? new Date().toISOString(),
 }));
 
 const meta: Meta<typeof CardsGrid> = {

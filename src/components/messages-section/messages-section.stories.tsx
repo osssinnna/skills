@@ -8,7 +8,6 @@ import { AppHeaderUI } from "../ui/app-header";
 import { ButtonUI } from "../ui/button";
 import messagesReducer from "../../services/messagesSlice/messagesSlice";
 //  создадим тестовый стор чтобы не было ошибок в истории связ с dispatch и т.п.
-const dummyReducer = (state = {}) => state; // редюсер заглушка
 
 const mockStore = configureStore({
   reducer: {
